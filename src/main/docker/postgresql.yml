@@ -1,0 +1,11 @@
+version: '2'
+services:
+    prosopografia-postgresql:
+        image: postgres:9.6.5
+        # volumes:
+        #     - ~/volumes/jhipster/prosopografia/postgresql/:/var/lib/postgresql/data/
+        environment:
+            - POSTGRES_USER=prosopografia
+            - POSTGRES_PASSWORD=
+        ports:
+            - 5432:5432
