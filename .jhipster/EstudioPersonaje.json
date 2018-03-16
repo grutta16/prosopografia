@@ -1,0 +1,43 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "relationshipValidateRules": "required",
+            "relationshipName": "institucion",
+            "otherEntityName": "institucion",
+            "otherEntityField": "nombre"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipValidateRules": "required",
+            "relationshipName": "carrera",
+            "otherEntityName": "carrera",
+            "otherEntityField": "nombre"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipValidateRules": "required",
+            "relationshipName": "personaje",
+            "otherEntityName": "personaje",
+            "otherEntityField": "id"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "anioInicio",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "anioFin",
+            "fieldType": "Integer"
+        }
+    ],
+    "changelogDate": "20180315172334",
+    "entityTableName": "estudio_personaje",
+    "dto": "no",
+    "pagination": "pagination",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": false,
+    "angularJSSuffix": "pr"
+}

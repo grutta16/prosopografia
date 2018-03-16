@@ -1,0 +1,36 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "relationshipValidateRules": "required",
+            "relationshipName": "persona",
+            "otherEntityName": "persona",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipValidateRules": "required",
+            "relationshipName": "personaje",
+            "otherEntityName": "personaje",
+            "otherEntityField": "id"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "fechaDesde",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "fechaHasta",
+            "fieldType": "LocalDate"
+        }
+    ],
+    "changelogDate": "20180315172325",
+    "entityTableName": "pareja_personaje",
+    "dto": "no",
+    "pagination": "pagination",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": false,
+    "angularJSSuffix": "pr"
+}

@@ -1,0 +1,40 @@
+
+<div *ngIf="familiarPersonaje">
+    <h2><span jhiTranslate="prosopografiaApp.familiarPersonaje.detail.title">Familiar Personaje</span> {{familiarPersonaje.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="prosopografiaApp.familiarPersonaje.persona">Persona</span></dt>
+        <dd>
+            <div *ngIf="familiarPersonaje.persona">
+                <a [routerLink]="['/persona-pr', familiarPersonaje.persona?.id]">{{familiarPersonaje.persona?.id}}</a>
+            </div>
+        </dd>
+        <dt><span jhiTranslate="prosopografiaApp.familiarPersonaje.relacionFamiliar">Relacion Familiar</span></dt>
+        <dd>
+            <div *ngIf="familiarPersonaje.relacionFamiliar">
+                <a [routerLink]="['/relacion-familiar-pr', familiarPersonaje.relacionFamiliar?.id]">{{familiarPersonaje.relacionFamiliar?.nombre}}</a>
+            </div>
+        </dd>
+        <dt><span jhiTranslate="prosopografiaApp.familiarPersonaje.personaje">Personaje</span></dt>
+        <dd>
+            <div *ngIf="familiarPersonaje.personaje">
+                <a [routerLink]="['/personaje-pr', familiarPersonaje.personaje?.id]">{{familiarPersonaje.personaje?.id}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'familiar-personaje-pr/'+ familiarPersonaje.id + '/edit'} }]"
+            replaceUrl="true"
+            queryParamsHandling="merge"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

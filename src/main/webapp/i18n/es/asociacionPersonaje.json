@@ -1,0 +1,26 @@
+
+{
+    "prosopografiaApp": {
+        "asociacionPersonaje" : {
+            "home": {
+                "title": "Asociacion Personajes",
+                "createLabel": "Crear nuevo Asociacion Personaje",
+                "createOrEditLabel": "Crear o editar Asociacion Personaje",
+                "search": "Search for Asociacion Personaje"
+            },
+            "created": "Un nuevo Asociacion Personaje ha sido creado con el identificador {{ param }}",
+            "updated": "Un Asociacion Personaje ha sido actualizado con el identificador {{ param }}",
+            "deleted": "Un Asociacion Personaje ha sido eliminado con el identificador {{ param }}",
+            "delete": {
+                "question": "¿Seguro que quiere eliminar Asociacion Personaje {{ id }}?"
+            },
+            "detail": {
+                "title": "Asociacion Personaje"
+            },
+            "fechaDesde": "Fecha Desde",
+            "fechaHasta": "Fecha Hasta",
+            "asociacion": "Asociacion",
+            "personaje": "Personaje"
+        }
+    }
+}

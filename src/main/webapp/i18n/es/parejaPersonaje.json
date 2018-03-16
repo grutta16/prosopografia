@@ -1,0 +1,26 @@
+
+{
+    "prosopografiaApp": {
+        "parejaPersonaje" : {
+            "home": {
+                "title": "Pareja Personajes",
+                "createLabel": "Crear nuevo Pareja Personaje",
+                "createOrEditLabel": "Crear o editar Pareja Personaje",
+                "search": "Search for Pareja Personaje"
+            },
+            "created": "Un nuevo Pareja Personaje ha sido creado con el identificador {{ param }}",
+            "updated": "Un Pareja Personaje ha sido actualizado con el identificador {{ param }}",
+            "deleted": "Un Pareja Personaje ha sido eliminado con el identificador {{ param }}",
+            "delete": {
+                "question": "¿Seguro que quiere eliminar Pareja Personaje {{ id }}?"
+            },
+            "detail": {
+                "title": "Pareja Personaje"
+            },
+            "fechaDesde": "Fecha Desde",
+            "fechaHasta": "Fecha Hasta",
+            "persona": "Persona",
+            "personaje": "Personaje"
+        }
+    }
+}

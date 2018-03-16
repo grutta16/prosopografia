@@ -1,0 +1,36 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "relationshipValidateRules": "required",
+            "relationshipName": "religion",
+            "otherEntityName": "religion",
+            "otherEntityField": "nombre"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipValidateRules": "required",
+            "relationshipName": "personaje",
+            "otherEntityName": "personaje",
+            "otherEntityField": "id"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "fechaDesde",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "fechaHasta",
+            "fieldType": "LocalDate"
+        }
+    ],
+    "changelogDate": "20180315172329",
+    "entityTableName": "religion_personaje",
+    "dto": "no",
+    "pagination": "pagination",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": false,
+    "angularJSSuffix": "pr"
+}

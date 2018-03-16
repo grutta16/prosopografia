@@ -1,0 +1,40 @@
+
+{
+    "prosopografiaApp": {
+        "personaje" : {
+            "home": {
+                "title": "Personajes",
+                "createLabel": "Crear nuevo personaje",
+                "createOrEditLabel": "Crear o editar personaje",
+                "search": "Buscar personaje"
+            },
+            "created": "Un nuevo personaje ha sido creado con el identificador {{ param }}",
+            "updated": "Un personaje ha sido actualizado con el identificador {{ param }}",
+            "deleted": "Un personaje ha sido eliminado con el identificador {{ param }}",
+            "delete": {
+                "question": "¿Seguro que quiere eliminar el personaje {{ id }} - {{ nombres }} {{ apellidos }}?"
+            },
+            "detail": {
+                "title": "Personaje"
+            },
+            "fechaNacimiento": "Fecha de nacimiento",
+            "fechaDefuncion": "Fecha de defunción",
+            "nombresAlternativos": "Nombres alternativos",
+            "apellidosAlternativos": "Apellidos alternativos",
+            "sexo": "Sexo",
+            "observaciones": "Observaciones",
+            "persona": "Persona",
+            "lugarNacimiento": "Lugar de nacimiento",
+            "lugarDefuncion": "Lugar de defunción",
+            "profesiones": "Profesiones",
+            "parejas": "Parejas",
+            "familiares": "Familiares",
+            "estudios": "Estudios",
+            "asociaciones": "Asociaciones",
+            "partidos": "Partidos",
+            "religiones": "Religiones",
+            "residencias": "Residencias",
+            "cargos": "Cargos"
+        }
+    }
+}

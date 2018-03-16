@@ -1,0 +1,24 @@
+
+{
+    "prosopografiaApp": {
+        "partido" : {
+            "home": {
+                "title": "Partidos",
+                "createLabel": "Crear nuevo partido",
+                "createOrEditLabel": "Crear o editar partido",
+                "search": "Buscar partido"
+            },
+            "created": "Un nuevo partido ha sido creado con el identificador {{ param }}",
+            "updated": "Un partido ha sido actualizado con el identificador {{ param }}",
+            "deleted": "Un partido ha sido eliminado con el identificador {{ param }}",
+            "delete": {
+                "question": "¿Seguro que quiere eliminar el partido {{ id }} - {{ nombre }}?"
+            },
+            "detail": {
+                "title": "Partido"
+            },
+            "nombre": "Nombre",
+            "abreviacion": "Abreviación"
+        }
+    }
+}

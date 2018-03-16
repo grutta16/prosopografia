@@ -1,0 +1,28 @@
+
+{
+    "prosopografiaApp": {
+        "eleccion" : {
+            "home": {
+                "title": "Elecciones",
+                "createLabel": "Crear nueva elección",
+                "createOrEditLabel": "Crear o editar elección",
+                "search": "Buscar elección"
+            },
+            "created": "Una nueva elección ha sido creada con el identificador {{ param }}",
+            "updated": "Una elección ha sido actualizada con el identificador {{ param }}",
+            "deleted": "Una elección ha sido eliminada con el identificador {{ param }}",
+            "delete": {
+                "question": "¿Seguro que quiere eliminar la elección {{ id }} - {{ nombre }}?"
+            },
+            "detail": {
+                "title": "Elección"
+            },
+            "nombre": "Nombre",
+            "fecha": "Fecha",
+            "fuente": "Fuente",
+            "observaciones": "Observaciones",
+            "alcance": "Alcance",
+            "cargo": "Cargo"
+        }
+    }
+}

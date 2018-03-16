@@ -1,0 +1,23 @@
+
+{
+    "prosopografiaApp": {
+        "asociacion" : {
+            "home": {
+                "title": "Asociaciones",
+                "createLabel": "Crear nueva asociación",
+                "createOrEditLabel": "Crear o editar asociación",
+                "search": "Buscar asociación"
+            },
+            "created": "Una nueva asociación ha sido creada con el identificador {{ param }}",
+            "updated": "Una asociación ha sido actualizada con el identificador {{ param }}",
+            "deleted": "Una asociación ha sido eliminada con el identificador {{ param }}",
+            "delete": {
+                "question": "¿Seguro que quiere eliminar la asociación {{ id }} - {{ nombre }}?"
+            },
+            "detail": {
+                "title": "Asociación"
+            },
+            "nombre": "Nombre"
+        }
+    }
+}

@@ -1,0 +1,107 @@
+<div>
+    <h2>
+        <span jhiTranslate="prosopografiaApp.personaje.home.title">Personajes</span>
+        <button class="btn btn-primary float-right jh-create-entity create-personaje-pr" [routerLink]="['/', { outlets: { popup: ['personaje-pr-new'] } }]">
+            <span class="fa fa-plus"></span>
+            <span class="hidden-sm-down"  jhiTranslate="prosopografiaApp.personaje.home.createLabel">
+            Create new Personaje
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <div class="row">
+        <div class="col-sm-12">
+            <form name="searchForm" class="form-inline">
+                <div class="input-group w-100 mt-3">
+                    <input type="text" class="form-control" [(ngModel)]="currentSearch" id="currentSearch" name="currentSearch" placeholder="{{ 'prosopografiaApp.personaje.home.search' | translate }}">
+                    <button class="input-group-append btn btn-info" (click)="search(currentSearch)">
+                        <span class="fa fa-search"></span>
+                    </button>
+                    <button class="input-group-append btn btn-danger" (click)="clear()" *ngIf="currentSearch">
+                        <span class="fa fa-trash-o"></span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive" *ngIf="personajes">
+        <table class="table table-striped">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+            <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="fechaNacimiento"><span jhiTranslate="prosopografiaApp.personaje.fechaNacimiento">Fecha Nacimiento</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="fechaDefuncion"><span jhiTranslate="prosopografiaApp.personaje.fechaDefuncion">Fecha Defuncion</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="nombresAlternativos"><span jhiTranslate="prosopografiaApp.personaje.nombresAlternativos">Nombres Alternativos</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="apellidosAlternativos"><span jhiTranslate="prosopografiaApp.personaje.apellidosAlternativos">Apellidos Alternativos</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="sexo"><span jhiTranslate="prosopografiaApp.personaje.sexo">Sexo</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="observaciones"><span jhiTranslate="prosopografiaApp.personaje.observaciones">Observaciones</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="persona.id"><span jhiTranslate="prosopografiaApp.personaje.persona">Persona</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="lugarNacimiento.nombre"><span jhiTranslate="prosopografiaApp.personaje.lugarNacimiento">Lugar Nacimiento</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="lugarDefuncion.nombre"><span jhiTranslate="prosopografiaApp.personaje.lugarDefuncion">Lugar Defuncion</span> <span class="fa fa-sort"></span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let personaje of personajes ;trackBy: trackId">
+                <td><a [routerLink]="['../personaje-pr', personaje.id ]">{{personaje.id}}</a></td>
+                <td>{{personaje.fechaNacimiento | date:'mediumDate'}}</td>
+                <td>{{personaje.fechaDefuncion | date:'mediumDate'}}</td>
+                <td>{{personaje.nombresAlternativos}}</td>
+                <td>{{personaje.apellidosAlternativos}}</td>
+                <td>{{personaje.sexo}}</td>
+                <td>{{personaje.observaciones}}</td>
+                <td>
+                    <div *ngIf="personaje.persona">
+                        <a [routerLink]="['../persona-pr', personaje.persona?.id ]" >{{personaje.persona?.id}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="personaje.lugarNacimiento">
+                        <a [routerLink]="['../lugar-pr', personaje.lugarNacimiento?.id ]" >{{personaje.lugarNacimiento?.nombre}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="personaje.lugarDefuncion">
+                        <a [routerLink]="['../lugar-pr', personaje.lugarDefuncion?.id ]" >{{personaje.lugarDefuncion?.nombre}}</a>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['../personaje-pr', personaje.id ]"
+                                class="btn btn-info btn-sm">
+                            <span class="fa fa-eye"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'personaje-pr/'+ personaje.id + '/edit'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-primary btn-sm">
+                            <span class="fa fa-pencil"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'personaje-pr/'+ personaje.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <span class="fa fa-remove"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div *ngIf="personajes && personajes.length">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="queryCount" [maxSize]="5" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
+        </div>
+    </div>
+</div>

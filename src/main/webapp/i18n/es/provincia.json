@@ -1,0 +1,25 @@
+
+{
+    "prosopografiaApp": {
+        "provincia" : {
+            "home": {
+                "title": "Provincias",
+                "createLabel": "Crear nueva provincia",
+                "createOrEditLabel": "Crear o editar provincia",
+                "search": "Buscar provincia"
+            },
+            "created": "Una nueva provincia ha sido creada con el identificador {{ param }}",
+            "updated": "Una provincia ha sido actualizada con el identificador {{ param }}",
+            "deleted": "Una provincia ha sido eliminada con el identificador {{ param }}",
+            "delete": {
+                "question": "¿Seguro que quiere eliminar la provincia {{ id }} - {{ nombre }}?"
+            },
+            "detail": {
+                "title": "Provincia"
+            },
+            "nombre": "Nombre",
+            "lugares": "Lugares",
+            "pais": "País"
+        }
+    }
+}

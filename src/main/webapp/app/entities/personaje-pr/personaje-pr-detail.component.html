@@ -1,0 +1,70 @@
+
+<div *ngIf="personaje">
+    <h2><span jhiTranslate="prosopografiaApp.personaje.detail.title">Personaje</span> {{personaje.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="prosopografiaApp.personaje.fechaNacimiento">Fecha Nacimiento</span></dt>
+        <dd>
+            <span>{{personaje.fechaNacimiento | date:'mediumDate'}}</span>
+        </dd>
+        <dt><span jhiTranslate="prosopografiaApp.personaje.fechaDefuncion">Fecha Defuncion</span></dt>
+        <dd>
+            <span>{{personaje.fechaDefuncion | date:'mediumDate'}}</span>
+        </dd>
+        <dt><span jhiTranslate="prosopografiaApp.personaje.nombresAlternativos">Nombres Alternativos</span></dt>
+        <dd>
+            <span>{{personaje.nombresAlternativos}}</span>
+        </dd>
+        <dt><span jhiTranslate="prosopografiaApp.personaje.apellidosAlternativos">Apellidos Alternativos</span></dt>
+        <dd>
+            <span>{{personaje.apellidosAlternativos}}</span>
+        </dd>
+        <dt><span jhiTranslate="prosopografiaApp.personaje.sexo">Sexo</span></dt>
+        <dd>
+            <span>{{personaje.sexo}}</span>
+        </dd>
+        <dt><span jhiTranslate="prosopografiaApp.personaje.observaciones">Observaciones</span></dt>
+        <dd>
+            <span>{{personaje.observaciones}}</span>
+        </dd>
+        <dt><span jhiTranslate="prosopografiaApp.personaje.persona">Persona</span></dt>
+        <dd>
+            <div *ngIf="personaje.persona">
+                <a [routerLink]="['/persona-pr', personaje.persona?.id]">{{personaje.persona?.id}}</a>
+            </div>
+        </dd>
+        <dt><span jhiTranslate="prosopografiaApp.personaje.lugarNacimiento">Lugar Nacimiento</span></dt>
+        <dd>
+            <div *ngIf="personaje.lugarNacimiento">
+                <a [routerLink]="['/lugar-pr', personaje.lugarNacimiento?.id]">{{personaje.lugarNacimiento?.nombre}}</a>
+            </div>
+        </dd>
+        <dt><span jhiTranslate="prosopografiaApp.personaje.lugarDefuncion">Lugar Defuncion</span></dt>
+        <dd>
+            <div *ngIf="personaje.lugarDefuncion">
+                <a [routerLink]="['/lugar-pr', personaje.lugarDefuncion?.id]">{{personaje.lugarDefuncion?.nombre}}</a>
+            </div>
+        </dd>
+        <dt><span jhiTranslate="prosopografiaApp.personaje.profesiones">Profesiones</span></dt>
+        <dd>
+            <span *ngFor="let profesiones of personaje.profesiones; let last = last">
+                <a [routerLink]="['/profesion-pr', profesiones?.id ]">{{profesiones.nombre}}</a>{{last ? '' : ', '}}
+            </span>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'personaje-pr/'+ personaje.id + '/edit'} }]"
+            replaceUrl="true"
+            queryParamsHandling="merge"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

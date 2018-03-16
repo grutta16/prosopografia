@@ -1,0 +1,26 @@
+
+{
+    "prosopografiaApp": {
+        "detCandidatura" : {
+            "home": {
+                "title": "Det Candidaturas",
+                "createLabel": "Crear nuevo Det Candidatura",
+                "createOrEditLabel": "Crear o editar Det Candidatura",
+                "search": "Search for Det Candidatura"
+            },
+            "created": "Un nuevo Det Candidatura ha sido creado con el identificador {{ param }}",
+            "updated": "Un Det Candidatura ha sido actualizado con el identificador {{ param }}",
+            "deleted": "Un Det Candidatura ha sido eliminado con el identificador {{ param }}",
+            "delete": {
+                "question": "¿Seguro que quiere eliminar Det Candidatura {{ id }}?"
+            },
+            "detail": {
+                "title": "Det Candidatura"
+            },
+            "fechaInicio": "Fecha Inicio",
+            "fechaFin": "Fecha Fin",
+            "observaciones": "Observaciones",
+            "candidatura": "Candidatura"
+        }
+    }
+}

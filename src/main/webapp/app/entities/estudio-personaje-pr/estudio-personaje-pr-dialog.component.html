@@ -1,0 +1,74 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 class="modal-title" id="myEstudioPersonajeLabel" jhiTranslate="prosopografiaApp.estudioPersonaje.home.createOrEditLabel">Create or edit a Estudio Personaje</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" [hidden]="!estudioPersonaje.id">
+            <label for="id" jhiTranslate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                   [(ngModel)]="estudioPersonaje.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="prosopografiaApp.estudioPersonaje.anioInicio" for="field_anioInicio">Anio Inicio</label>
+            <input type="number" class="form-control" name="anioInicio" id="field_anioInicio"
+                [(ngModel)]="estudioPersonaje.anioInicio" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="prosopografiaApp.estudioPersonaje.anioFin" for="field_anioFin">Anio Fin</label>
+            <input type="number" class="form-control" name="anioFin" id="field_anioFin"
+                [(ngModel)]="estudioPersonaje.anioFin" />
+        </div>
+
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="prosopografiaApp.estudioPersonaje.institucion" for="field_institucion">Institucion</label>
+            <select class="form-control" id="field_institucion" name="institucion" [(ngModel)]="estudioPersonaje.institucion"  required>
+                <option *ngIf="!editForm.value.institucion" [ngValue]="null" selected></option>
+                <option [ngValue]="institucionOption.id === estudioPersonaje.institucion?.id ? estudioPersonaje.institucion : institucionOption" *ngFor="let institucionOption of institucions; trackBy: trackInstitucionById">{{institucionOption.nombre}}</option>
+            </select>
+        </div>
+        <div [hidden]="!(editForm.controls.institucion?.dirty && editForm.controls.institucion?.invalid)">
+            <small class="form-text text-danger"
+                [hidden]="!editForm.controls.institucion?.errors?.required" jhiTranslate="entity.validation.required">
+                This field is required.
+            </small>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="prosopografiaApp.estudioPersonaje.carrera" for="field_carrera">Carrera</label>
+            <select class="form-control" id="field_carrera" name="carrera" [(ngModel)]="estudioPersonaje.carrera"  required>
+                <option *ngIf="!editForm.value.carrera" [ngValue]="null" selected></option>
+                <option [ngValue]="carreraOption.id === estudioPersonaje.carrera?.id ? estudioPersonaje.carrera : carreraOption" *ngFor="let carreraOption of carreras; trackBy: trackCarreraById">{{carreraOption.nombre}}</option>
+            </select>
+        </div>
+        <div [hidden]="!(editForm.controls.carrera?.dirty && editForm.controls.carrera?.invalid)">
+            <small class="form-text text-danger"
+                [hidden]="!editForm.controls.carrera?.errors?.required" jhiTranslate="entity.validation.required">
+                This field is required.
+            </small>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="prosopografiaApp.estudioPersonaje.personaje" for="field_personaje">Personaje</label>
+            <select class="form-control" id="field_personaje" name="personaje" [(ngModel)]="estudioPersonaje.personaje"  required>
+                <option *ngIf="!editForm.value.personaje" [ngValue]="null" selected></option>
+                <option [ngValue]="personajeOption.id === estudioPersonaje.personaje?.id ? estudioPersonaje.personaje : personajeOption" *ngFor="let personajeOption of personajes; trackBy: trackPersonajeById">{{personajeOption.id}}</option>
+            </select>
+        </div>
+        <div [hidden]="!(editForm.controls.personaje?.dirty && editForm.controls.personaje?.invalid)">
+            <small class="form-text text-danger"
+                [hidden]="!editForm.controls.personaje?.errors?.required" jhiTranslate="entity.validation.required">
+                This field is required.
+            </small>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

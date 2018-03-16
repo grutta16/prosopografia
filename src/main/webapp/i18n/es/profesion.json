@@ -1,0 +1,24 @@
+
+{
+    "prosopografiaApp": {
+        "profesion" : {
+            "home": {
+                "title": "Profesiones",
+                "createLabel": "Crear nueva profesión",
+                "createOrEditLabel": "Crear o editar profesión",
+                "search": "Buscar profesión"
+            },
+            "created": "Una nueva profesión ha sido creada con el identificador {{ param }}",
+            "updated": "Una profesión ha sido actualizada con el identificador {{ param }}",
+            "deleted": "Una profesión ha sido eliminada con el identificador {{ param }}",
+            "delete": {
+                "question": "¿Seguro que quiere eliminar la profesión {{ id }} - {{ nombre }}?"
+            },
+            "detail": {
+                "title": "Profesión"
+            },
+            "nombre": "Nombre",
+            "tipoProfesion": "Tipo de profesión"
+        }
+    }
+}

@@ -1,0 +1,23 @@
+
+{
+    "prosopografiaApp": {
+        "tipoProfesion" : {
+            "home": {
+                "title": "Tipos de profesiones",
+                "createLabel": "Crear nuevo tipo de profesión",
+                "createOrEditLabel": "Crear o editar tipo de profesión",
+                "search": "Buscar tipo de profesión"
+            },
+            "created": "Un nuevo tipo de profesión ha sido creado con el identificador {{ param }}",
+            "updated": "Un tipo de profesión ha sido actualizado con el identificador {{ param }}",
+            "deleted": "Un tipo de profesión ha sido eliminado con el identificador {{ param }}",
+            "delete": {
+                "question": "¿Seguro que quiere eliminar el tipo de profesión {{ id }} - {{ nombre }}?"
+            },
+            "detail": {
+                "title": "Tipo de profesión"
+            },
+            "nombre": "Nombre"
+        }
+    }
+}

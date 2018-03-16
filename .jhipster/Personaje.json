@@ -1,0 +1,127 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipType": "one-to-one",
+            "relationshipValidateRules": "required",
+            "relationshipName": "persona",
+            "otherEntityName": "persona",
+            "otherEntityField": "id",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "personaje"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "lugarNacimiento",
+            "otherEntityName": "lugar",
+            "otherEntityField": "nombre"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "lugarDefuncion",
+            "otherEntityName": "lugar",
+            "otherEntityField": "nombre"
+        },
+        {
+            "relationshipType": "many-to-many",
+            "otherEntityRelationshipName": "",
+            "relationshipName": "profesiones",
+            "otherEntityName": "profesion",
+            "otherEntityField": "nombre",
+            "ownerSide": true
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "parejas",
+            "otherEntityName": "parejaPersonaje",
+            "otherEntityRelationshipName": "personaje"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "familiares",
+            "otherEntityName": "familiarPersonaje",
+            "otherEntityRelationshipName": "personaje"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "estudios",
+            "otherEntityName": "estudioPersonaje",
+            "otherEntityRelationshipName": "personaje"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "asociaciones",
+            "otherEntityName": "asociacionPersonaje",
+            "otherEntityRelationshipName": "personaje"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "partidos",
+            "otherEntityName": "partidoPersonaje",
+            "otherEntityRelationshipName": "personaje"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "religiones",
+            "otherEntityName": "religionPersonaje",
+            "otherEntityRelationshipName": "personaje"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "residencias",
+            "otherEntityName": "residenciaPersonaje",
+            "otherEntityRelationshipName": "personaje"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "cargos",
+            "otherEntityName": "cargoPersonaje",
+            "otherEntityRelationshipName": "personaje"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "fechaNacimiento",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "fechaDefuncion",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "nombresAlternativos",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 50
+        },
+        {
+            "fieldName": "apellidosAlternativos",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 50
+        },
+        {
+            "fieldName": "sexo",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "observaciones",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 2000
+        }
+    ],
+    "changelogDate": "20180315172326",
+    "entityTableName": "personaje",
+    "dto": "no",
+    "pagination": "pagination",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": true,
+    "angularJSSuffix": "pr"
+}

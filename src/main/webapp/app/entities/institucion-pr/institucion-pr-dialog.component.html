@@ -1,0 +1,68 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 class="modal-title" id="myInstitucionLabel" jhiTranslate="prosopografiaApp.institucion.home.createOrEditLabel">Create or edit a Institucion</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" [hidden]="!institucion.id">
+            <label for="id" jhiTranslate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                   [(ngModel)]="institucion.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="prosopografiaApp.institucion.nombre" for="field_nombre">Nombre</label>
+            <input type="text" class="form-control" name="nombre" id="field_nombre"
+                [(ngModel)]="institucion.nombre" required maxlength="50"/>
+            <div [hidden]="!(editForm.controls.nombre?.dirty && editForm.controls.nombre?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.nombre?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.nombre?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 50 }">
+                   This field cannot be longer than 50 characters.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="prosopografiaApp.institucion.nivel" for="field_nivel">Nivel</label>
+            <select class="form-control" name="nivel" [(ngModel)]="institucion.nivel" id="field_nivel" >
+                <option value="PRIMARIO">{{'prosopografiaApp.Nivel.PRIMARIO' | translate}}</option>
+                <option value="SECUNDARIO">{{'prosopografiaApp.Nivel.SECUNDARIO' | translate}}</option>
+                <option value="TERCIARIO">{{'prosopografiaApp.Nivel.TERCIARIO' | translate}}</option>
+                <option value="UNIVERSITARIO">{{'prosopografiaApp.Nivel.UNIVERSITARIO' | translate}}</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="prosopografiaApp.institucion.lugar" for="field_lugar">Lugar</label>
+            <select class="form-control" id="field_lugar" name="lugar" [(ngModel)]="institucion.lugar"  required>
+                <option *ngIf="!editForm.value.lugar" [ngValue]="null" selected></option>
+                <option [ngValue]="lugarOption.id === institucion.lugar?.id ? institucion.lugar : lugarOption" *ngFor="let lugarOption of lugars; trackBy: trackLugarById">{{lugarOption.nombre}}</option>
+            </select>
+        </div>
+        <div [hidden]="!(editForm.controls.lugar?.dirty && editForm.controls.lugar?.invalid)">
+            <small class="form-text text-danger"
+                [hidden]="!editForm.controls.lugar?.errors?.required" jhiTranslate="entity.validation.required">
+                This field is required.
+            </small>
+        </div>
+        <div class="form-group">
+            <label jhiTranslate="prosopografiaApp.institucion.carreras" for="field_carreras">Carreras</label>
+            <select class="form-control" id="field_carreras" multiple name="carreras" [(ngModel)]="institucion.carreras">
+                <option [ngValue]="getSelected(institucion.carreras, carreraOption)" *ngFor="let carreraOption of carreras; trackBy: trackCarreraById">{{carreraOption.nombre}}</option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

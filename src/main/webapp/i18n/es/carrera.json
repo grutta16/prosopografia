@@ -1,0 +1,25 @@
+
+{
+    "prosopografiaApp": {
+        "carrera" : {
+            "home": {
+                "title": "Carreras",
+                "createLabel": "Crear nueva carrera",
+                "createOrEditLabel": "Crear o editar carrera",
+                "search": "Buscar carrera"
+            },
+            "created": "Una nueva carrera ha sido creada con el identificador {{ param }}",
+            "updated": "Una carrera ha sido actualizada con el identificador {{ param }}",
+            "deleted": "Una carrera ha sido eliminada con el identificador {{ param }}",
+            "delete": {
+                "question": "¿Seguro que quiere eliminar la carrera {{ id }} - {{ nombre }}?"
+            },
+            "detail": {
+                "title": "Carrera"
+            },
+            "nombre": "Nombre",
+            "titulo": "Título",
+            "duracion": "Duración (años)"
+        }
+    }
+}

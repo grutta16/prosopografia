@@ -1,0 +1,48 @@
+
+<div *ngIf="eleccion">
+    <h2><span jhiTranslate="prosopografiaApp.eleccion.detail.title">Eleccion</span> {{eleccion.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="prosopografiaApp.eleccion.nombre">Nombre</span></dt>
+        <dd>
+            <span>{{eleccion.nombre}}</span>
+        </dd>
+        <dt><span jhiTranslate="prosopografiaApp.eleccion.fecha">Fecha</span></dt>
+        <dd>
+            <span>{{eleccion.fecha | date:'mediumDate'}}</span>
+        </dd>
+        <dt><span jhiTranslate="prosopografiaApp.eleccion.fuente">Fuente</span></dt>
+        <dd>
+            <span>{{eleccion.fuente}}</span>
+        </dd>
+        <dt><span jhiTranslate="prosopografiaApp.eleccion.observaciones">Observaciones</span></dt>
+        <dd>
+            <span>{{eleccion.observaciones}}</span>
+        </dd>
+        <dt><span jhiTranslate="prosopografiaApp.eleccion.alcance">Alcance</span></dt>
+        <dd>
+            <span jhiTranslate="{{'prosopografiaApp.Alcance.' + eleccion.alcance}}">{{eleccion.alcance}}</span>
+        </dd>
+        <dt><span jhiTranslate="prosopografiaApp.eleccion.cargo">Cargo</span></dt>
+        <dd>
+            <div *ngIf="eleccion.cargo">
+                <a [routerLink]="['/cargo-pr', eleccion.cargo?.id]">{{eleccion.cargo?.nombre}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'eleccion-pr/'+ eleccion.id + '/edit'} }]"
+            replaceUrl="true"
+            queryParamsHandling="merge"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

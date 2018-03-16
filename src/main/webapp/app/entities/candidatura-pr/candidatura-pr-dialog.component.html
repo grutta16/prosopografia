@@ -1,0 +1,72 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 class="modal-title" id="myCandidaturaLabel" jhiTranslate="prosopografiaApp.candidatura.home.createOrEditLabel">Create or edit a Candidatura</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" [hidden]="!candidatura.id">
+            <label for="id" jhiTranslate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                   [(ngModel)]="candidatura.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="prosopografiaApp.candidatura.esSuplente" for="field_esSuplente">Es Suplente</label>
+            <input type="checkbox" class="form-control" name="esSuplente" id="field_esSuplente"
+                [(ngModel)]="candidatura.esSuplente" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="prosopografiaApp.candidatura.resultoElecto" for="field_resultoElecto">Resulto Electo</label>
+            <input type="checkbox" class="form-control" name="resultoElecto" id="field_resultoElecto"
+                [(ngModel)]="candidatura.resultoElecto" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="prosopografiaApp.candidatura.observaciones" for="field_observaciones">Observaciones</label>
+            <input type="text" class="form-control" name="observaciones" id="field_observaciones"
+                [(ngModel)]="candidatura.observaciones" maxlength="2000"/>
+            <div [hidden]="!(editForm.controls.observaciones?.dirty && editForm.controls.observaciones?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.observaciones?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 2000 }">
+                   This field cannot be longer than 2000 characters.
+                </small>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="prosopografiaApp.candidatura.eleccion" for="field_eleccion">Eleccion</label>
+            <select class="form-control" id="field_eleccion" name="eleccion" [(ngModel)]="candidatura.eleccion"  required>
+                <option *ngIf="!editForm.value.eleccion" [ngValue]="null" selected></option>
+                <option [ngValue]="eleccionOption.id === candidatura.eleccion?.id ? candidatura.eleccion : eleccionOption" *ngFor="let eleccionOption of eleccions; trackBy: trackEleccionById">{{eleccionOption.nombre}}</option>
+            </select>
+        </div>
+        <div [hidden]="!(editForm.controls.eleccion?.dirty && editForm.controls.eleccion?.invalid)">
+            <small class="form-text text-danger"
+                [hidden]="!editForm.controls.eleccion?.errors?.required" jhiTranslate="entity.validation.required">
+                This field is required.
+            </small>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="prosopografiaApp.candidatura.seccion" for="field_seccion">Seccion</label>
+            <select class="form-control" id="field_seccion" name="seccion" [(ngModel)]="candidatura.seccion"  required>
+                <option *ngIf="!editForm.value.seccion" [ngValue]="null" selected></option>
+                <option [ngValue]="seccionOption.id === candidatura.seccion?.id ? candidatura.seccion : seccionOption" *ngFor="let seccionOption of seccions; trackBy: trackSeccionById">{{seccionOption.nombre}}</option>
+            </select>
+        </div>
+        <div [hidden]="!(editForm.controls.seccion?.dirty && editForm.controls.seccion?.invalid)">
+            <small class="form-text text-danger"
+                [hidden]="!editForm.controls.seccion?.errors?.required" jhiTranslate="entity.validation.required">
+                This field is required.
+            </small>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

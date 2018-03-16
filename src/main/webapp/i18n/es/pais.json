@@ -1,0 +1,24 @@
+
+{
+    "prosopografiaApp": {
+        "pais" : {
+            "home": {
+                "title": "País",
+                "createLabel": "Crear nuevo país",
+                "createOrEditLabel": "Crear o editar país",
+                "search": "Buscar país"
+            },
+            "created": "Un nuevo país ha sido creado con el identificador {{ param }}",
+            "updated": "Un país ha sido actualizado con el identificador {{ param }}",
+            "deleted": "Un país ha sido eliminado con el identificador {{ param }}",
+            "delete": {
+                "question": "¿Seguro que quiere eliminar el país {{ id }} - {{ nombre }}?"
+            },
+            "detail": {
+                "title": "País"
+            },
+            "nombre": "Nombre",
+            "provincias": "Provincias"
+        }
+    }
+}

@@ -1,0 +1,23 @@
+
+{
+    "prosopografiaApp": {
+        "religion" : {
+            "home": {
+                "title": "Religiones",
+                "createLabel": "Crear nueva religión",
+                "createOrEditLabel": "Crear o editar religión",
+                "search": "Buscar religión"
+            },
+            "created": "Una nueva religión ha sido creada con el identificador {{ param }}",
+            "updated": "Una religión ha sido actualizada con el identificador {{ param }}",
+            "deleted": "Una religión ha sido eliminada con el identificador {{ param }}",
+            "delete": {
+                "question": "¿Seguro que quiere eliminar la religión {{ id }} - {{ nombre }}?"
+            },
+            "detail": {
+                "title": "Religión"
+            },
+            "nombre": "Nombre"
+        }
+    }
+}

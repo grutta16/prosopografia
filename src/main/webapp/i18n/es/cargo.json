@@ -1,0 +1,24 @@
+
+{
+    "prosopografiaApp": {
+        "cargo" : {
+            "home": {
+                "title": "Cargos",
+                "createLabel": "Crear nuevo cargo",
+                "createOrEditLabel": "Crear o editar cargo",
+                "search": "Buscar cargo"
+            },
+            "created": "Un nuevo cargo ha sido creado con el identificador {{ param }}",
+            "updated": "Un cargo ha sido actualizado con el identificador {{ param }}",
+            "deleted": "Un cargo ha sido eliminado con el identificador {{ param }}",
+            "delete": {
+                "question": "¿Seguro que quiere eliminar el cargo {{ id }} - {{ nombre }}?"
+            },
+            "detail": {
+                "title": "Cargo"
+            },
+            "nombre": "Nombre",
+            "ambito": "Ámbito"
+        }
+    }
+}

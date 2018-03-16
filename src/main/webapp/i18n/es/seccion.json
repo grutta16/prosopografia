@@ -1,0 +1,23 @@
+
+{
+    "prosopografiaApp": {
+        "seccion" : {
+            "home": {
+                "title": "Secciones",
+                "createLabel": "Crear nueva sección",
+                "createOrEditLabel": "Crear o editar sección",
+                "search": "Buscar sección"
+            },
+            "created": "Una nueva sección ha sido creada con el identificador {{ param }}",
+            "updated": "Una sección ha sido actualizada con el identificador {{ param }}",
+            "deleted": "Una sección ha sido eliminada con el identificador {{ param }}",
+            "delete": {
+                "question": "¿Seguro que quiere eliminar la sección {{ id }} - {{ nombre }}?"
+            },
+            "detail": {
+                "title": "Sección"
+            },
+            "nombre": "Nombre"
+        }
+    }
+}

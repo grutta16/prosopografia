@@ -1,0 +1,71 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 class="modal-title" id="myPartidoPersonajeLabel" jhiTranslate="prosopografiaApp.partidoPersonaje.home.createOrEditLabel">Create or edit a Partido Personaje</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" [hidden]="!partidoPersonaje.id">
+            <label for="id" jhiTranslate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                   [(ngModel)]="partidoPersonaje.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="prosopografiaApp.partidoPersonaje.fechaDesde" for="field_fechaDesde">Fecha Desde</label>
+            <div class="input-group">
+                <input id="field_fechaDesde" type="text" class="form-control" name="fechaDesde" ngbDatepicker  #fechaDesdeDp="ngbDatepicker" [(ngModel)]="partidoPersonaje.fechaDesde"
+                />
+                <span class="input-group-append">
+                    <button type="button" class="btn btn-secondary" (click)="fechaDesdeDp.toggle()"><i class="fa fa-calendar"></i></button>
+                </span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="prosopografiaApp.partidoPersonaje.fechaHasta" for="field_fechaHasta">Fecha Hasta</label>
+            <div class="input-group">
+                <input id="field_fechaHasta" type="text" class="form-control" name="fechaHasta" ngbDatepicker  #fechaHastaDp="ngbDatepicker" [(ngModel)]="partidoPersonaje.fechaHasta"
+                />
+                <span class="input-group-append">
+                    <button type="button" class="btn btn-secondary" (click)="fechaHastaDp.toggle()"><i class="fa fa-calendar"></i></button>
+                </span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="prosopografiaApp.partidoPersonaje.partido" for="field_partido">Partido</label>
+            <select class="form-control" id="field_partido" name="partido" [(ngModel)]="partidoPersonaje.partido"  required>
+                <option *ngIf="!editForm.value.partido" [ngValue]="null" selected></option>
+                <option [ngValue]="partidoOption.id === partidoPersonaje.partido?.id ? partidoPersonaje.partido : partidoOption" *ngFor="let partidoOption of partidos; trackBy: trackPartidoById">{{partidoOption.nombre}}</option>
+            </select>
+        </div>
+        <div [hidden]="!(editForm.controls.partido?.dirty && editForm.controls.partido?.invalid)">
+            <small class="form-text text-danger"
+                [hidden]="!editForm.controls.partido?.errors?.required" jhiTranslate="entity.validation.required">
+                This field is required.
+            </small>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="prosopografiaApp.partidoPersonaje.personaje" for="field_personaje">Personaje</label>
+            <select class="form-control" id="field_personaje" name="personaje" [(ngModel)]="partidoPersonaje.personaje"  required>
+                <option *ngIf="!editForm.value.personaje" [ngValue]="null" selected></option>
+                <option [ngValue]="personajeOption.id === partidoPersonaje.personaje?.id ? partidoPersonaje.personaje : personajeOption" *ngFor="let personajeOption of personajes; trackBy: trackPersonajeById">{{personajeOption.id}}</option>
+            </select>
+        </div>
+        <div [hidden]="!(editForm.controls.personaje?.dirty && editForm.controls.personaje?.invalid)">
+            <small class="form-text text-danger"
+                [hidden]="!editForm.controls.personaje?.errors?.required" jhiTranslate="entity.validation.required">
+                This field is required.
+            </small>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

@@ -1,0 +1,50 @@
+
+<div *ngIf="cargoPersonaje">
+    <h2><span jhiTranslate="prosopografiaApp.cargoPersonaje.detail.title">Cargo Personaje</span> {{cargoPersonaje.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="prosopografiaApp.cargoPersonaje.fechaInicio">Fecha Inicio</span></dt>
+        <dd>
+            <span>{{cargoPersonaje.fechaInicio | date:'mediumDate'}}</span>
+        </dd>
+        <dt><span jhiTranslate="prosopografiaApp.cargoPersonaje.fechaFin">Fecha Fin</span></dt>
+        <dd>
+            <span>{{cargoPersonaje.fechaFin | date:'mediumDate'}}</span>
+        </dd>
+        <dt><span jhiTranslate="prosopografiaApp.cargoPersonaje.observaciones">Observaciones</span></dt>
+        <dd>
+            <span>{{cargoPersonaje.observaciones}}</span>
+        </dd>
+        <dt><span jhiTranslate="prosopografiaApp.cargoPersonaje.alcance">Alcance</span></dt>
+        <dd>
+            <span jhiTranslate="{{'prosopografiaApp.Alcance.' + cargoPersonaje.alcance}}">{{cargoPersonaje.alcance}}</span>
+        </dd>
+        <dt><span jhiTranslate="prosopografiaApp.cargoPersonaje.cargo">Cargo</span></dt>
+        <dd>
+            <div *ngIf="cargoPersonaje.cargo">
+                <a [routerLink]="['/cargo-pr', cargoPersonaje.cargo?.id]">{{cargoPersonaje.cargo?.nombre}}</a>
+            </div>
+        </dd>
+        <dt><span jhiTranslate="prosopografiaApp.cargoPersonaje.personaje">Personaje</span></dt>
+        <dd>
+            <div *ngIf="cargoPersonaje.personaje">
+                <a [routerLink]="['/personaje-pr', cargoPersonaje.personaje?.id]">{{cargoPersonaje.personaje?.id}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'cargo-personaje-pr/'+ cargoPersonaje.id + '/edit'} }]"
+            replaceUrl="true"
+            queryParamsHandling="merge"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

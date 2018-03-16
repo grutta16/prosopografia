@@ -1,0 +1,27 @@
+{
+    "fluentMethods": true,
+    "relationships": [],
+    "fields": [
+        {
+            "fieldName": "nombre",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required",
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 50
+        },
+        {
+            "fieldName": "ambito",
+            "fieldType": "Ambito",
+            "fieldValues": "MUNICIPAL,PROVINCIAL,NACIONAL,INTERNACIONAL"
+        }
+    ],
+    "changelogDate": "20180315172317",
+    "entityTableName": "cargo",
+    "dto": "no",
+    "pagination": "pagination",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": false,
+    "angularJSSuffix": "pr"
+}

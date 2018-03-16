@@ -1,0 +1,26 @@
+
+{
+    "prosopografiaApp": {
+        "institucion" : {
+            "home": {
+                "title": "Instituciones",
+                "createLabel": "Crear nueva institución",
+                "createOrEditLabel": "Crear o editar institución",
+                "search": "Buscar institución"
+            },
+            "created": "Una nueva institución ha sido creada con el identificador {{ param }}",
+            "updated": "Una institución ha sido actualizada con el identificador {{ param }}",
+            "deleted": "Una institución ha sido eliminada con el identificador {{ param }}",
+            "delete": {
+                "question": "¿Seguro que quiere eliminar la institución {{ id }} - {{ nombre }}?"
+            },
+            "detail": {
+                "title": "Institución"
+            },
+            "nombre": "Nombre",
+            "nivel": "Nivel",
+            "lugar": "Lugar",
+            "carreras": "Carreras"
+        }
+    }
+}

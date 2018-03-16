@@ -1,0 +1,28 @@
+
+{
+    "prosopografiaApp": {
+        "candidatura" : {
+            "home": {
+                "title": "Candidaturas",
+                "createLabel": "Crear nueva candidatura",
+                "createOrEditLabel": "Crear o editar candidatura",
+                "search": "Buscar candidatura"
+            },
+            "created": "Una nueva candidatura ha sido creada con el identificador {{ param }}",
+            "updated": "Una candidatura ha sido actualizada con el identificador {{ param }}",
+            "deleted": "Una candidatura ha sido eliminada con el identificador {{ param }}",
+            "delete": {
+                "question": "¿Seguro que quiere eliminar la candidatura {{ id }} - {{ eleccion }}?"
+            },
+            "detail": {
+                "title": "Candidatura"
+            },
+            "esSuplente": "¿Es suplente?",
+            "resultoElecto": "¿Resulto electo?",
+            "observaciones": "Observaciones",
+            "detCandidaturas": "Det Candidaturas",
+            "eleccion": "Elección",
+            "seccion": "Sección"
+        }
+    }
+}

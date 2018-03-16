@@ -1,0 +1,26 @@
+
+{
+    "prosopografiaApp": {
+        "religionPersonaje" : {
+            "home": {
+                "title": "Religion Personajes",
+                "createLabel": "Crear nuevo Religion Personaje",
+                "createOrEditLabel": "Crear o editar Religion Personaje",
+                "search": "Search for Religion Personaje"
+            },
+            "created": "Un nuevo Religion Personaje ha sido creado con el identificador {{ param }}",
+            "updated": "Un Religion Personaje ha sido actualizado con el identificador {{ param }}",
+            "deleted": "Un Religion Personaje ha sido eliminado con el identificador {{ param }}",
+            "delete": {
+                "question": "¿Seguro que quiere eliminar Religion Personaje {{ id }}?"
+            },
+            "detail": {
+                "title": "Religion Personaje"
+            },
+            "fechaDesde": "Fecha Desde",
+            "fechaHasta": "Fecha Hasta",
+            "religion": "Religion",
+            "personaje": "Personaje"
+        }
+    }
+}

@@ -1,0 +1,26 @@
+
+{
+    "prosopografiaApp": {
+        "residenciaPersonaje" : {
+            "home": {
+                "title": "Residencia Personajes",
+                "createLabel": "Crear nuevo Residencia Personaje",
+                "createOrEditLabel": "Crear o editar Residencia Personaje",
+                "search": "Search for Residencia Personaje"
+            },
+            "created": "Un nuevo Residencia Personaje ha sido creado con el identificador {{ param }}",
+            "updated": "Un Residencia Personaje ha sido actualizado con el identificador {{ param }}",
+            "deleted": "Un Residencia Personaje ha sido eliminado con el identificador {{ param }}",
+            "delete": {
+                "question": "¿Seguro que quiere eliminar Residencia Personaje {{ id }}?"
+            },
+            "detail": {
+                "title": "Residencia Personaje"
+            },
+            "fechaDesde": "Fecha Desde",
+            "fechaHasta": "Fecha Hasta",
+            "lugar": "Lugar",
+            "personaje": "Personaje"
+        }
+    }
+}

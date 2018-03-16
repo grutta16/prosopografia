@@ -1,0 +1,46 @@
+
+<div *ngIf="candidatura">
+    <h2><span jhiTranslate="prosopografiaApp.candidatura.detail.title">Candidatura</span> {{candidatura.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="prosopografiaApp.candidatura.esSuplente">Es Suplente</span></dt>
+        <dd>
+            <span>{{candidatura.esSuplente}}</span>
+        </dd>
+        <dt><span jhiTranslate="prosopografiaApp.candidatura.resultoElecto">Resulto Electo</span></dt>
+        <dd>
+            <span>{{candidatura.resultoElecto}}</span>
+        </dd>
+        <dt><span jhiTranslate="prosopografiaApp.candidatura.observaciones">Observaciones</span></dt>
+        <dd>
+            <span>{{candidatura.observaciones}}</span>
+        </dd>
+        <dt><span jhiTranslate="prosopografiaApp.candidatura.eleccion">Eleccion</span></dt>
+        <dd>
+            <div *ngIf="candidatura.eleccion">
+                <a [routerLink]="['/eleccion-pr', candidatura.eleccion?.id]">{{candidatura.eleccion?.nombre}}</a>
+            </div>
+        </dd>
+        <dt><span jhiTranslate="prosopografiaApp.candidatura.seccion">Seccion</span></dt>
+        <dd>
+            <div *ngIf="candidatura.seccion">
+                <a [routerLink]="['/seccion-pr', candidatura.seccion?.id]">{{candidatura.seccion?.nombre}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'candidatura-pr/'+ candidatura.id + '/edit'} }]"
+            replaceUrl="true"
+            queryParamsHandling="merge"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

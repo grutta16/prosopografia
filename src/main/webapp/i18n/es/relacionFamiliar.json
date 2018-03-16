@@ -1,0 +1,23 @@
+
+{
+    "prosopografiaApp": {
+        "relacionFamiliar" : {
+            "home": {
+                "title": "Relaciones Familiares",
+                "createLabel": "Crear nueva relación familiar",
+                "createOrEditLabel": "Crear o editar relación familiar",
+                "search": "Buscar relación familiar"
+            },
+            "created": "Una nueva relación familiar ha sido creada con el identificador {{ param }}",
+            "updated": "Una relación familiar ha sido actualizada con el identificador {{ param }}",
+            "deleted": "Una relación familiar ha sido eliminada con el identificador {{ param }}",
+            "delete": {
+                "question": "¿Seguro que quiere eliminar la relación familiar {{ id }} - {{ nombre }}?"
+            },
+            "detail": {
+                "title": "Relación Familiar"
+            },
+            "nombre": "Nombre"
+        }
+    }
+}

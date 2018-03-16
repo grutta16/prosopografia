@@ -1,0 +1,11 @@
+{
+    "prosopografiaApp": {
+        "Nivel" : {
+            "null": "",
+            "PRIMARIO": "PRIMARIO",
+            "SECUNDARIO": "SECUNDARIO",
+            "TERCIARIO": "TERCIARIO",
+            "UNIVERSITARIO": "UNIVERSITARIO"
+        }
+    }
+}

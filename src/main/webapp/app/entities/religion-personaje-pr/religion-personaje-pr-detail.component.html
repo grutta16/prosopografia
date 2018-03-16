@@ -1,0 +1,42 @@
+
+<div *ngIf="religionPersonaje">
+    <h2><span jhiTranslate="prosopografiaApp.religionPersonaje.detail.title">Religion Personaje</span> {{religionPersonaje.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="prosopografiaApp.religionPersonaje.fechaDesde">Fecha Desde</span></dt>
+        <dd>
+            <span>{{religionPersonaje.fechaDesde | date:'mediumDate'}}</span>
+        </dd>
+        <dt><span jhiTranslate="prosopografiaApp.religionPersonaje.fechaHasta">Fecha Hasta</span></dt>
+        <dd>
+            <span>{{religionPersonaje.fechaHasta | date:'mediumDate'}}</span>
+        </dd>
+        <dt><span jhiTranslate="prosopografiaApp.religionPersonaje.religion">Religion</span></dt>
+        <dd>
+            <div *ngIf="religionPersonaje.religion">
+                <a [routerLink]="['/religion-pr', religionPersonaje.religion?.id]">{{religionPersonaje.religion?.nombre}}</a>
+            </div>
+        </dd>
+        <dt><span jhiTranslate="prosopografiaApp.religionPersonaje.personaje">Personaje</span></dt>
+        <dd>
+            <div *ngIf="religionPersonaje.personaje">
+                <a [routerLink]="['/personaje-pr', religionPersonaje.personaje?.id]">{{religionPersonaje.personaje?.id}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'religion-personaje-pr/'+ religionPersonaje.id + '/edit'} }]"
+            replaceUrl="true"
+            queryParamsHandling="merge"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

@@ -1,0 +1,42 @@
+
+<div *ngIf="residenciaPersonaje">
+    <h2><span jhiTranslate="prosopografiaApp.residenciaPersonaje.detail.title">Residencia Personaje</span> {{residenciaPersonaje.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="prosopografiaApp.residenciaPersonaje.fechaDesde">Fecha Desde</span></dt>
+        <dd>
+            <span>{{residenciaPersonaje.fechaDesde | date:'mediumDate'}}</span>
+        </dd>
+        <dt><span jhiTranslate="prosopografiaApp.residenciaPersonaje.fechaHasta">Fecha Hasta</span></dt>
+        <dd>
+            <span>{{residenciaPersonaje.fechaHasta | date:'mediumDate'}}</span>
+        </dd>
+        <dt><span jhiTranslate="prosopografiaApp.residenciaPersonaje.lugar">Lugar</span></dt>
+        <dd>
+            <div *ngIf="residenciaPersonaje.lugar">
+                <a [routerLink]="['/lugar-pr', residenciaPersonaje.lugar?.id]">{{residenciaPersonaje.lugar?.nombre}}</a>
+            </div>
+        </dd>
+        <dt><span jhiTranslate="prosopografiaApp.residenciaPersonaje.personaje">Personaje</span></dt>
+        <dd>
+            <div *ngIf="residenciaPersonaje.personaje">
+                <a [routerLink]="['/personaje-pr', residenciaPersonaje.personaje?.id]">{{residenciaPersonaje.personaje?.id}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'residencia-personaje-pr/'+ residenciaPersonaje.id + '/edit'} }]"
+            replaceUrl="true"
+            queryParamsHandling="merge"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

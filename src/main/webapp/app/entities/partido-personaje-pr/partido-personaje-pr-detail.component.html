@@ -1,0 +1,42 @@
+
+<div *ngIf="partidoPersonaje">
+    <h2><span jhiTranslate="prosopografiaApp.partidoPersonaje.detail.title">Partido Personaje</span> {{partidoPersonaje.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="prosopografiaApp.partidoPersonaje.fechaDesde">Fecha Desde</span></dt>
+        <dd>
+            <span>{{partidoPersonaje.fechaDesde | date:'mediumDate'}}</span>
+        </dd>
+        <dt><span jhiTranslate="prosopografiaApp.partidoPersonaje.fechaHasta">Fecha Hasta</span></dt>
+        <dd>
+            <span>{{partidoPersonaje.fechaHasta | date:'mediumDate'}}</span>
+        </dd>
+        <dt><span jhiTranslate="prosopografiaApp.partidoPersonaje.partido">Partido</span></dt>
+        <dd>
+            <div *ngIf="partidoPersonaje.partido">
+                <a [routerLink]="['/partido-pr', partidoPersonaje.partido?.id]">{{partidoPersonaje.partido?.nombre}}</a>
+            </div>
+        </dd>
+        <dt><span jhiTranslate="prosopografiaApp.partidoPersonaje.personaje">Personaje</span></dt>
+        <dd>
+            <div *ngIf="partidoPersonaje.personaje">
+                <a [routerLink]="['/personaje-pr', partidoPersonaje.personaje?.id]">{{partidoPersonaje.personaje?.id}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'partido-personaje-pr/'+ partidoPersonaje.id + '/edit'} }]"
+            replaceUrl="true"
+            queryParamsHandling="merge"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

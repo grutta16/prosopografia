@@ -1,0 +1,24 @@
+
+{
+    "prosopografiaApp": {
+        "lugar" : {
+            "home": {
+                "title": "Lugares",
+                "createLabel": "Crear nuevo lugar",
+                "createOrEditLabel": "Crear o editar lugar",
+                "search": "Buscar lugar"
+            },
+            "created": "Un nuevo lugar ha sido creado con el identificador {{ param }}",
+            "updated": "Un lugar ha sido actualizado con el identificador {{ param }}",
+            "deleted": "Un lugar ha sido eliminado con el identificador {{ param }}",
+            "delete": {
+                "question": "¿Seguro que quiere eliminar el lugar {{ id }} - {{ nombre }}?"
+            },
+            "detail": {
+                "title": "Lugar"
+            },
+            "nombre": "Nombre",
+            "provincia": "Provincia"
+        }
+    }
+}

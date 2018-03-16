@@ -1,0 +1,26 @@
+
+{
+    "prosopografiaApp": {
+        "partidoPersonaje" : {
+            "home": {
+                "title": "Partido Personajes",
+                "createLabel": "Crear nuevo Partido Personaje",
+                "createOrEditLabel": "Crear o editar Partido Personaje",
+                "search": "Search for Partido Personaje"
+            },
+            "created": "Un nuevo Partido Personaje ha sido creado con el identificador {{ param }}",
+            "updated": "Un Partido Personaje ha sido actualizado con el identificador {{ param }}",
+            "deleted": "Un Partido Personaje ha sido eliminado con el identificador {{ param }}",
+            "delete": {
+                "question": "¿Seguro que quiere eliminar Partido Personaje {{ id }}?"
+            },
+            "detail": {
+                "title": "Partido Personaje"
+            },
+            "fechaDesde": "Fecha Desde",
+            "fechaHasta": "Fecha Hasta",
+            "partido": "Partido",
+            "personaje": "Personaje"
+        }
+    }
+}

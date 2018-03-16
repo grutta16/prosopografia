@@ -1,0 +1,48 @@
+
+<div *ngIf="estudioPersonaje">
+    <h2><span jhiTranslate="prosopografiaApp.estudioPersonaje.detail.title">Estudio Personaje</span> {{estudioPersonaje.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="prosopografiaApp.estudioPersonaje.anioInicio">Anio Inicio</span></dt>
+        <dd>
+            <span>{{estudioPersonaje.anioInicio}}</span>
+        </dd>
+        <dt><span jhiTranslate="prosopografiaApp.estudioPersonaje.anioFin">Anio Fin</span></dt>
+        <dd>
+            <span>{{estudioPersonaje.anioFin}}</span>
+        </dd>
+        <dt><span jhiTranslate="prosopografiaApp.estudioPersonaje.institucion">Institucion</span></dt>
+        <dd>
+            <div *ngIf="estudioPersonaje.institucion">
+                <a [routerLink]="['/institucion-pr', estudioPersonaje.institucion?.id]">{{estudioPersonaje.institucion?.nombre}}</a>
+            </div>
+        </dd>
+        <dt><span jhiTranslate="prosopografiaApp.estudioPersonaje.carrera">Carrera</span></dt>
+        <dd>
+            <div *ngIf="estudioPersonaje.carrera">
+                <a [routerLink]="['/carrera-pr', estudioPersonaje.carrera?.id]">{{estudioPersonaje.carrera?.nombre}}</a>
+            </div>
+        </dd>
+        <dt><span jhiTranslate="prosopografiaApp.estudioPersonaje.personaje">Personaje</span></dt>
+        <dd>
+            <div *ngIf="estudioPersonaje.personaje">
+                <a [routerLink]="['/personaje-pr', estudioPersonaje.personaje?.id]">{{estudioPersonaje.personaje?.id}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'estudio-personaje-pr/'+ estudioPersonaje.id + '/edit'} }]"
+            replaceUrl="true"
+            queryParamsHandling="merge"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

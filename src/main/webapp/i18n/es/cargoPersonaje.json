@@ -1,0 +1,28 @@
+
+{
+    "prosopografiaApp": {
+        "cargoPersonaje" : {
+            "home": {
+                "title": "Cargo Personajes",
+                "createLabel": "Crear nuevo Cargo Personaje",
+                "createOrEditLabel": "Crear o editar Cargo Personaje",
+                "search": "Search for Cargo Personaje"
+            },
+            "created": "Un nuevo Cargo Personaje ha sido creado con el identificador {{ param }}",
+            "updated": "Un Cargo Personaje ha sido actualizado con el identificador {{ param }}",
+            "deleted": "Un Cargo Personaje ha sido eliminado con el identificador {{ param }}",
+            "delete": {
+                "question": "¿Seguro que quiere eliminar Cargo Personaje {{ id }}?"
+            },
+            "detail": {
+                "title": "Cargo Personaje"
+            },
+            "fechaInicio": "Fecha Inicio",
+            "fechaFin": "Fecha Fin",
+            "observaciones": "Observaciones",
+            "alcance": "Alcance",
+            "cargo": "Cargo",
+            "personaje": "Personaje"
+        }
+    }
+}

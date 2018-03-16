@@ -1,12 +1,39 @@
 {
     "global": {
-        "title": "Prosopografia",
+        "title": "Sistema de Prosopografía",
         "browsehappy": "Está usando un navegador <strong>no actualizado</strong>. Por favor, <a href=\"http://browsehappy.com/?locale=en\">actualice su navegador</a> para mejorar su experiencia.",
         "menu": {
             "home": "Inicio",
             "jhipster-needle-menu-add-element": "JHipster will add additional menu entries here (do not translate!)",
             "entities": {
-                "main": "Entidades",
+                "main": "Tablas",
+                "paisPr": "Paises",
+                "provinciaPr": "Provincias",
+                "lugarPr": "Lugares",
+                "tipoProfesionPr": "Tipos de profesiones",
+                "profesionPr": "Profesiones",
+                "religionPr": "Religiones",
+                "asociacionPr": "Asociaciones",
+                "partidoPr": "Partidos",
+                "cargoPr": "Cargos",
+                "seccionPr": "Secciones",
+                "eleccionPr": "Elecciones",
+                "candidaturaPr": "Candidaturas",
+                "detCandidaturaPr": "Det Candidatura",
+                "personaPr": "Personas",
+                "familiarPersonajePr": "Familiar Personaje",
+                "relacionFamiliarPr": "Relaciones Familiares",
+                "parejaPersonajePr": "Pareja Personaje",
+                "personajePr": "Personajes",
+                "asociacionPersonajePr": "Asociacion Personaje",
+                "partidoPersonajePr": "Partido Personaje",
+                "religionPersonajePr": "Religion Personaje",
+                "residenciaPersonajePr": "Residencia Personaje",
+                "cargoPersonajePr": "Cargo Personaje",
+                "educacion": "Educación",
+                "institucionPr": "Instituciones",
+                "carreraPr": "Carreras",
+                "estudioPersonajePr": "Estudio Personaje",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {
@@ -82,7 +109,7 @@
             "id" : "ID"
         },
         "ribbon": {
-            "dev":"Development"
+            "dev":"En desarrollo"
         },
         "item-count": "Monstrando {{first}} - {{second}} de {{total}} artículos."
     },

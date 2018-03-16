@@ -1,0 +1,27 @@
+
+{
+    "prosopografiaApp": {
+        "estudioPersonaje" : {
+            "home": {
+                "title": "Estudio Personajes",
+                "createLabel": "Crear nuevo Estudio Personaje",
+                "createOrEditLabel": "Crear o editar Estudio Personaje",
+                "search": "Search for Estudio Personaje"
+            },
+            "created": "Un nuevo Estudio Personaje ha sido creado con el identificador {{ param }}",
+            "updated": "Un Estudio Personaje ha sido actualizado con el identificador {{ param }}",
+            "deleted": "Un Estudio Personaje ha sido eliminado con el identificador {{ param }}",
+            "delete": {
+                "question": "¿Seguro que quiere eliminar Estudio Personaje {{ id }}?"
+            },
+            "detail": {
+                "title": "Estudio Personaje"
+            },
+            "anioInicio": "Anio Inicio",
+            "anioFin": "Anio Fin",
+            "institucion": "Institucion",
+            "carrera": "Carrera",
+            "personaje": "Personaje"
+        }
+    }
+}

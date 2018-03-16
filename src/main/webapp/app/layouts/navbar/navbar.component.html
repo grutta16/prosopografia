@@ -1,15 +1,19 @@
 <nav class="navbar navbar-dark navbar-expand-md jh-navbar">
     <div class="jh-logo-container float-left">
-        <a class="jh-navbar-toggler d-lg-none float-right" href="javascript:void(0);" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation" (click)="toggleNavbar()">
+        <a class="jh-navbar-toggler d-lg-none float-right" href="javascript:void(0);" data-toggle="collapse"
+           data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
+           aria-label="Toggle navigation" (click)="toggleNavbar()">
             <i class="fa fa-bars"></i>
         </a>
         <a class="navbar-brand logo float-left" routerLink="/" (click)="collapseNavbar()">
-            <span class="logo-img"></span>
-            <span jhiTranslate="global.title" class="navbar-title">Prosopografia</span> <span class="navbar-version">{{version}}</span>
+            <!--<span class="logo-img"></span>-->
+            <span jhiTranslate="global.title" class="navbar-title">Prosopografia</span> <!--<span class="navbar-version">{{version}}</span>-->
         </a>
     </div>
-    <div class="navbar-collapse collapse" id="navbarResponsive" [ngbCollapse]="isNavbarCollapsed" [ngSwitch]="isAuthenticated()">
+    <div class="navbar-collapse collapse" id="navbarResponsive" [ngbCollapse]="isNavbarCollapsed"
+         [ngSwitch]="isAuthenticated()">
         <ul class="navbar-nav ml-auto">
+
             <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
                 <a class="nav-link" routerLink="/" (click)="collapseNavbar()">
                     <span>
@@ -18,21 +22,305 @@
                     </span>
                 </a>
             </li>
+
             <!-- jhipster-needle-add-element-to-menu - JHipster will add new menu items here -->
-            <li *ngSwitchCase="true" ngbDropdown class="nav-item dropdown pointer" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+            <li *ngSwitchCase="true" ngbDropdown class="nav-item dropdown pointer" routerLinkActive="active"
+                [routerLinkActiveOptions]="{exact: true}">
                 <a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);" id="entity-menu">
                     <span>
                         <i class="fa fa-th-list" aria-hidden="true"></i>
                         <span jhiTranslate="global.menu.entities.main">
-                            Entities
+                            Tables
                         </span>
                     </span>
                 </a>
+
                 <ul class="dropdown-menu" ngbDropdownMenu>
+                    <li class="dropdown-submenu">
+                        <a  class="dropdown-item" href="javascript:void(0);">
+                            <span>
+                                <i class="fa fa-fw fa-chevron-right" aria-hidden="true"></i>
+                                <span jhiTranslate="global.menu.entities.partidoPr">
+                                    Partido Pr
+                                </span>
+                            </span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a class="dropdown-item" routerLink="partido-pr" routerLinkActive="active"
+                                   [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                                    <i class="fa fa-fw fa-asterisk" aria-hidden="true"></i>
+                                    <span jhiTranslate="global.menu.entities.partidoPr">Partido Pr</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" routerLink="cargo-pr" routerLinkActive="active"
+                                   [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                                    <i class="fa fa-fw fa-asterisk" aria-hidden="true"></i>
+                                    <span jhiTranslate="global.menu.entities.cargoPr">Cargo Pr</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" routerLink="seccion-pr" routerLinkActive="active"
+                                   [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                                    <i class="fa fa-fw fa-asterisk" aria-hidden="true"></i>
+                                    <span jhiTranslate="global.menu.entities.seccionPr">Seccion Pr</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li class="dropdown-submenu">
+                        <a  class="dropdown-item" href="javascript:void(0);">
+                            <span>
+                                <i class="fa fa-fw fa-chevron-right" aria-hidden="true"></i>
+                                <span jhiTranslate="global.menu.entities.lugarPr">
+                                    Lugar Pr
+                                </span>
+                            </span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a class="dropdown-item" routerLink="pais-pr" routerLinkActive="active"
+                                   [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                                    <i class="fa fa-fw fa-asterisk" aria-hidden="true"></i>
+                                    <span jhiTranslate="global.menu.entities.paisPr">Pais Pr</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" routerLink="provincia-pr" routerLinkActive="active"
+                                   [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                                    <i class="fa fa-fw fa-asterisk" aria-hidden="true"></i>
+                                    <span jhiTranslate="global.menu.entities.provinciaPr">Provincia Pr</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" routerLink="lugar-pr" routerLinkActive="active"
+                                   [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                                    <i class="fa fa-fw fa-asterisk" aria-hidden="true"></i>
+                                    <span jhiTranslate="global.menu.entities.lugarPr">Lugar Pr</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="dropdown-submenu">
+                        <a  class="dropdown-item" href="javascript:void(0);">
+                            <span>
+                                <i class="fa fa-fw fa-chevron-right" aria-hidden="true"></i>
+                                <span jhiTranslate="global.menu.entities.profesionPr">
+                                    Profesiones Pr
+                                </span>
+                            </span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a class="dropdown-item" routerLink="tipo-profesion-pr" routerLinkActive="active"
+                                   [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                                    <i class="fa fa-fw fa-asterisk" aria-hidden="true"></i>
+                                    <span jhiTranslate="global.menu.entities.tipoProfesionPr">Tipo Profesion Pr</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" routerLink="profesion-pr" routerLinkActive="active"
+                                   [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                                    <i class="fa fa-fw fa-asterisk" aria-hidden="true"></i>
+                                    <span jhiTranslate="global.menu.entities.profesionPr">Profesion Pr</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li class="dropdown-submenu">
+                        <a  class="dropdown-item" href="javascript:void(0);">
+                            <span>
+                                <i class="fa fa-fw fa-chevron-right" aria-hidden="true"></i>
+                                <span jhiTranslate="global.menu.entities.educacion">
+                                    Educacion
+                                </span>
+                            </span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a class="dropdown-item" routerLink="carrera-pr" routerLinkActive="active"
+                                   [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                                    <i class="fa fa-fw fa-asterisk" aria-hidden="true"></i>
+                                    <span jhiTranslate="global.menu.entities.carreraPr">Carrera Pr</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" routerLink="institucion-pr" routerLinkActive="active"
+                                   [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                                    <i class="fa fa-fw fa-asterisk" aria-hidden="true"></i>
+                                    <span jhiTranslate="global.menu.entities.institucionPr">
+                                    Institucion Pr
+                                </span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <a class="dropdown-item" routerLink="religion-pr" routerLinkActive="active"
+                           [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                            <i class="fa fa-fw fa-chevron-right" aria-hidden="true"></i>
+                            <span jhiTranslate="global.menu.entities.religionPr">Religion Pr</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" routerLink="asociacion-pr" routerLinkActive="active"
+                           [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                            <i class="fa fa-fw fa-chevron-right" aria-hidden="true"></i>
+                            <span jhiTranslate="global.menu.entities.asociacionPr">Asociacion Pr</span>
+                        </a>
+                    </li>
+                    <!--<li>-->
+                    <!--<a class="dropdown-item" routerLink="seccion-pr" routerLinkActive="active"-->
+                    <!--[routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">-->
+                    <!--<i class="fa fa-fw fa-chevron-right" aria-hidden="true"></i>-->
+                    <!--<span jhiTranslate="global.menu.entities.seccionPr">Seccion Pr</span>-->
+                    <!--</a>-->
+                    <!--</li>-->
+                    <!--<li>-->
+                    <!--<a class="dropdown-item" routerLink="ambito-pr" routerLinkActive="active"-->
+                    <!--[routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">-->
+                    <!--<i class="fa fa-fw fa-chevron-right" aria-hidden="true"></i>-->
+                    <!--<span jhiTranslate="global.menu.entities.ambitoPr">Ambito Pr</span>-->
+                    <!--</a>-->
+                    <!--</li>-->
+                    <!--<li>-->
+                    <!--<a class="dropdown-item" routerLink="persona-pr" routerLinkActive="active"-->
+                    <!--[routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">-->
+                    <!--<i class="fa fa-fw fa-asterisk" aria-hidden="true"></i>-->
+                    <!--<span jhiTranslate="global.menu.entities.personaPr">Persona Pr</span>-->
+                    <!--</a>-->
+                    <!--</li>-->
+                    <!--<li>-->
+                    <!--<a class="dropdown-item" routerLink="familiar-personaje-pr" routerLinkActive="active"-->
+                    <!--[routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">-->
+                    <!--<i class="fa fa-fw fa-asterisk" aria-hidden="true"></i>-->
+                    <!--<span jhiTranslate="global.menu.entities.familiarPersonajePr">Familiar Personaje Pr</span>-->
+                    <!--</a>-->
+                    <!--</li>-->
+                    <li>
+                        <a class="dropdown-item" routerLink="relacion-familiar-pr" routerLinkActive="active"
+                           [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                            <i class="fa fa-fw fa-chevron-right" aria-hidden="true"></i>
+                            <span jhiTranslate="global.menu.entities.relacionFamiliarPr">Relacion Familiar Pr</span>
+                        </a>
+                    </li>
+                    <!--<li>-->
+                    <!--<a class="dropdown-item" routerLink="pareja-personaje-pr" routerLinkActive="active"-->
+                    <!--[routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">-->
+                    <!--<i class="fa fa-fw fa-asterisk" aria-hidden="true"></i>-->
+                    <!--<span jhiTranslate="global.menu.entities.parejaPersonajePr">Pareja Personaje Pr</span>-->
+                    <!--</a>-->
+                    <!--</li>-->
+
+                    <!--<li>-->
+                    <!--<a class="dropdown-item" routerLink="asociacion-personaje-pr" routerLinkActive="active"-->
+                    <!--[routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">-->
+                    <!--<i class="fa fa-fw fa-asterisk" aria-hidden="true"></i>-->
+                    <!--<span-->
+                    <!--jhiTranslate="global.menu.entities.asociacionPersonajePr">Asociacion Personaje Pr</span>-->
+                    <!--</a>-->
+                    <!--</li>-->
+                    <!--<li>-->
+                    <!--<a class="dropdown-item" routerLink="partido-personaje-pr" routerLinkActive="active"-->
+                    <!--[routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">-->
+                    <!--<i class="fa fa-fw fa-asterisk" aria-hidden="true"></i>-->
+                    <!--<span jhiTranslate="global.menu.entities.partidoPersonajePr">Partido Personaje Pr</span>-->
+                    <!--</a>-->
+                    <!--</li>-->
+                    <!--<li>-->
+                    <!--<a class="dropdown-item" routerLink="religion-personaje-pr" routerLinkActive="active"-->
+                    <!--[routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">-->
+                    <!--<i class="fa fa-fw fa-asterisk" aria-hidden="true"></i>-->
+                    <!--<span jhiTranslate="global.menu.entities.religionPersonajePr">Religion Personaje Pr</span>-->
+                    <!--</a>-->
+                    <!--</li>-->
+                    <!--<li>-->
+                    <!--<a class="dropdown-item" routerLink="residencia-personaje-pr" routerLinkActive="active"-->
+                    <!--[routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">-->
+                    <!--<i class="fa fa-fw fa-asterisk" aria-hidden="true"></i>-->
+                    <!--<span-->
+                    <!--jhiTranslate="global.menu.entities.residenciaPersonajePr">Residencia Personaje Pr</span>-->
+                    <!--</a>-->
+                    <!--</li>-->
+                    <!--<li>-->
+                    <!--<a class="dropdown-item" routerLink="cargo-interno-personaje-pr" routerLinkActive="active"-->
+                    <!--[routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">-->
+                    <!--<i class="fa fa-fw fa-asterisk" aria-hidden="true"></i>-->
+                    <!--<span-->
+                    <!--jhiTranslate="global.menu.entities.cargoInternoPersonajePr">Cargo Interno Personaje Pr</span>-->
+                    <!--</a>-->
+                    <!--</li>-->
+                    <!--<li>-->
+                    <!--<a class="dropdown-item" routerLink="cargo-gobierno-personaje-pr" routerLinkActive="active"-->
+                    <!--[routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">-->
+                    <!--<i class="fa fa-fw fa-asterisk" aria-hidden="true"></i>-->
+                    <!--<span jhiTranslate="global.menu.entities.cargoGobiernoPersonajePr">Cargo Gobierno Personaje Pr</span>-->
+                    <!--</a>-->
+                    <!--</li>-->
+
+                    <!--<li>-->
+                    <!--<a class="dropdown-item" routerLink="institucion-pr" routerLinkActive="active"-->
+                    <!--[routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">-->
+                    <!--<i class="fa fa-fw fa-asterisk" aria-hidden="true"></i>-->
+                    <!--<span jhiTranslate="global.menu.entities.institucionPr">Institucion Pr</span>-->
+                    <!--</a>-->
+                    <!--</li>-->
+                    <!--<li>-->
+                    <!--<a class="dropdown-item" routerLink="estudio-personaje-pr" routerLinkActive="active"-->
+                    <!--[routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">-->
+                    <!--<i class="fa fa-fw fa-asterisk" aria-hidden="true"></i>-->
+                    <!--<span jhiTranslate="global.menu.entities.estudioPersonajePr">Estudio Personaje Pr</span>-->
+                    <!--</a>-->
+                    <!--</li>-->
+                    <!--<li>-->
+                    <!--<a class="dropdown-item" routerLink="partido-pr" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">-->
+                    <!--<i class="fa fa-fw fa-asterisk" aria-hidden="true"></i>-->
+                    <!--<span jhiTranslate="global.menu.entities.partidoPr">Partido Pr</span>-->
+                    <!--</a>-->
+                    <!--</li>-->
                     <!-- jhipster-needle-add-entity-to-menu - JHipster will add entities to the menu here -->
                 </ul>
             </li>
-            <li *jhiHasAnyAuthority="'ROLE_ADMIN'" ngbDropdown class="nav-item dropdown pointer" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+
+            <li *ngSwitchCase="true" class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                <a class="nav-link" routerLink="personaje-pr" (click)="collapseNavbar()">
+                    <span>
+                        <i class="fa fa-users" aria-hidden="true"></i>
+                        <span jhiTranslate="global.menu.entities.personajePr">
+                            Personaje Pr
+                        </span>
+                    </span>
+                </a>
+            </li>
+
+            <li *ngSwitchCase="true" class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                <a class="nav-link" routerLink="eleccion-pr" (click)="collapseNavbar()">
+                    <span>
+                        <i class="fa fa-archive" aria-hidden="true"></i>
+                        <span jhiTranslate="global.menu.entities.eleccionPr">
+                            Eleccion Pr
+                        </span>
+                    </span>
+                </a>
+            </li>
+
+            <li *ngSwitchCase="true" class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                <a class="nav-link" routerLink="candidatura-pr" (click)="collapseNavbar()">
+                    <span>
+                        <i class="fa fa-address-card" aria-hidden="true"></i>
+                        <span jhiTranslate="global.menu.entities.candidaturaPr">
+                            Candidatura Pr
+                        </span>
+                    </span>
+                </a>
+            </li>
+
+            <li *jhiHasAnyAuthority="'ROLE_ADMIN'" ngbDropdown class="nav-item dropdown pointer"
+                routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
                 <a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);" id="admin-menu">
                     <span>
                         <i class="fa fa-user-plus" aria-hidden="true"></i>
@@ -41,31 +329,36 @@
                 </a>
                 <ul class="dropdown-menu" ngbDropdownMenu>
                     <li>
-                        <a class="dropdown-item" routerLink="user-management" routerLinkActive="active" (click)="collapseNavbar()">
+                        <a class="dropdown-item" routerLink="user-management" routerLinkActive="active"
+                           (click)="collapseNavbar()">
                             <i class="fa fa-fw fa-user" aria-hidden="true"></i>
                             <span jhiTranslate="global.menu.admin.userManagement">User management</span>
                         </a>
                     </li>
                     <li>
-                        <a class="dropdown-item" routerLink="jhi-metrics" routerLinkActive="active" (click)="collapseNavbar()">
+                        <a class="dropdown-item" routerLink="jhi-metrics" routerLinkActive="active"
+                           (click)="collapseNavbar()">
                             <i class="fa fa-fw fa-tachometer" aria-hidden="true"></i>
                             <span jhiTranslate="global.menu.admin.metrics">Metrics</span>
                         </a>
                     </li>
                     <li>
-                        <a class="dropdown-item" routerLink="jhi-health" routerLinkActive="active" (click)="collapseNavbar()">
+                        <a class="dropdown-item" routerLink="jhi-health" routerLinkActive="active"
+                           (click)="collapseNavbar()">
                             <i class="fa fa-fw fa-heart" aria-hidden="true"></i>
                             <span jhiTranslate="global.menu.admin.health">Health</span>
                         </a>
                     </li>
                     <li>
-                        <a class="dropdown-item" routerLink="jhi-configuration" routerLinkActive="active" (click)="collapseNavbar()">
+                        <a class="dropdown-item" routerLink="jhi-configuration" routerLinkActive="active"
+                           (click)="collapseNavbar()">
                             <i class="fa fa-fw fa-list" aria-hidden="true"></i>
                             <span jhiTranslate="global.menu.admin.configuration">Configuration</span>
                         </a>
                     </li>
                     <li>
-                        <a class="dropdown-item" routerLink="audits" routerLinkActive="active" (click)="collapseNavbar()">
+                        <a class="dropdown-item" routerLink="audits" routerLinkActive="active"
+                           (click)="collapseNavbar()">
                             <i class="fa fa-fw fa-bell" aria-hidden="true"></i>
                             <span jhiTranslate="global.menu.admin.audits">Audits</span>
                         </a>
@@ -83,10 +376,17 @@
                         </a>
                     </li>
                     <!-- jhipster-needle-add-element-to-admin-menu - JHipster will add entities to the admin menu here -->
+                    <li *ngIf="!inProduction">
+                        <a class="dropdown-item" href='./h2-console' target="_tab" (click)="collapseNavbar()">
+                            <i class="fa fa-fw fa-hdd-o" aria-hidden="true"></i>
+                            <span jhiTranslate="global.menu.admin.database">Database</span>
+                        </a>
+                    </li>
                 </ul>
             </li>
             <li ngbDropdown class="nav-item dropdown pointer" *ngIf="languages">
-                <a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);" id="languagesnavBarDropdown" *ngIf="languages.length > 1">
+                <a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);"
+                   id="languagesnavBarDropdown" *ngIf="languages.length > 1">
                     <span>
                         <i class="fa fa-flag" aria-hidden="true"></i>
                         <span jhiTranslate="global.menu.language">Language</span>
@@ -94,11 +394,13 @@
                 </a>
                 <ul class="dropdown-menu" ngbDropdownMenu *ngIf="languages.length > 1">
                     <li *ngFor="let language of languages">
-                        <a class="dropdown-item" [jhiActiveMenu]="language" href="javascript:void(0);" (click)="changeLanguage(language);collapseNavbar();">{{language | findLanguageFromKey}}</a>
+                        <a class="dropdown-item" [jhiActiveMenu]="language" href="javascript:void(0);"
+                           (click)="changeLanguage(language);collapseNavbar();">{{language | findLanguageFromKey}}</a>
                     </li>
                 </ul>
             </li>
-            <li ngbDropdown class="nav-item dropdown pointer" placement="bottom-right" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+            <li ngbDropdown class="nav-item dropdown pointer" placement="bottom-right" routerLinkActive="active"
+                [routerLinkActiveOptions]="{exact: true}">
                 <a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);" id="account-menu">
                   <span *ngIf="!getImageUrl()">
                     <i class="fa fa-user" aria-hidden="true"></i>
@@ -106,19 +408,21 @@
                       Account
                     </span>
                   </span>
-                  <span *ngIf="getImageUrl()">
+                    <span *ngIf="getImageUrl()">
                       <img [src]="getImageUrl()" class="profile-image img-circle" alt="Avatar">
                   </span>
                 </a>
                 <ul class="dropdown-menu" ngbDropdownMenu>
                     <li *ngSwitchCase="true">
-                        <a class="dropdown-item" routerLink="settings" routerLinkActive="active" (click)="collapseNavbar()">
+                        <a class="dropdown-item" routerLink="settings" routerLinkActive="active"
+                           (click)="collapseNavbar()">
                             <i class="fa fa-fw fa-wrench" aria-hidden="true"></i>
                             <span jhiTranslate="global.menu.account.settings">Settings</span>
                         </a>
                     </li>
                     <li *ngSwitchCase="true">
-                        <a class="dropdown-item" routerLink="password" routerLinkActive="active" (click)="collapseNavbar()">
+                        <a class="dropdown-item" routerLink="password" routerLinkActive="active"
+                           (click)="collapseNavbar()">
                             <i class="fa fa-fw fa-clock-o" aria-hidden="true"></i>
                             <span jhiTranslate="global.menu.account.password">Password</span>
                         </a>
@@ -136,7 +440,8 @@
                         </a>
                     </li>
                     <li *ngSwitchCase="false">
-                        <a class="dropdown-item" routerLink="register" routerLinkActive="active" (click)="collapseNavbar()">
+                        <a class="dropdown-item" routerLink="register" routerLinkActive="active"
+                           (click)="collapseNavbar()">
                             <i class="fa fa-fw fa-user-plus" aria-hidden="true"></i>
                             <span jhiTranslate="global.menu.account.register">Register</span>
                         </a>

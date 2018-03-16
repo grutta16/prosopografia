@@ -1,0 +1,95 @@
+<div>
+    <h2>
+        <span jhiTranslate="prosopografiaApp.candidatura.home.title">Candidaturas</span>
+        <button class="btn btn-primary float-right jh-create-entity create-candidatura-pr" [routerLink]="['/', { outlets: { popup: ['candidatura-pr-new'] } }]">
+            <span class="fa fa-plus"></span>
+            <span class="hidden-sm-down"  jhiTranslate="prosopografiaApp.candidatura.home.createLabel">
+            Create new Candidatura
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <div class="row">
+        <div class="col-sm-12">
+            <form name="searchForm" class="form-inline">
+                <div class="input-group w-100 mt-3">
+                    <input type="text" class="form-control" [(ngModel)]="currentSearch" id="currentSearch" name="currentSearch" placeholder="{{ 'prosopografiaApp.candidatura.home.search' | translate }}">
+                    <button class="input-group-append btn btn-info" (click)="search(currentSearch)">
+                        <span class="fa fa-search"></span>
+                    </button>
+                    <button class="input-group-append btn btn-danger" (click)="clear()" *ngIf="currentSearch">
+                        <span class="fa fa-trash-o"></span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive" *ngIf="candidaturas">
+        <table class="table table-striped">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+            <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="esSuplente"><span jhiTranslate="prosopografiaApp.candidatura.esSuplente">Es Suplente</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="resultoElecto"><span jhiTranslate="prosopografiaApp.candidatura.resultoElecto">Resulto Electo</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="observaciones"><span jhiTranslate="prosopografiaApp.candidatura.observaciones">Observaciones</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="eleccion.nombre"><span jhiTranslate="prosopografiaApp.candidatura.eleccion">Eleccion</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="seccion.nombre"><span jhiTranslate="prosopografiaApp.candidatura.seccion">Seccion</span> <span class="fa fa-sort"></span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let candidatura of candidaturas ;trackBy: trackId">
+                <td><a [routerLink]="['../candidatura-pr', candidatura.id ]">{{candidatura.id}}</a></td>
+                <td>{{candidatura.esSuplente}}</td>
+                <td>{{candidatura.resultoElecto}}</td>
+                <td>{{candidatura.observaciones}}</td>
+                <td>
+                    <div *ngIf="candidatura.eleccion">
+                        <a [routerLink]="['../eleccion-pr', candidatura.eleccion?.id ]" >{{candidatura.eleccion?.nombre}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="candidatura.seccion">
+                        <a [routerLink]="['../seccion-pr', candidatura.seccion?.id ]" >{{candidatura.seccion?.nombre}}</a>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['../candidatura-pr', candidatura.id ]"
+                                class="btn btn-info btn-sm">
+                            <span class="fa fa-eye"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'candidatura-pr/'+ candidatura.id + '/edit'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-primary btn-sm">
+                            <span class="fa fa-pencil"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'candidatura-pr/'+ candidatura.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <span class="fa fa-remove"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div *ngIf="candidaturas && candidaturas.length">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="queryCount" [maxSize]="5" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
+        </div>
+    </div>
+</div>

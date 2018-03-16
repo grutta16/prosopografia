@@ -1,0 +1,30 @@
+
+<div *ngIf="cargo">
+    <h2><span jhiTranslate="prosopografiaApp.cargo.detail.title">Cargo</span> {{cargo.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="prosopografiaApp.cargo.nombre">Nombre</span></dt>
+        <dd>
+            <span>{{cargo.nombre}}</span>
+        </dd>
+        <dt><span jhiTranslate="prosopografiaApp.cargo.ambito">Ambito</span></dt>
+        <dd>
+            <span jhiTranslate="{{'prosopografiaApp.Ambito.' + cargo.ambito}}">{{cargo.ambito}}</span>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'cargo-pr/'+ cargo.id + '/edit'} }]"
+            replaceUrl="true"
+            queryParamsHandling="merge"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>
