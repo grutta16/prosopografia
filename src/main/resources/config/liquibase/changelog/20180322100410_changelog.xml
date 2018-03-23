@@ -1,0 +1,587 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <changeSet author="kosmos (generated)" id="1521723857252-1">
+        <createSequence sequenceName="hibernate_sequence"/>
+    </changeSet>
+    <changeSet author="kosmos (generated)" id="1521723857252-2">
+        <createTable tableName="asociacion">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="asociacionPK"/>
+            </column>
+            <column name="nombre" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="kosmos (generated)" id="1521723857252-3">
+        <createTable tableName="asociacion_personaje">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="asociacion_personajePK"/>
+            </column>
+            <column name="fecha_desde" type="date"/>
+            <column name="fecha_hasta" type="date"/>
+            <column name="asociacion_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="personaje_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="kosmos (generated)" id="1521723857252-4">
+        <createTable tableName="candidatura">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="candidaturaPK"/>
+            </column>
+            <column name="es_suplente" type="BOOLEAN"/>
+            <column name="observaciones" type="VARCHAR(2000)"/>
+            <column name="resulto_electo" type="BOOLEAN"/>
+            <column name="eleccion_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="personaje_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="seccion_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="kosmos (generated)" id="1521723857252-5">
+        <createTable tableName="cargo">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="cargoPK"/>
+            </column>
+            <column name="ambito" type="VARCHAR(255)"/>
+            <column name="nombre" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="kosmos (generated)" id="1521723857252-6">
+        <createTable tableName="cargo_personaje">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="cargo_personajePK"/>
+            </column>
+            <column name="alcance" type="VARCHAR(255)"/>
+            <column name="fecha_fin" type="date"/>
+            <column name="fecha_inicio" type="date"/>
+            <column name="observaciones" type="VARCHAR(2000)"/>
+            <column name="cargo_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="personaje_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="kosmos (generated)" id="1521723857252-7">
+        <createTable tableName="carrera">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="carreraPK"/>
+            </column>
+            <column name="duracion" type="FLOAT4">
+                <constraints nullable="false"/>
+            </column>
+            <column name="nombre" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="titulo" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="kosmos (generated)" id="1521723857252-8">
+        <createTable tableName="det_candidatura">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="det_candidaturaPK"/>
+            </column>
+            <column name="fecha_fin" type="date"/>
+            <column name="fecha_inicio" type="date"/>
+            <column name="observaciones" type="VARCHAR(2000)"/>
+            <column name="candidatura_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="kosmos (generated)" id="1521723857252-9">
+        <createTable tableName="eleccion">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="eleccionPK"/>
+            </column>
+            <column name="alcance" type="VARCHAR(255)"/>
+            <column name="fecha" type="date"/>
+            <column name="fuente" type="VARCHAR(255)"/>
+            <column name="nombre" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="observaciones" type="VARCHAR(2000)"/>
+            <column name="cargo_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="kosmos (generated)" id="1521723857252-10">
+        <createTable tableName="estudio_personaje">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="estudio_personajePK"/>
+            </column>
+            <column name="anio_fin" type="INT"/>
+            <column name="anio_inicio" type="INT"/>
+            <column name="carrera_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="institucion_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="personaje_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="kosmos (generated)" id="1521723857252-11">
+        <createTable tableName="familiar_personaje">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="familiar_personajePK"/>
+            </column>
+            <column name="apellidos" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="nombres" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="personaje_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="relacion_familiar_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="kosmos (generated)" id="1521723857252-12">
+        <createTable tableName="institucion">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="institucionPK"/>
+            </column>
+            <column name="nivel" type="VARCHAR(255)"/>
+            <column name="nombre" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="lugar_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="kosmos (generated)" id="1521723857252-13">
+        <createTable tableName="institucion_carreras">
+            <column name="institucions_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="carreras_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="kosmos (generated)" id="1521723857252-14">
+        <createTable tableName="jhi_authority">
+            <column name="name" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="kosmos (generated)" id="1521723857252-15">
+        <createTable tableName="jhi_persistent_audit_event">
+            <column autoIncrement="true" name="event_id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="jhi_persistent_audit_eventPK"/>
+            </column>
+            <column name="event_date" type="TIMESTAMP WITHOUT TIME ZONE"/>
+            <column name="event_type" type="VARCHAR(255)"/>
+            <column name="principal" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="kosmos (generated)" id="1521723857252-16">
+        <createTable tableName="jhi_persistent_audit_evt_data">
+            <column name="event_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="value" type="VARCHAR(255)"/>
+            <column name="name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="kosmos (generated)" id="1521723857252-17">
+        <createTable tableName="jhi_user">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="jhi_userPK"/>
+            </column>
+            <column name="created_by" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_date" type="TIMESTAMP WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="last_modified_by" type="VARCHAR(50)"/>
+            <column name="last_modified_date" type="TIMESTAMP WITHOUT TIME ZONE"/>
+            <column name="activated" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+            <column name="activation_key" type="VARCHAR(20)"/>
+            <column name="email" type="VARCHAR(100)"/>
+            <column name="first_name" type="VARCHAR(50)"/>
+            <column name="image_url" type="VARCHAR(256)"/>
+            <column name="lang_key" type="VARCHAR(6)"/>
+            <column name="last_name" type="VARCHAR(50)"/>
+            <column name="login" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="password_hash" type="VARCHAR(60)"/>
+            <column name="reset_date" type="TIMESTAMP WITHOUT TIME ZONE"/>
+            <column name="reset_key" type="VARCHAR(20)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="kosmos (generated)" id="1521723857252-18">
+        <createTable tableName="jhi_user_authority">
+            <column name="user_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="authority_name" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="kosmos (generated)" id="1521723857252-19">
+        <createTable tableName="lugar">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="lugarPK"/>
+            </column>
+            <column name="nombre" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="provincia_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="kosmos (generated)" id="1521723857252-20">
+        <createTable tableName="pais">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="paisPK"/>
+            </column>
+            <column name="nombre" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="kosmos (generated)" id="1521723857252-21">
+        <createTable tableName="pareja_personaje">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="pareja_personajePK"/>
+            </column>
+            <column name="apellidos" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="fecha_desde" type="date"/>
+            <column name="fecha_hasta" type="date"/>
+            <column name="nombres" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="personaje_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="kosmos (generated)" id="1521723857252-22">
+        <createTable tableName="partido">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="partidoPK"/>
+            </column>
+            <column name="abreviacion" type="VARCHAR(20)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="nombre" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="kosmos (generated)" id="1521723857252-23">
+        <createTable tableName="partido_personaje">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="partido_personajePK"/>
+            </column>
+            <column name="fecha_desde" type="date"/>
+            <column name="fecha_hasta" type="date"/>
+            <column name="partido_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="personaje_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="kosmos (generated)" id="1521723857252-24">
+        <createTable tableName="persona">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="personaPK"/>
+            </column>
+            <column name="apellidos" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="nombres" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="kosmos (generated)" id="1521723857252-25">
+        <createTable tableName="personaje">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="personajePK"/>
+            </column>
+            <column name="apellidos" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="apellidos_alternativos" type="VARCHAR(100)"/>
+            <column name="fecha_defuncion" type="date"/>
+            <column name="fecha_nacimiento" type="date"/>
+            <column name="nombres" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="nombres_alternativos" type="VARCHAR(100)"/>
+            <column name="observaciones" type="VARCHAR(2000)"/>
+            <column name="sexo" type="BOOLEAN"/>
+            <column name="lugar_defuncion_id" type="BIGINT"/>
+            <column name="lugar_nacimiento_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="kosmos (generated)" id="1521723857252-26">
+        <createTable tableName="personaje_profesiones">
+            <column name="personajes_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="profesiones_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="kosmos (generated)" id="1521723857252-27">
+        <createTable tableName="profesion">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="profesionPK"/>
+            </column>
+            <column name="nombre" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="tipo_profesion_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="kosmos (generated)" id="1521723857252-28">
+        <createTable tableName="provincia">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="provinciaPK"/>
+            </column>
+            <column name="nombre" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="pais_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="kosmos (generated)" id="1521723857252-29">
+        <createTable tableName="relacion_familiar">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="relacion_familiarPK"/>
+            </column>
+            <column name="nombre" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="kosmos (generated)" id="1521723857252-30">
+        <createTable tableName="religion">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="religionPK"/>
+            </column>
+            <column name="nombre" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="kosmos (generated)" id="1521723857252-31">
+        <createTable tableName="religion_personaje">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="religion_personajePK"/>
+            </column>
+            <column name="fecha_desde" type="date"/>
+            <column name="fecha_hasta" type="date"/>
+            <column name="personaje_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="religion_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="kosmos (generated)" id="1521723857252-32">
+        <createTable tableName="residencia_personaje">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="residencia_personajePK"/>
+            </column>
+            <column name="fecha_desde" type="date"/>
+            <column name="fecha_hasta" type="date"/>
+            <column name="lugar_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="personaje_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="kosmos (generated)" id="1521723857252-33">
+        <createTable tableName="seccion">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="seccionPK"/>
+            </column>
+            <column name="nombre" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="kosmos (generated)" id="1521723857252-34">
+        <createTable tableName="tipo_profesion">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="tipo_profesionPK"/>
+            </column>
+            <column name="nombre" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="kosmos (generated)" id="1521723857252-35">
+        <addPrimaryKey columnNames="institucions_id, carreras_id" tableName="institucion_carreras"/>
+    </changeSet>
+    <changeSet author="kosmos (generated)" id="1521723857252-36">
+        <addPrimaryKey columnNames="event_id, name" tableName="jhi_persistent_audit_evt_data"/>
+    </changeSet>
+    <changeSet author="kosmos (generated)" id="1521723857252-37">
+        <addPrimaryKey columnNames="user_id, authority_name" tableName="jhi_user_authority"/>
+    </changeSet>
+    <changeSet author="kosmos (generated)" id="1521723857252-38">
+        <addPrimaryKey columnNames="personajes_id, profesiones_id" tableName="personaje_profesiones"/>
+    </changeSet>
+    <changeSet author="kosmos (generated)" id="1521723857252-39">
+        <addPrimaryKey columnNames="name" constraintName="jhi_authorityPK" tableName="jhi_authority"/>
+    </changeSet>
+    <changeSet author="kosmos (generated)" id="1521723857252-40">
+        <addUniqueConstraint columnNames="email" constraintName="UC_JHI_USEREMAIL_COL" tableName="jhi_user"/>
+    </changeSet>
+    <changeSet author="kosmos (generated)" id="1521723857252-41">
+        <addUniqueConstraint columnNames="login" constraintName="UC_JHI_USERLOGIN_COL" tableName="jhi_user"/>
+    </changeSet>
+    <changeSet author="kosmos (generated)" id="1521723857252-42">
+        <addForeignKeyConstraint baseColumnNames="tipo_profesion_id" baseTableName="profesion" constraintName="FK1wke0f35r79jb8he2l38f7u3c" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="tipo_profesion"/>
+    </changeSet>
+    <changeSet author="kosmos (generated)" id="1521723857252-43">
+        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="jhi_user_authority" constraintName="FK290okww5jujghp4el5i7mgwu0" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="jhi_user"/>
+    </changeSet>
+    <changeSet author="kosmos (generated)" id="1521723857252-44">
+        <addForeignKeyConstraint baseColumnNames="event_id" baseTableName="jhi_persistent_audit_evt_data" constraintName="FK2ehnyx2si4tjd2nt4q7y40v8m" deferrable="false" initiallyDeferred="false" referencedColumnNames="event_id" referencedTableName="jhi_persistent_audit_event"/>
+    </changeSet>
+    <changeSet author="kosmos (generated)" id="1521723857252-45">
+        <addForeignKeyConstraint baseColumnNames="personaje_id" baseTableName="pareja_personaje" constraintName="FK2irq6j4ga1prlp53vg06lo8ck" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="personaje"/>
+    </changeSet>
+    <changeSet author="kosmos (generated)" id="1521723857252-46">
+        <addForeignKeyConstraint baseColumnNames="institucion_id" baseTableName="estudio_personaje" constraintName="FK3dpqc3gfghnx6w7oabg9j6d86" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="institucion"/>
+    </changeSet>
+    <changeSet author="kosmos (generated)" id="1521723857252-47">
+        <addForeignKeyConstraint baseColumnNames="personaje_id" baseTableName="religion_personaje" constraintName="FK3wk0iq84tc4oqh3aa5o1vhm6h" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="personaje"/>
+    </changeSet>
+    <changeSet author="kosmos (generated)" id="1521723857252-48">
+        <addForeignKeyConstraint baseColumnNames="authority_name" baseTableName="jhi_user_authority" constraintName="FK4psxl0jtx6nr7rhqbynr6itoc" deferrable="false" initiallyDeferred="false" referencedColumnNames="name" referencedTableName="jhi_authority"/>
+    </changeSet>
+    <changeSet author="kosmos (generated)" id="1521723857252-49">
+        <addForeignKeyConstraint baseColumnNames="partido_id" baseTableName="partido_personaje" constraintName="FK4uxysgy6qgmjh7d1x5facqfxv" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="partido"/>
+    </changeSet>
+    <changeSet author="kosmos (generated)" id="1521723857252-50">
+        <addForeignKeyConstraint baseColumnNames="carrera_id" baseTableName="estudio_personaje" constraintName="FK58kq7ue00kb3r97129l5fx2sq" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="carrera"/>
+    </changeSet>
+    <changeSet author="kosmos (generated)" id="1521723857252-51">
+        <addForeignKeyConstraint baseColumnNames="eleccion_id" baseTableName="candidatura" constraintName="FK77dgycj8478txcf9olonenflg" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="eleccion"/>
+    </changeSet>
+    <changeSet author="kosmos (generated)" id="1521723857252-52">
+        <addForeignKeyConstraint baseColumnNames="institucions_id" baseTableName="institucion_carreras" constraintName="FK7y2kwccgp4qe90cwxt3ctfc5x" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="institucion"/>
+    </changeSet>
+    <changeSet author="kosmos (generated)" id="1521723857252-53">
+        <addForeignKeyConstraint baseColumnNames="lugar_id" baseTableName="institucion" constraintName="FKcx6ul2ysn4fmfy1y9prkwf3xr" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="lugar"/>
+    </changeSet>
+    <changeSet author="kosmos (generated)" id="1521723857252-54">
+        <addForeignKeyConstraint baseColumnNames="personaje_id" baseTableName="cargo_personaje" constraintName="FKd7rj0tc0vpjgkvpxa4u1lfete" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="personaje"/>
+    </changeSet>
+    <changeSet author="kosmos (generated)" id="1521723857252-55">
+        <addForeignKeyConstraint baseColumnNames="personaje_id" baseTableName="estudio_personaje" constraintName="FKdcjouqe2wfrfx3vnq2oeanmgk" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="personaje"/>
+    </changeSet>
+    <changeSet author="kosmos (generated)" id="1521723857252-56">
+        <addForeignKeyConstraint baseColumnNames="religion_id" baseTableName="religion_personaje" constraintName="FKdh2e4tgkidinhamdl4dcnua5p" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="religion"/>
+    </changeSet>
+    <changeSet author="kosmos (generated)" id="1521723857252-57">
+        <addForeignKeyConstraint baseColumnNames="seccion_id" baseTableName="candidatura" constraintName="FKdlattvwrtxl36lirbixwvu91g" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="seccion"/>
+    </changeSet>
+    <changeSet author="kosmos (generated)" id="1521723857252-58">
+        <addForeignKeyConstraint baseColumnNames="profesiones_id" baseTableName="personaje_profesiones" constraintName="FKdrtlcc6abboormdglmpa2hf17" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="profesion"/>
+    </changeSet>
+    <changeSet author="kosmos (generated)" id="1521723857252-59">
+        <addForeignKeyConstraint baseColumnNames="lugar_nacimiento_id" baseTableName="personaje" constraintName="FKe59vl3n1nudplwt9wuq0jjp6v" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="lugar"/>
+    </changeSet>
+    <changeSet author="kosmos (generated)" id="1521723857252-60">
+        <addForeignKeyConstraint baseColumnNames="personajes_id" baseTableName="personaje_profesiones" constraintName="FKg1jusy2drb925gy0bdu2b71nu" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="personaje"/>
+    </changeSet>
+    <changeSet author="kosmos (generated)" id="1521723857252-61">
+        <addForeignKeyConstraint baseColumnNames="candidatura_id" baseTableName="det_candidatura" constraintName="FKgaftjc23mrkk3ahf7q0t707xw" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="candidatura"/>
+    </changeSet>
+    <changeSet author="kosmos (generated)" id="1521723857252-62">
+        <addForeignKeyConstraint baseColumnNames="cargo_id" baseTableName="cargo_personaje" constraintName="FKgmw9jx3m4tnerigh2w4iq89uh" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="cargo"/>
+    </changeSet>
+    <changeSet author="kosmos (generated)" id="1521723857252-63">
+        <addForeignKeyConstraint baseColumnNames="personaje_id" baseTableName="partido_personaje" constraintName="FKgnaq5njod1a5rsjhjvy200sp8" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="personaje"/>
+    </changeSet>
+    <changeSet author="kosmos (generated)" id="1521723857252-64">
+        <addForeignKeyConstraint baseColumnNames="cargo_id" baseTableName="eleccion" constraintName="FKieiiqh0k8cogjmdxm1thye1n0" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="cargo"/>
+    </changeSet>
+    <changeSet author="kosmos (generated)" id="1521723857252-65">
+        <addForeignKeyConstraint baseColumnNames="personaje_id" baseTableName="residencia_personaje" constraintName="FKjvdkj1ucogmxhrc5xpcw2b17x" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="personaje"/>
+    </changeSet>
+    <changeSet author="kosmos (generated)" id="1521723857252-66">
+        <addForeignKeyConstraint baseColumnNames="asociacion_id" baseTableName="asociacion_personaje" constraintName="FKlxw6dg9v7bqb1h9x6tpv1h4hm" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="asociacion"/>
+    </changeSet>
+    <changeSet author="kosmos (generated)" id="1521723857252-67">
+        <addForeignKeyConstraint baseColumnNames="pais_id" baseTableName="provincia" constraintName="FKm4s599988w0v1q1nw6dyo5t2m" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="pais"/>
+    </changeSet>
+    <changeSet author="kosmos (generated)" id="1521723857252-68">
+        <addForeignKeyConstraint baseColumnNames="personaje_id" baseTableName="asociacion_personaje" constraintName="FKmowd6a8kphm0xqgaow9bjxrre" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="personaje"/>
+    </changeSet>
+    <changeSet author="kosmos (generated)" id="1521723857252-69">
+        <addForeignKeyConstraint baseColumnNames="provincia_id" baseTableName="lugar" constraintName="FKmvtcctihcbjtg08tlcevcdpgw" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="provincia"/>
+    </changeSet>
+    <changeSet author="kosmos (generated)" id="1521723857252-70">
+        <addForeignKeyConstraint baseColumnNames="lugar_id" baseTableName="residencia_personaje" constraintName="FKo1f4hcn70hqwbbtwia58tqp6v" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="lugar"/>
+    </changeSet>
+    <changeSet author="kosmos (generated)" id="1521723857252-71">
+        <addForeignKeyConstraint baseColumnNames="personaje_id" baseTableName="familiar_personaje" constraintName="FKok0lpshp4lmvvx8oqmmu6fvfu" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="personaje"/>
+    </changeSet>
+    <changeSet author="kosmos (generated)" id="1521723857252-72">
+        <addForeignKeyConstraint baseColumnNames="lugar_defuncion_id" baseTableName="personaje" constraintName="FKoxsdkrn10tc4bidcdwd6ya6a0" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="lugar"/>
+    </changeSet>
+    <changeSet author="kosmos (generated)" id="1521723857252-73">
+        <addForeignKeyConstraint baseColumnNames="relacion_familiar_id" baseTableName="familiar_personaje" constraintName="FKp0r8573325y9vv376xwkb6gse" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="relacion_familiar"/>
+    </changeSet>
+    <changeSet author="kosmos (generated)" id="1521723857252-74">
+        <addForeignKeyConstraint baseColumnNames="personaje_id" baseTableName="candidatura" constraintName="FKr7y25q0pmiwracfxjxpyb418" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="personaje"/>
+    </changeSet>
+    <changeSet author="kosmos (generated)" id="1521723857252-75">
+        <addForeignKeyConstraint baseColumnNames="carreras_id" baseTableName="institucion_carreras" constraintName="FKtp086b1oge58n4xhh6w9a93up" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="carrera"/>
+    </changeSet>
+</databaseChangeLog>

@@ -11,6 +11,8 @@ import { CandidaturaPrService } from '../../../../../../main/webapp/app/entities
 import { CandidaturaPr } from '../../../../../../main/webapp/app/entities/candidatura-pr/candidatura-pr.model';
 import { EleccionPrService } from '../../../../../../main/webapp/app/entities/eleccion-pr';
 import { SeccionPrService } from '../../../../../../main/webapp/app/entities/seccion-pr';
+import { PersonajePrService } from '../../../../../../main/webapp/app/entities/personaje-pr';
+import { PartidoPrService } from '../../../../../../main/webapp/app/entities/partido-pr';
 
 describe('Component Tests', () => {
 
@@ -28,6 +30,8 @@ describe('Component Tests', () => {
                 providers: [
                     EleccionPrService,
                     SeccionPrService,
+                    PersonajePrService,
+                    PartidoPrService,
                     CandidaturaPrService
                 ]
             })

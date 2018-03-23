@@ -13,6 +13,36 @@
                    [(ngModel)]="personaje.id" readonly />
         </div>
         <div class="form-group">
+            <label class="form-control-label" jhiTranslate="prosopografiaApp.personaje.nombres" for="field_nombres">Nombres</label>
+            <input type="text" class="form-control" name="nombres" id="field_nombres"
+                [(ngModel)]="personaje.nombres" required maxlength="100"/>
+            <div [hidden]="!(editForm.controls.nombres?.dirty && editForm.controls.nombres?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.nombres?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.nombres?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 100 }">
+                   This field cannot be longer than 100 characters.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="prosopografiaApp.personaje.apellidos" for="field_apellidos">Apellidos</label>
+            <input type="text" class="form-control" name="apellidos" id="field_apellidos"
+                [(ngModel)]="personaje.apellidos" required maxlength="100"/>
+            <div [hidden]="!(editForm.controls.apellidos?.dirty && editForm.controls.apellidos?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.apellidos?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.apellidos?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 100 }">
+                   This field cannot be longer than 100 characters.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
             <label class="form-control-label" jhiTranslate="prosopografiaApp.personaje.fechaNacimiento" for="field_fechaNacimiento">Fecha Nacimiento</label>
             <div class="input-group">
                 <input id="field_fechaNacimiento" type="text" class="form-control" name="fechaNacimiento" ngbDatepicker  #fechaNacimientoDp="ngbDatepicker" [(ngModel)]="personaje.fechaNacimiento"
@@ -35,22 +65,22 @@
         <div class="form-group">
             <label class="form-control-label" jhiTranslate="prosopografiaApp.personaje.nombresAlternativos" for="field_nombresAlternativos">Nombres Alternativos</label>
             <input type="text" class="form-control" name="nombresAlternativos" id="field_nombresAlternativos"
-                [(ngModel)]="personaje.nombresAlternativos" maxlength="50"/>
+                [(ngModel)]="personaje.nombresAlternativos" maxlength="100"/>
             <div [hidden]="!(editForm.controls.nombresAlternativos?.dirty && editForm.controls.nombresAlternativos?.invalid)">
                 <small class="form-text text-danger"
-                   [hidden]="!editForm.controls.nombresAlternativos?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 50 }">
-                   This field cannot be longer than 50 characters.
+                   [hidden]="!editForm.controls.nombresAlternativos?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 100 }">
+                   This field cannot be longer than 100 characters.
                 </small>
             </div>
         </div>
         <div class="form-group">
             <label class="form-control-label" jhiTranslate="prosopografiaApp.personaje.apellidosAlternativos" for="field_apellidosAlternativos">Apellidos Alternativos</label>
             <input type="text" class="form-control" name="apellidosAlternativos" id="field_apellidosAlternativos"
-                [(ngModel)]="personaje.apellidosAlternativos" maxlength="50"/>
+                [(ngModel)]="personaje.apellidosAlternativos" maxlength="100"/>
             <div [hidden]="!(editForm.controls.apellidosAlternativos?.dirty && editForm.controls.apellidosAlternativos?.invalid)">
                 <small class="form-text text-danger"
-                   [hidden]="!editForm.controls.apellidosAlternativos?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 50 }">
-                   This field cannot be longer than 50 characters.
+                   [hidden]="!editForm.controls.apellidosAlternativos?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 100 }">
+                   This field cannot be longer than 100 characters.
                 </small>
             </div>
         </div>
@@ -71,19 +101,6 @@
             </div>
         </div>
 
-        <div class="form-group">
-            <label class="form-control-label" jhiTranslate="prosopografiaApp.personaje.persona" for="field_persona">Persona</label>
-            <select class="form-control" id="field_persona" name="persona" [(ngModel)]="personaje.persona" required>
-                <option *ngIf="!editForm.value.persona" [ngValue]="null" selected></option>
-                <option [ngValue]="personaOption.id === personaje.persona?.id ? personaje.persona : personaOption" *ngFor="let personaOption of personas; trackBy: trackPersonaById">{{personaOption.id}}</option>
-            </select>
-        </div>
-        <div [hidden]="!(editForm.controls.persona?.dirty && editForm.controls.persona?.invalid)">
-            <small class="form-text text-danger"
-                [hidden]="!editForm.controls.persona?.errors?.required" jhiTranslate="entity.validation.required">
-                This field is required.
-            </small>
-        </div>
         <div class="form-group">
             <label class="form-control-label" jhiTranslate="prosopografiaApp.personaje.lugarNacimiento" for="field_lugarNacimiento">Lugar Nacimiento</label>
             <select class="form-control" id="field_lugarNacimiento" name="lugarNacimiento" [(ngModel)]="personaje.lugarNacimiento" >

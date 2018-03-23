@@ -30,7 +30,8 @@
             <thead>
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
             <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="persona.id"><span jhiTranslate="prosopografiaApp.familiarPersonaje.persona">Persona</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="nombres"><span jhiTranslate="prosopografiaApp.familiarPersonaje.nombres">Nombres</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="apellidos"><span jhiTranslate="prosopografiaApp.familiarPersonaje.apellidos">Apellidos</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="relacionFamiliar.nombre"><span jhiTranslate="prosopografiaApp.familiarPersonaje.relacionFamiliar">Relacion Familiar</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="personaje.id"><span jhiTranslate="prosopografiaApp.familiarPersonaje.personaje">Personaje</span> <span class="fa fa-sort"></span></th>
             <th></th>
@@ -39,11 +40,8 @@
             <tbody>
             <tr *ngFor="let familiarPersonaje of familiarPersonajes ;trackBy: trackId">
                 <td><a [routerLink]="['../familiar-personaje-pr', familiarPersonaje.id ]">{{familiarPersonaje.id}}</a></td>
-                <td>
-                    <div *ngIf="familiarPersonaje.persona">
-                        <a [routerLink]="['../persona-pr', familiarPersonaje.persona?.id ]" >{{familiarPersonaje.persona?.id}}</a>
-                    </div>
-                </td>
+                <td>{{familiarPersonaje.nombres}}</td>
+                <td>{{familiarPersonaje.apellidos}}</td>
                 <td>
                     <div *ngIf="familiarPersonaje.relacionFamiliar">
                         <a [routerLink]="['../relacion-familiar-pr', familiarPersonaje.relacionFamiliar?.id ]" >{{familiarPersonaje.relacionFamiliar?.nombre}}</a>

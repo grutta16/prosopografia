@@ -9,7 +9,6 @@ import { JhiEventManager, JhiAlertService } from 'ng-jhipster';
 import { PersonajePr } from './personaje-pr.model';
 import { PersonajePrPopupService } from './personaje-pr-popup.service';
 import { PersonajePrService } from './personaje-pr.service';
-import { PersonaPr, PersonaPrService } from '../persona-pr';
 import { LugarPr, LugarPrService } from '../lugar-pr';
 import { ProfesionPr, ProfesionPrService } from '../profesion-pr';
 
@@ -22,8 +21,6 @@ export class PersonajePrDialogComponent implements OnInit {
     personaje: PersonajePr;
     isSaving: boolean;
 
-    personas: PersonaPr[];
-
     lugars: LugarPr[];
 
     profesions: ProfesionPr[];
@@ -34,7 +31,6 @@ export class PersonajePrDialogComponent implements OnInit {
         public activeModal: NgbActiveModal,
         private jhiAlertService: JhiAlertService,
         private personajeService: PersonajePrService,
-        private personaService: PersonaPrService,
         private lugarService: LugarPrService,
         private profesionService: ProfesionPrService,
         private eventManager: JhiEventManager
@@ -43,19 +39,6 @@ export class PersonajePrDialogComponent implements OnInit {
 
     ngOnInit() {
         this.isSaving = false;
-        this.personaService
-            .query({filter: 'personaje-is-null'})
-            .subscribe((res: HttpResponse<PersonaPr[]>) => {
-                if (!this.personaje.persona || !this.personaje.persona.id) {
-                    this.personas = res.body;
-                } else {
-                    this.personaService
-                        .find(this.personaje.persona.id)
-                        .subscribe((subRes: HttpResponse<PersonaPr>) => {
-                            this.personas = [subRes.body].concat(res.body);
-                        }, (subRes: HttpErrorResponse) => this.onError(subRes.message));
-                }
-            }, (res: HttpErrorResponse) => this.onError(res.message));
         this.lugarService.query()
             .subscribe((res: HttpResponse<LugarPr[]>) => { this.lugars = res.body; }, (res: HttpErrorResponse) => this.onError(res.message));
         this.profesionService.query()
@@ -94,10 +77,6 @@ export class PersonajePrDialogComponent implements OnInit {
 
     private onError(error: any) {
         this.jhiAlertService.error(error.message, null, null);
-    }
-
-    trackPersonaById(index: number, item: PersonaPr) {
-        return item.id;
     }
 
     trackLugarById(index: number, item: LugarPr) {

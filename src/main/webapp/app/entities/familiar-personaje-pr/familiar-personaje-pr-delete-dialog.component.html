@@ -6,7 +6,7 @@
     </div>
     <div class="modal-body">
         <jhi-alert-error></jhi-alert-error>
-        <p jhiTranslate="prosopografiaApp.familiarPersonaje.delete.question" translateValues="{id: '{{familiarPersonaje.id}}'}">Are you sure you want to delete this Familiar Personaje?</p>
+        <p jhiTranslate="prosopografiaApp.familiarPersonaje.delete.question" translateValues="{id: '{{familiarPersonaje.id}}', nombres: '{{familiarPersonaje.nombres}}', apellidos: '{{familiarPersonaje.apellidos}}'}">Are you sure you want to delete this Familiar Personaje?</p>
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">

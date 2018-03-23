@@ -21,16 +21,20 @@
             <column name="id" type="bigint" autoIncrement="${autoIncrement}">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
+            <column name="nombres" type="varchar(100)">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="apellidos" type="varchar(100)">
+                <constraints nullable="false" />
+            </column>
+
             <column name="fecha_desde" type="date">
                 <constraints nullable="true" />
             </column>
 
             <column name="fecha_hasta" type="date">
                 <constraints nullable="true" />
-            </column>
-
-            <column name="persona_id" type="bigint">
-                <constraints nullable="false" />
             </column>
 
             <column name="personaje_id" type="bigint">

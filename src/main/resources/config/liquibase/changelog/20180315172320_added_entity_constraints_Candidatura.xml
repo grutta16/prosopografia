@@ -20,5 +20,17 @@
                                  referencedColumnNames="id"
                                  referencedTableName="seccion"/>
 
+        <addForeignKeyConstraint baseColumnNames="personaje_id"
+                                 baseTableName="candidatura"
+                                 constraintName="fk_candidatura_personaje_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="personaje"/>
+
+        <addForeignKeyConstraint baseColumnNames="partido_id"
+                                 baseTableName="candidatura"
+                                 constraintName="fk_candidatura_partido_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="partido"/>
+
     </changeSet>
 </databaseChangeLog>

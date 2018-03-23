@@ -2,15 +2,6 @@
     "fluentMethods": true,
     "relationships": [
         {
-            "relationshipType": "one-to-one",
-            "relationshipValidateRules": "required",
-            "relationshipName": "persona",
-            "otherEntityName": "persona",
-            "otherEntityField": "id",
-            "ownerSide": true,
-            "otherEntityRelationshipName": "personaje"
-        },
-        {
             "relationshipType": "many-to-one",
             "relationshipName": "lugarNacimiento",
             "otherEntityName": "lugar",
@@ -77,9 +68,33 @@
             "relationshipName": "cargos",
             "otherEntityName": "cargoPersonaje",
             "otherEntityRelationshipName": "personaje"
+        },
+        {
+            "relationshipName": "candidaturas",
+            "otherEntityName": "candidatura",
+            "relationshipType": "one-to-many",
+            "otherEntityRelationshipName": "personaje"
         }
     ],
     "fields": [
+        {
+            "fieldName": "nombres",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required",
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 100
+        },
+        {
+            "fieldName": "apellidos",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required",
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 100
+        },
         {
             "fieldName": "fechaNacimiento",
             "fieldType": "LocalDate"
@@ -94,7 +109,7 @@
             "fieldValidateRules": [
                 "maxlength"
             ],
-            "fieldValidateRulesMaxlength": 50
+            "fieldValidateRulesMaxlength": 100
         },
         {
             "fieldName": "apellidosAlternativos",
@@ -102,7 +117,7 @@
             "fieldValidateRules": [
                 "maxlength"
             ],
-            "fieldValidateRulesMaxlength": 50
+            "fieldValidateRulesMaxlength": 100
         },
         {
             "fieldName": "sexo",
@@ -118,10 +133,10 @@
         }
     ],
     "changelogDate": "20180315172326",
-    "entityTableName": "personaje",
     "dto": "no",
-    "pagination": "pagination",
     "service": "serviceClass",
+    "entityTableName": "personaje",
     "jpaMetamodelFiltering": true,
+    "pagination": "pagination",
     "angularJSSuffix": "pr"
 }

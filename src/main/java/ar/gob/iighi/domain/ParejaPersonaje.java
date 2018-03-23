@@ -24,15 +24,21 @@ public class ParejaPersonaje implements Serializable {
     @SequenceGenerator(name = "sequenceGenerator")
     private Long id;
 
+    @NotNull
+    @Size(max = 100)
+    @Column(name = "nombres", length = 100, nullable = false)
+    private String nombres;
+
+    @NotNull
+    @Size(max = 100)
+    @Column(name = "apellidos", length = 100, nullable = false)
+    private String apellidos;
+
     @Column(name = "fecha_desde")
     private LocalDate fechaDesde;
 
     @Column(name = "fecha_hasta")
     private LocalDate fechaHasta;
-
-    @ManyToOne(optional = false)
-    @NotNull
-    private Persona persona;
 
     @ManyToOne(optional = false)
     @NotNull
@@ -45,6 +51,32 @@ public class ParejaPersonaje implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getNombres() {
+        return nombres;
+    }
+
+    public ParejaPersonaje nombres(String nombres) {
+        this.nombres = nombres;
+        return this;
+    }
+
+    public void setNombres(String nombres) {
+        this.nombres = nombres;
+    }
+
+    public String getApellidos() {
+        return apellidos;
+    }
+
+    public ParejaPersonaje apellidos(String apellidos) {
+        this.apellidos = apellidos;
+        return this;
+    }
+
+    public void setApellidos(String apellidos) {
+        this.apellidos = apellidos;
     }
 
     public LocalDate getFechaDesde() {
@@ -71,19 +103,6 @@ public class ParejaPersonaje implements Serializable {
 
     public void setFechaHasta(LocalDate fechaHasta) {
         this.fechaHasta = fechaHasta;
-    }
-
-    public Persona getPersona() {
-        return persona;
-    }
-
-    public ParejaPersonaje persona(Persona persona) {
-        this.persona = persona;
-        return this;
-    }
-
-    public void setPersona(Persona persona) {
-        this.persona = persona;
     }
 
     public Personaje getPersonaje() {
@@ -124,6 +143,8 @@ public class ParejaPersonaje implements Serializable {
     public String toString() {
         return "ParejaPersonaje{" +
             "id=" + getId() +
+            ", nombres='" + getNombres() + "'" +
+            ", apellidos='" + getApellidos() + "'" +
             ", fechaDesde='" + getFechaDesde() + "'" +
             ", fechaHasta='" + getFechaHasta() + "'" +
             "}";

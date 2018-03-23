@@ -33,7 +33,10 @@ describe('FamiliarPersonaje e2e test', () => {
 
    /* it('should create and save FamiliarPersonajes', () => {
         familiarPersonajeComponentsPage.clickOnCreateButton();
-        familiarPersonajeDialogPage.personaSelectLastOption();
+        familiarPersonajeDialogPage.setNombresInput('nombres');
+        expect(familiarPersonajeDialogPage.getNombresInput()).toMatch('nombres');
+        familiarPersonajeDialogPage.setApellidosInput('apellidos');
+        expect(familiarPersonajeDialogPage.getApellidosInput()).toMatch('apellidos');
         familiarPersonajeDialogPage.relacionFamiliarSelectLastOption();
         familiarPersonajeDialogPage.personajeSelectLastOption();
         familiarPersonajeDialogPage.save();
@@ -62,7 +65,8 @@ export class FamiliarPersonajeDialogPage {
     modalTitle = element(by.css('h4#myFamiliarPersonajeLabel'));
     saveButton = element(by.css('.modal-footer .btn.btn-primary'));
     closeButton = element(by.css('button.close'));
-    personaSelect = element(by.css('select#field_persona'));
+    nombresInput = element(by.css('input#field_nombres'));
+    apellidosInput = element(by.css('input#field_apellidos'));
     relacionFamiliarSelect = element(by.css('select#field_relacionFamiliar'));
     personajeSelect = element(by.css('select#field_personaje'));
 
@@ -70,20 +74,20 @@ export class FamiliarPersonajeDialogPage {
         return this.modalTitle.getAttribute('jhiTranslate');
     }
 
-    personaSelectLastOption = function() {
-        this.personaSelect.all(by.tagName('option')).last().click();
+    setNombresInput = function(nombres) {
+        this.nombresInput.sendKeys(nombres);
     };
 
-    personaSelectOption = function(option) {
-        this.personaSelect.sendKeys(option);
+    getNombresInput = function() {
+        return this.nombresInput.getAttribute('value');
     };
 
-    getPersonaSelect = function() {
-        return this.personaSelect;
+    setApellidosInput = function(apellidos) {
+        this.apellidosInput.sendKeys(apellidos);
     };
 
-    getPersonaSelectedOption = function() {
-        return this.personaSelect.element(by.css('option:checked')).getText();
+    getApellidosInput = function() {
+        return this.apellidosInput.getAttribute('value');
     };
 
     relacionFamiliarSelectLastOption = function() {

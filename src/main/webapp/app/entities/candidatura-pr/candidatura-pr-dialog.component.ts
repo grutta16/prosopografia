@@ -11,6 +11,8 @@ import { CandidaturaPrPopupService } from './candidatura-pr-popup.service';
 import { CandidaturaPrService } from './candidatura-pr.service';
 import { EleccionPr, EleccionPrService } from '../eleccion-pr';
 import { SeccionPr, SeccionPrService } from '../seccion-pr';
+import { PersonajePr, PersonajePrService } from '../personaje-pr';
+import { PartidoPr, PartidoPrService } from '../partido-pr';
 
 @Component({
     selector: 'jhi-candidatura-pr-dialog',
@@ -25,12 +27,18 @@ export class CandidaturaPrDialogComponent implements OnInit {
 
     seccions: SeccionPr[];
 
+    personajes: PersonajePr[];
+
+    partidos: PartidoPr[];
+
     constructor(
         public activeModal: NgbActiveModal,
         private jhiAlertService: JhiAlertService,
         private candidaturaService: CandidaturaPrService,
         private eleccionService: EleccionPrService,
         private seccionService: SeccionPrService,
+        private personajeService: PersonajePrService,
+        private partidoService: PartidoPrService,
         private eventManager: JhiEventManager
     ) {
     }
@@ -41,6 +49,10 @@ export class CandidaturaPrDialogComponent implements OnInit {
             .subscribe((res: HttpResponse<EleccionPr[]>) => { this.eleccions = res.body; }, (res: HttpErrorResponse) => this.onError(res.message));
         this.seccionService.query()
             .subscribe((res: HttpResponse<SeccionPr[]>) => { this.seccions = res.body; }, (res: HttpErrorResponse) => this.onError(res.message));
+        this.personajeService.query()
+            .subscribe((res: HttpResponse<PersonajePr[]>) => { this.personajes = res.body; }, (res: HttpErrorResponse) => this.onError(res.message));
+        this.partidoService.query()
+            .subscribe((res: HttpResponse<PartidoPr[]>) => { this.partidos = res.body; }, (res: HttpErrorResponse) => this.onError(res.message));
     }
 
     clear() {
@@ -82,6 +94,14 @@ export class CandidaturaPrDialogComponent implements OnInit {
     }
 
     trackSeccionById(index: number, item: SeccionPr) {
+        return item.id;
+    }
+
+    trackPersonajeById(index: number, item: PersonajePr) {
+        return item.id;
+    }
+
+    trackPartidoById(index: number, item: PartidoPr) {
         return item.id;
     }
 }

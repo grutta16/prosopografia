@@ -4,6 +4,14 @@
     <hr>
     <jhi-alert-error></jhi-alert-error>
     <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="prosopografiaApp.parejaPersonaje.nombres">Nombres</span></dt>
+        <dd>
+            <span>{{parejaPersonaje.nombres}}</span>
+        </dd>
+        <dt><span jhiTranslate="prosopografiaApp.parejaPersonaje.apellidos">Apellidos</span></dt>
+        <dd>
+            <span>{{parejaPersonaje.apellidos}}</span>
+        </dd>
         <dt><span jhiTranslate="prosopografiaApp.parejaPersonaje.fechaDesde">Fecha Desde</span></dt>
         <dd>
             <span>{{parejaPersonaje.fechaDesde | date:'mediumDate'}}</span>
@@ -11,12 +19,6 @@
         <dt><span jhiTranslate="prosopografiaApp.parejaPersonaje.fechaHasta">Fecha Hasta</span></dt>
         <dd>
             <span>{{parejaPersonaje.fechaHasta | date:'mediumDate'}}</span>
-        </dd>
-        <dt><span jhiTranslate="prosopografiaApp.parejaPersonaje.persona">Persona</span></dt>
-        <dd>
-            <div *ngIf="parejaPersonaje.persona">
-                <a [routerLink]="['/persona-pr', parejaPersonaje.persona?.id]">{{parejaPersonaje.persona?.id}}</a>
-            </div>
         </dd>
         <dt><span jhiTranslate="prosopografiaApp.parejaPersonaje.personaje">Personaje</span></dt>
         <dd>

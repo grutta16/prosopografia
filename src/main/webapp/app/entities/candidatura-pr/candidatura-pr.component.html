@@ -29,57 +29,82 @@
         <table class="table table-striped">
             <thead>
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
-            <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <span class="fa fa-sort"></span></th>
+            <!--<th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <span class="fa fa-sort"></span></th>-->
+            <th jhiSortBy="personaje.nombres"><span jhiTranslate="prosopografiaApp.candidatura.personaje.nombres">Personaje nombres</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="personaje.apellidos"><span jhiTranslate="prosopografiaApp.candidatura.personaje.apellidos">Personaje apellidos</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="esSuplente"><span jhiTranslate="prosopografiaApp.candidatura.esSuplente">Es Suplente</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="resultoElecto"><span jhiTranslate="prosopografiaApp.candidatura.resultoElecto">Resulto Electo</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="observaciones"><span jhiTranslate="prosopografiaApp.candidatura.observaciones">Observaciones</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="eleccion.nombre"><span jhiTranslate="prosopografiaApp.candidatura.eleccion">Eleccion</span> <span class="fa fa-sort"></span></th>
+            <!--<th jhiSortBy="observaciones"><span jhiTranslate="prosopografiaApp.candidatura.observaciones">Observaciones</span> <span class="fa fa-sort"></span></th>-->
+            <th jhiSortBy="anio"><span jhiTranslate="prosopografiaApp.candidatura.anio">Anio</span> <span class="fa fa-sort"></span></th>
+            <!--<th jhiSortBy="eleccion.nombre"><span jhiTranslate="prosopografiaApp.candidatura.eleccion">Eleccion</span> <span class="fa fa-sort"></span></th>-->
             <th jhiSortBy="seccion.nombre"><span jhiTranslate="prosopografiaApp.candidatura.seccion">Seccion</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="partido.nombre"><span jhiTranslate="prosopografiaApp.candidatura.partido">Partido</span> <span class="fa fa-sort"></span></th>
             <th></th>
             </tr>
             </thead>
             <tbody>
             <tr *ngFor="let candidatura of candidaturas ;trackBy: trackId">
-                <td><a [routerLink]="['../candidatura-pr', candidatura.id ]">{{candidatura.id}}</a></td>
-                <td>{{candidatura.esSuplente}}</td>
-                <td>{{candidatura.resultoElecto}}</td>
-                <td>{{candidatura.observaciones}}</td>
+                <!--<td><a [routerLink]="['../candidatura-pr', candidatura.id ]">{{candidatura.id}}</a></td>-->
                 <td>
-                    <div *ngIf="candidatura.eleccion">
-                        <a [routerLink]="['../eleccion-pr', candidatura.eleccion?.id ]" >{{candidatura.eleccion?.nombre}}</a>
+                    <div *ngIf="candidatura.personaje">
+                        <a [routerLink]="['../personaje-pr', candidatura.personaje?.id ]" >{{candidatura.personaje?.nombres}}</a>
                     </div>
                 </td>
+                <td>
+                    <div *ngIf="candidatura.personaje">
+                        <a [routerLink]="['../personaje-pr', candidatura.personaje?.id ]" >{{candidatura.personaje?.apellidos}}</a>
+                    </div>
+                </td>
+                <td class="text-center">
+                    <i class="fa fa-{{candidatura.esSuplente ? 'check text-success' : 'times text-danger'}}" aria-hidden="true"></i>
+                </td>
+                <td class="text-center">
+                    <i class="fa fa-{{candidatura.resultoElecto ? 'check text-success' : 'times text-danger'}}" aria-hidden="true"></i>
+                </td>
+                <!--<td>{{candidatura.observaciones}}</td>-->
+                <td>{{candidatura.anio}}</td>
+                <!--<td>-->
+                    <!--<div *ngIf="candidatura.eleccion">-->
+                        <!--<a [routerLink]="['../eleccion-pr', candidatura.eleccion?.id ]" >{{candidatura.eleccion?.nombre}}</a>-->
+                    <!--</div>-->
+                <!--</td>-->
                 <td>
                     <div *ngIf="candidatura.seccion">
                         <a [routerLink]="['../seccion-pr', candidatura.seccion?.id ]" >{{candidatura.seccion?.nombre}}</a>
                     </div>
                 </td>
-                <td class="text-right">
-                    <div class="btn-group flex-btn-group-container">
-                        <button type="submit"
-                                [routerLink]="['../candidatura-pr', candidatura.id ]"
-                                class="btn btn-info btn-sm">
-                            <span class="fa fa-eye"></span>
-                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
-                        </button>
-                        <button type="submit"
-                                [routerLink]="['/', { outlets: { popup: 'candidatura-pr/'+ candidatura.id + '/edit'} }]"
-                                replaceUrl="true"
-                                queryParamsHandling="merge"
-                                class="btn btn-primary btn-sm">
-                            <span class="fa fa-pencil"></span>
-                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
-                        </button>
-                        <button type="submit"
-                                [routerLink]="['/', { outlets: { popup: 'candidatura-pr/'+ candidatura.id + '/delete'} }]"
-                                replaceUrl="true"
-                                queryParamsHandling="merge"
-                                class="btn btn-danger btn-sm">
-                            <span class="fa fa-remove"></span>
-                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
-                        </button>
+                <td>
+                    <div *ngIf="candidatura.partido">
+                        <a [routerLink]="['../partido-pr', candidatura.partido?.id ]" >{{candidatura.partido?.nombre}}</a>
                     </div>
                 </td>
+
+                <!--<td class="text-right">-->
+                    <!--<div class="btn-group flex-btn-group-container">-->
+                        <!--<button type="submit"-->
+                                <!--[routerLink]="['../candidatura-pr', candidatura.id ]"-->
+                                <!--class="btn btn-info btn-sm">-->
+                            <!--<span class="fa fa-eye"></span>-->
+                            <!--<span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>-->
+                        <!--</button>-->
+                        <!--<button type="submit"-->
+                                <!--[routerLink]="['/', { outlets: { popup: 'candidatura-pr/'+ candidatura.id + '/edit'} }]"-->
+                                <!--replaceUrl="true"-->
+                                <!--queryParamsHandling="merge"-->
+                                <!--class="btn btn-primary btn-sm">-->
+                            <!--<span class="fa fa-pencil"></span>-->
+                            <!--<span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>-->
+                        <!--</button>-->
+                        <!--<button type="submit"-->
+                                <!--[routerLink]="['/', { outlets: { popup: 'candidatura-pr/'+ candidatura.id + '/delete'} }]"-->
+                                <!--replaceUrl="true"-->
+                                <!--queryParamsHandling="merge"-->
+                                <!--class="btn btn-danger btn-sm">-->
+                            <!--<span class="fa fa-remove"></span>-->
+                            <!--<span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>-->
+                        <!--</button>-->
+                    <!--</div>-->
+                <!--</td>-->
             </tr>
             </tbody>
         </table>

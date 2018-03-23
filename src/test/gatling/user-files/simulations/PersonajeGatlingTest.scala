@@ -68,7 +68,7 @@ class PersonajeGatlingTest extends Simulation {
             .exec(http("Create new personaje")
             .post("/api/personajes")
             .headers(headers_http_authenticated)
-            .body(StringBody("""{"id":null, "fechaNacimiento":"2020-01-01T00:00:00.000Z", "fechaDefuncion":"2020-01-01T00:00:00.000Z", "nombresAlternativos":"SAMPLE_TEXT", "apellidosAlternativos":"SAMPLE_TEXT", "sexo":null, "observaciones":"SAMPLE_TEXT"}""")).asJSON
+            .body(StringBody("""{"id":null, "nombres":"SAMPLE_TEXT", "apellidos":"SAMPLE_TEXT", "fechaNacimiento":"2020-01-01T00:00:00.000Z", "fechaDefuncion":"2020-01-01T00:00:00.000Z", "nombresAlternativos":"SAMPLE_TEXT", "apellidosAlternativos":"SAMPLE_TEXT", "sexo":null, "observaciones":"SAMPLE_TEXT"}""")).asJSON
             .check(status.is(201))
             .check(headerRegex("Location", "(.*)").saveAs("new_personaje_url"))).exitHereIfFailed
             .pause(10)

@@ -68,7 +68,7 @@ class FamiliarPersonajeGatlingTest extends Simulation {
             .exec(http("Create new familiarPersonaje")
             .post("/api/familiar-personajes")
             .headers(headers_http_authenticated)
-            .body(StringBody("""{"id":null}""")).asJSON
+            .body(StringBody("""{"id":null, "nombres":"SAMPLE_TEXT", "apellidos":"SAMPLE_TEXT"}""")).asJSON
             .check(status.is(201))
             .check(headerRegex("Location", "(.*)").saveAs("new_familiarPersonaje_url"))).exitHereIfFailed
             .pause(10)

@@ -76,6 +76,12 @@ public class PersonajeQueryService extends QueryService<Personaje> {
             if (criteria.getId() != null) {
                 specification = specification.and(buildSpecification(criteria.getId(), Personaje_.id));
             }
+            if (criteria.getNombres() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getNombres(), Personaje_.nombres));
+            }
+            if (criteria.getApellidos() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getApellidos(), Personaje_.apellidos));
+            }
             if (criteria.getFechaNacimiento() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getFechaNacimiento(), Personaje_.fechaNacimiento));
             }
@@ -93,9 +99,6 @@ public class PersonajeQueryService extends QueryService<Personaje> {
             }
             if (criteria.getObservaciones() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getObservaciones(), Personaje_.observaciones));
-            }
-            if (criteria.getPersonaId() != null) {
-                specification = specification.and(buildReferringEntitySpecification(criteria.getPersonaId(), Personaje_.persona, Persona_.id));
             }
             if (criteria.getLugarNacimientoId() != null) {
                 specification = specification.and(buildReferringEntitySpecification(criteria.getLugarNacimientoId(), Personaje_.lugarNacimiento, Lugar_.id));
@@ -129,6 +132,9 @@ public class PersonajeQueryService extends QueryService<Personaje> {
             }
             if (criteria.getCargosId() != null) {
                 specification = specification.and(buildReferringEntitySpecification(criteria.getCargosId(), Personaje_.cargos, CargoPersonaje_.id));
+            }
+            if (criteria.getCandidaturasId() != null) {
+                specification = specification.and(buildReferringEntitySpecification(criteria.getCandidaturasId(), Personaje_.candidaturas, Candidatura_.id));
             }
         }
         return specification;

@@ -5,6 +5,8 @@ import ar.gob.iighi.ProsopografiaApp;
 import ar.gob.iighi.domain.Candidatura;
 import ar.gob.iighi.domain.Eleccion;
 import ar.gob.iighi.domain.Seccion;
+import ar.gob.iighi.domain.Personaje;
+import ar.gob.iighi.domain.Partido;
 import ar.gob.iighi.repository.CandidaturaRepository;
 import ar.gob.iighi.service.CandidaturaService;
 import ar.gob.iighi.repository.search.CandidaturaSearchRepository;
@@ -50,6 +52,9 @@ public class CandidaturaResourceIntTest {
 
     private static final String DEFAULT_OBSERVACIONES = "AAAAAAAAAA";
     private static final String UPDATED_OBSERVACIONES = "BBBBBBBBBB";
+
+    private static final String DEFAULT_ANIO = "AAAA";
+    private static final String UPDATED_ANIO = "BBBB";
 
     @Autowired
     private CandidaturaRepository candidaturaRepository;
@@ -97,7 +102,8 @@ public class CandidaturaResourceIntTest {
         Candidatura candidatura = new Candidatura()
             .esSuplente(DEFAULT_ES_SUPLENTE)
             .resultoElecto(DEFAULT_RESULTO_ELECTO)
-            .observaciones(DEFAULT_OBSERVACIONES);
+            .observaciones(DEFAULT_OBSERVACIONES)
+            .anio(DEFAULT_ANIO);
         // Add required entity
         Eleccion eleccion = EleccionResourceIntTest.createEntity(em);
         em.persist(eleccion);
@@ -108,6 +114,16 @@ public class CandidaturaResourceIntTest {
         em.persist(seccion);
         em.flush();
         candidatura.setSeccion(seccion);
+        // Add required entity
+        Personaje personaje = PersonajeResourceIntTest.createEntity(em);
+        em.persist(personaje);
+        em.flush();
+        candidatura.setPersonaje(personaje);
+        // Add required entity
+        Partido partido = PartidoResourceIntTest.createEntity(em);
+        em.persist(partido);
+        em.flush();
+        candidatura.setPartido(partido);
         return candidatura;
     }
 
@@ -135,6 +151,7 @@ public class CandidaturaResourceIntTest {
         assertThat(testCandidatura.isEsSuplente()).isEqualTo(DEFAULT_ES_SUPLENTE);
         assertThat(testCandidatura.isResultoElecto()).isEqualTo(DEFAULT_RESULTO_ELECTO);
         assertThat(testCandidatura.getObservaciones()).isEqualTo(DEFAULT_OBSERVACIONES);
+        assertThat(testCandidatura.getAnio()).isEqualTo(DEFAULT_ANIO);
 
         // Validate the Candidatura in Elasticsearch
         Candidatura candidaturaEs = candidaturaSearchRepository.findOne(testCandidatura.getId());
@@ -173,7 +190,8 @@ public class CandidaturaResourceIntTest {
             .andExpect(jsonPath("$.[*].id").value(hasItem(candidatura.getId().intValue())))
             .andExpect(jsonPath("$.[*].esSuplente").value(hasItem(DEFAULT_ES_SUPLENTE.booleanValue())))
             .andExpect(jsonPath("$.[*].resultoElecto").value(hasItem(DEFAULT_RESULTO_ELECTO.booleanValue())))
-            .andExpect(jsonPath("$.[*].observaciones").value(hasItem(DEFAULT_OBSERVACIONES.toString())));
+            .andExpect(jsonPath("$.[*].observaciones").value(hasItem(DEFAULT_OBSERVACIONES.toString())))
+            .andExpect(jsonPath("$.[*].anio").value(hasItem(DEFAULT_ANIO.toString())));
     }
 
     @Test
@@ -189,7 +207,8 @@ public class CandidaturaResourceIntTest {
             .andExpect(jsonPath("$.id").value(candidatura.getId().intValue()))
             .andExpect(jsonPath("$.esSuplente").value(DEFAULT_ES_SUPLENTE.booleanValue()))
             .andExpect(jsonPath("$.resultoElecto").value(DEFAULT_RESULTO_ELECTO.booleanValue()))
-            .andExpect(jsonPath("$.observaciones").value(DEFAULT_OBSERVACIONES.toString()));
+            .andExpect(jsonPath("$.observaciones").value(DEFAULT_OBSERVACIONES.toString()))
+            .andExpect(jsonPath("$.anio").value(DEFAULT_ANIO.toString()));
     }
 
     @Test
@@ -215,7 +234,8 @@ public class CandidaturaResourceIntTest {
         updatedCandidatura
             .esSuplente(UPDATED_ES_SUPLENTE)
             .resultoElecto(UPDATED_RESULTO_ELECTO)
-            .observaciones(UPDATED_OBSERVACIONES);
+            .observaciones(UPDATED_OBSERVACIONES)
+            .anio(UPDATED_ANIO);
 
         restCandidaturaMockMvc.perform(put("/api/candidaturas")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -229,6 +249,7 @@ public class CandidaturaResourceIntTest {
         assertThat(testCandidatura.isEsSuplente()).isEqualTo(UPDATED_ES_SUPLENTE);
         assertThat(testCandidatura.isResultoElecto()).isEqualTo(UPDATED_RESULTO_ELECTO);
         assertThat(testCandidatura.getObservaciones()).isEqualTo(UPDATED_OBSERVACIONES);
+        assertThat(testCandidatura.getAnio()).isEqualTo(UPDATED_ANIO);
 
         // Validate the Candidatura in Elasticsearch
         Candidatura candidaturaEs = candidaturaSearchRepository.findOne(testCandidatura.getId());
@@ -288,7 +309,8 @@ public class CandidaturaResourceIntTest {
             .andExpect(jsonPath("$.[*].id").value(hasItem(candidatura.getId().intValue())))
             .andExpect(jsonPath("$.[*].esSuplente").value(hasItem(DEFAULT_ES_SUPLENTE.booleanValue())))
             .andExpect(jsonPath("$.[*].resultoElecto").value(hasItem(DEFAULT_RESULTO_ELECTO.booleanValue())))
-            .andExpect(jsonPath("$.[*].observaciones").value(hasItem(DEFAULT_OBSERVACIONES.toString())));
+            .andExpect(jsonPath("$.[*].observaciones").value(hasItem(DEFAULT_OBSERVACIONES.toString())))
+            .andExpect(jsonPath("$.[*].anio").value(hasItem(DEFAULT_ANIO.toString())));
     }
 
     @Test

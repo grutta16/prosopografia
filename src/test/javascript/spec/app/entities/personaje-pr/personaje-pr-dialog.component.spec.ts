@@ -9,7 +9,6 @@ import { ProsopografiaTestModule } from '../../../test.module';
 import { PersonajePrDialogComponent } from '../../../../../../main/webapp/app/entities/personaje-pr/personaje-pr-dialog.component';
 import { PersonajePrService } from '../../../../../../main/webapp/app/entities/personaje-pr/personaje-pr.service';
 import { PersonajePr } from '../../../../../../main/webapp/app/entities/personaje-pr/personaje-pr.model';
-import { PersonaPrService } from '../../../../../../main/webapp/app/entities/persona-pr';
 import { LugarPrService } from '../../../../../../main/webapp/app/entities/lugar-pr';
 import { ProfesionPrService } from '../../../../../../main/webapp/app/entities/profesion-pr';
 
@@ -27,7 +26,6 @@ describe('Component Tests', () => {
                 imports: [ProsopografiaTestModule],
                 declarations: [PersonajePrDialogComponent],
                 providers: [
-                    PersonaPrService,
                     LugarPrService,
                     ProfesionPrService,
                     PersonajePrService

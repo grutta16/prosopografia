@@ -34,6 +34,7 @@
                 "institucionPr": "Instituciones",
                 "carreraPr": "Carreras",
                 "estudioPersonajePr": "Estudio Personaje",
+                "candidaturaPr": "Candidatura",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {

@@ -33,11 +33,14 @@ describe('ParejaPersonaje e2e test', () => {
 
    /* it('should create and save ParejaPersonajes', () => {
         parejaPersonajeComponentsPage.clickOnCreateButton();
+        parejaPersonajeDialogPage.setNombresInput('nombres');
+        expect(parejaPersonajeDialogPage.getNombresInput()).toMatch('nombres');
+        parejaPersonajeDialogPage.setApellidosInput('apellidos');
+        expect(parejaPersonajeDialogPage.getApellidosInput()).toMatch('apellidos');
         parejaPersonajeDialogPage.setFechaDesdeInput('2000-12-31');
         expect(parejaPersonajeDialogPage.getFechaDesdeInput()).toMatch('2000-12-31');
         parejaPersonajeDialogPage.setFechaHastaInput('2000-12-31');
         expect(parejaPersonajeDialogPage.getFechaHastaInput()).toMatch('2000-12-31');
-        parejaPersonajeDialogPage.personaSelectLastOption();
         parejaPersonajeDialogPage.personajeSelectLastOption();
         parejaPersonajeDialogPage.save();
         expect(parejaPersonajeDialogPage.getSaveButton().isPresent()).toBeFalsy();
@@ -65,14 +68,31 @@ export class ParejaPersonajeDialogPage {
     modalTitle = element(by.css('h4#myParejaPersonajeLabel'));
     saveButton = element(by.css('.modal-footer .btn.btn-primary'));
     closeButton = element(by.css('button.close'));
+    nombresInput = element(by.css('input#field_nombres'));
+    apellidosInput = element(by.css('input#field_apellidos'));
     fechaDesdeInput = element(by.css('input#field_fechaDesde'));
     fechaHastaInput = element(by.css('input#field_fechaHasta'));
-    personaSelect = element(by.css('select#field_persona'));
     personajeSelect = element(by.css('select#field_personaje'));
 
     getModalTitle() {
         return this.modalTitle.getAttribute('jhiTranslate');
     }
+
+    setNombresInput = function(nombres) {
+        this.nombresInput.sendKeys(nombres);
+    };
+
+    getNombresInput = function() {
+        return this.nombresInput.getAttribute('value');
+    };
+
+    setApellidosInput = function(apellidos) {
+        this.apellidosInput.sendKeys(apellidos);
+    };
+
+    getApellidosInput = function() {
+        return this.apellidosInput.getAttribute('value');
+    };
 
     setFechaDesdeInput = function(fechaDesde) {
         this.fechaDesdeInput.sendKeys(fechaDesde);
@@ -88,22 +108,6 @@ export class ParejaPersonajeDialogPage {
 
     getFechaHastaInput = function() {
         return this.fechaHastaInput.getAttribute('value');
-    };
-
-    personaSelectLastOption = function() {
-        this.personaSelect.all(by.tagName('option')).last().click();
-    };
-
-    personaSelectOption = function(option) {
-        this.personaSelect.sendKeys(option);
-    };
-
-    getPersonaSelect = function() {
-        return this.personaSelect;
-    };
-
-    getPersonaSelectedOption = function() {
-        return this.personaSelect.element(by.css('option:checked')).getText();
     };
 
     personajeSelectLastOption = function() {

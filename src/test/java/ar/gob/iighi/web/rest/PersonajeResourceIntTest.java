@@ -3,7 +3,6 @@ package ar.gob.iighi.web.rest;
 import ar.gob.iighi.ProsopografiaApp;
 
 import ar.gob.iighi.domain.Personaje;
-import ar.gob.iighi.domain.Persona;
 import ar.gob.iighi.domain.Lugar;
 import ar.gob.iighi.domain.Lugar;
 import ar.gob.iighi.domain.Profesion;
@@ -15,6 +14,7 @@ import ar.gob.iighi.domain.PartidoPersonaje;
 import ar.gob.iighi.domain.ReligionPersonaje;
 import ar.gob.iighi.domain.ResidenciaPersonaje;
 import ar.gob.iighi.domain.CargoPersonaje;
+import ar.gob.iighi.domain.Candidatura;
 import ar.gob.iighi.repository.PersonajeRepository;
 import ar.gob.iighi.service.PersonajeService;
 import ar.gob.iighi.repository.search.PersonajeSearchRepository;
@@ -55,6 +55,12 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = ProsopografiaApp.class)
 public class PersonajeResourceIntTest {
+
+    private static final String DEFAULT_NOMBRES = "AAAAAAAAAA";
+    private static final String UPDATED_NOMBRES = "BBBBBBBBBB";
+
+    private static final String DEFAULT_APELLIDOS = "AAAAAAAAAA";
+    private static final String UPDATED_APELLIDOS = "BBBBBBBBBB";
 
     private static final LocalDate DEFAULT_FECHA_NACIMIENTO = LocalDate.ofEpochDay(0L);
     private static final LocalDate UPDATED_FECHA_NACIMIENTO = LocalDate.now(ZoneId.systemDefault());
@@ -121,17 +127,14 @@ public class PersonajeResourceIntTest {
      */
     public static Personaje createEntity(EntityManager em) {
         Personaje personaje = new Personaje()
+            .nombres(DEFAULT_NOMBRES)
+            .apellidos(DEFAULT_APELLIDOS)
             .fechaNacimiento(DEFAULT_FECHA_NACIMIENTO)
             .fechaDefuncion(DEFAULT_FECHA_DEFUNCION)
             .nombresAlternativos(DEFAULT_NOMBRES_ALTERNATIVOS)
             .apellidosAlternativos(DEFAULT_APELLIDOS_ALTERNATIVOS)
             .sexo(DEFAULT_SEXO)
             .observaciones(DEFAULT_OBSERVACIONES);
-        // Add required entity
-        Persona persona = PersonaResourceIntTest.createEntity(em);
-        em.persist(persona);
-        em.flush();
-        personaje.setPersona(persona);
         return personaje;
     }
 
@@ -156,6 +159,8 @@ public class PersonajeResourceIntTest {
         List<Personaje> personajeList = personajeRepository.findAll();
         assertThat(personajeList).hasSize(databaseSizeBeforeCreate + 1);
         Personaje testPersonaje = personajeList.get(personajeList.size() - 1);
+        assertThat(testPersonaje.getNombres()).isEqualTo(DEFAULT_NOMBRES);
+        assertThat(testPersonaje.getApellidos()).isEqualTo(DEFAULT_APELLIDOS);
         assertThat(testPersonaje.getFechaNacimiento()).isEqualTo(DEFAULT_FECHA_NACIMIENTO);
         assertThat(testPersonaje.getFechaDefuncion()).isEqualTo(DEFAULT_FECHA_DEFUNCION);
         assertThat(testPersonaje.getNombresAlternativos()).isEqualTo(DEFAULT_NOMBRES_ALTERNATIVOS);
@@ -189,6 +194,42 @@ public class PersonajeResourceIntTest {
 
     @Test
     @Transactional
+    public void checkNombresIsRequired() throws Exception {
+        int databaseSizeBeforeTest = personajeRepository.findAll().size();
+        // set the field null
+        personaje.setNombres(null);
+
+        // Create the Personaje, which fails.
+
+        restPersonajeMockMvc.perform(post("/api/personajes")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(personaje)))
+            .andExpect(status().isBadRequest());
+
+        List<Personaje> personajeList = personajeRepository.findAll();
+        assertThat(personajeList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
+    public void checkApellidosIsRequired() throws Exception {
+        int databaseSizeBeforeTest = personajeRepository.findAll().size();
+        // set the field null
+        personaje.setApellidos(null);
+
+        // Create the Personaje, which fails.
+
+        restPersonajeMockMvc.perform(post("/api/personajes")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(personaje)))
+            .andExpect(status().isBadRequest());
+
+        List<Personaje> personajeList = personajeRepository.findAll();
+        assertThat(personajeList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
     public void getAllPersonajes() throws Exception {
         // Initialize the database
         personajeRepository.saveAndFlush(personaje);
@@ -198,6 +239,8 @@ public class PersonajeResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(personaje.getId().intValue())))
+            .andExpect(jsonPath("$.[*].nombres").value(hasItem(DEFAULT_NOMBRES.toString())))
+            .andExpect(jsonPath("$.[*].apellidos").value(hasItem(DEFAULT_APELLIDOS.toString())))
             .andExpect(jsonPath("$.[*].fechaNacimiento").value(hasItem(DEFAULT_FECHA_NACIMIENTO.toString())))
             .andExpect(jsonPath("$.[*].fechaDefuncion").value(hasItem(DEFAULT_FECHA_DEFUNCION.toString())))
             .andExpect(jsonPath("$.[*].nombresAlternativos").value(hasItem(DEFAULT_NOMBRES_ALTERNATIVOS.toString())))
@@ -217,12 +260,92 @@ public class PersonajeResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(personaje.getId().intValue()))
+            .andExpect(jsonPath("$.nombres").value(DEFAULT_NOMBRES.toString()))
+            .andExpect(jsonPath("$.apellidos").value(DEFAULT_APELLIDOS.toString()))
             .andExpect(jsonPath("$.fechaNacimiento").value(DEFAULT_FECHA_NACIMIENTO.toString()))
             .andExpect(jsonPath("$.fechaDefuncion").value(DEFAULT_FECHA_DEFUNCION.toString()))
             .andExpect(jsonPath("$.nombresAlternativos").value(DEFAULT_NOMBRES_ALTERNATIVOS.toString()))
             .andExpect(jsonPath("$.apellidosAlternativos").value(DEFAULT_APELLIDOS_ALTERNATIVOS.toString()))
             .andExpect(jsonPath("$.sexo").value(DEFAULT_SEXO.booleanValue()))
             .andExpect(jsonPath("$.observaciones").value(DEFAULT_OBSERVACIONES.toString()));
+    }
+
+    @Test
+    @Transactional
+    public void getAllPersonajesByNombresIsEqualToSomething() throws Exception {
+        // Initialize the database
+        personajeRepository.saveAndFlush(personaje);
+
+        // Get all the personajeList where nombres equals to DEFAULT_NOMBRES
+        defaultPersonajeShouldBeFound("nombres.equals=" + DEFAULT_NOMBRES);
+
+        // Get all the personajeList where nombres equals to UPDATED_NOMBRES
+        defaultPersonajeShouldNotBeFound("nombres.equals=" + UPDATED_NOMBRES);
+    }
+
+    @Test
+    @Transactional
+    public void getAllPersonajesByNombresIsInShouldWork() throws Exception {
+        // Initialize the database
+        personajeRepository.saveAndFlush(personaje);
+
+        // Get all the personajeList where nombres in DEFAULT_NOMBRES or UPDATED_NOMBRES
+        defaultPersonajeShouldBeFound("nombres.in=" + DEFAULT_NOMBRES + "," + UPDATED_NOMBRES);
+
+        // Get all the personajeList where nombres equals to UPDATED_NOMBRES
+        defaultPersonajeShouldNotBeFound("nombres.in=" + UPDATED_NOMBRES);
+    }
+
+    @Test
+    @Transactional
+    public void getAllPersonajesByNombresIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        personajeRepository.saveAndFlush(personaje);
+
+        // Get all the personajeList where nombres is not null
+        defaultPersonajeShouldBeFound("nombres.specified=true");
+
+        // Get all the personajeList where nombres is null
+        defaultPersonajeShouldNotBeFound("nombres.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllPersonajesByApellidosIsEqualToSomething() throws Exception {
+        // Initialize the database
+        personajeRepository.saveAndFlush(personaje);
+
+        // Get all the personajeList where apellidos equals to DEFAULT_APELLIDOS
+        defaultPersonajeShouldBeFound("apellidos.equals=" + DEFAULT_APELLIDOS);
+
+        // Get all the personajeList where apellidos equals to UPDATED_APELLIDOS
+        defaultPersonajeShouldNotBeFound("apellidos.equals=" + UPDATED_APELLIDOS);
+    }
+
+    @Test
+    @Transactional
+    public void getAllPersonajesByApellidosIsInShouldWork() throws Exception {
+        // Initialize the database
+        personajeRepository.saveAndFlush(personaje);
+
+        // Get all the personajeList where apellidos in DEFAULT_APELLIDOS or UPDATED_APELLIDOS
+        defaultPersonajeShouldBeFound("apellidos.in=" + DEFAULT_APELLIDOS + "," + UPDATED_APELLIDOS);
+
+        // Get all the personajeList where apellidos equals to UPDATED_APELLIDOS
+        defaultPersonajeShouldNotBeFound("apellidos.in=" + UPDATED_APELLIDOS);
+    }
+
+    @Test
+    @Transactional
+    public void getAllPersonajesByApellidosIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        personajeRepository.saveAndFlush(personaje);
+
+        // Get all the personajeList where apellidos is not null
+        defaultPersonajeShouldBeFound("apellidos.specified=true");
+
+        // Get all the personajeList where apellidos is null
+        defaultPersonajeShouldNotBeFound("apellidos.specified=false");
     }
 
     @Test
@@ -515,25 +638,6 @@ public class PersonajeResourceIntTest {
 
     @Test
     @Transactional
-    public void getAllPersonajesByPersonaIsEqualToSomething() throws Exception {
-        // Initialize the database
-        Persona persona = PersonaResourceIntTest.createEntity(em);
-        em.persist(persona);
-        em.flush();
-        personaje.setPersona(persona);
-        personajeRepository.saveAndFlush(personaje);
-        Long personaId = persona.getId();
-
-        // Get all the personajeList where persona equals to personaId
-        defaultPersonajeShouldBeFound("personaId.equals=" + personaId);
-
-        // Get all the personajeList where persona equals to personaId + 1
-        defaultPersonajeShouldNotBeFound("personaId.equals=" + (personaId + 1));
-    }
-
-
-    @Test
-    @Transactional
     public void getAllPersonajesByLugarNacimientoIsEqualToSomething() throws Exception {
         // Initialize the database
         Lugar lugarNacimiento = LugarResourceIntTest.createEntity(em);
@@ -740,6 +844,25 @@ public class PersonajeResourceIntTest {
         defaultPersonajeShouldNotBeFound("cargosId.equals=" + (cargosId + 1));
     }
 
+
+    @Test
+    @Transactional
+    public void getAllPersonajesByCandidaturasIsEqualToSomething() throws Exception {
+        // Initialize the database
+        Candidatura candidaturas = CandidaturaResourceIntTest.createEntity(em);
+        em.persist(candidaturas);
+        em.flush();
+        personaje.addCandidaturas(candidaturas);
+        personajeRepository.saveAndFlush(personaje);
+        Long candidaturasId = candidaturas.getId();
+
+        // Get all the personajeList where candidaturas equals to candidaturasId
+        defaultPersonajeShouldBeFound("candidaturasId.equals=" + candidaturasId);
+
+        // Get all the personajeList where candidaturas equals to candidaturasId + 1
+        defaultPersonajeShouldNotBeFound("candidaturasId.equals=" + (candidaturasId + 1));
+    }
+
     /**
      * Executes the search, and checks that the default entity is returned
      */
@@ -748,6 +871,8 @@ public class PersonajeResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(personaje.getId().intValue())))
+            .andExpect(jsonPath("$.[*].nombres").value(hasItem(DEFAULT_NOMBRES.toString())))
+            .andExpect(jsonPath("$.[*].apellidos").value(hasItem(DEFAULT_APELLIDOS.toString())))
             .andExpect(jsonPath("$.[*].fechaNacimiento").value(hasItem(DEFAULT_FECHA_NACIMIENTO.toString())))
             .andExpect(jsonPath("$.[*].fechaDefuncion").value(hasItem(DEFAULT_FECHA_DEFUNCION.toString())))
             .andExpect(jsonPath("$.[*].nombresAlternativos").value(hasItem(DEFAULT_NOMBRES_ALTERNATIVOS.toString())))
@@ -789,6 +914,8 @@ public class PersonajeResourceIntTest {
         // Disconnect from session so that the updates on updatedPersonaje are not directly saved in db
         em.detach(updatedPersonaje);
         updatedPersonaje
+            .nombres(UPDATED_NOMBRES)
+            .apellidos(UPDATED_APELLIDOS)
             .fechaNacimiento(UPDATED_FECHA_NACIMIENTO)
             .fechaDefuncion(UPDATED_FECHA_DEFUNCION)
             .nombresAlternativos(UPDATED_NOMBRES_ALTERNATIVOS)
@@ -805,6 +932,8 @@ public class PersonajeResourceIntTest {
         List<Personaje> personajeList = personajeRepository.findAll();
         assertThat(personajeList).hasSize(databaseSizeBeforeUpdate);
         Personaje testPersonaje = personajeList.get(personajeList.size() - 1);
+        assertThat(testPersonaje.getNombres()).isEqualTo(UPDATED_NOMBRES);
+        assertThat(testPersonaje.getApellidos()).isEqualTo(UPDATED_APELLIDOS);
         assertThat(testPersonaje.getFechaNacimiento()).isEqualTo(UPDATED_FECHA_NACIMIENTO);
         assertThat(testPersonaje.getFechaDefuncion()).isEqualTo(UPDATED_FECHA_DEFUNCION);
         assertThat(testPersonaje.getNombresAlternativos()).isEqualTo(UPDATED_NOMBRES_ALTERNATIVOS);
@@ -868,6 +997,8 @@ public class PersonajeResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(personaje.getId().intValue())))
+            .andExpect(jsonPath("$.[*].nombres").value(hasItem(DEFAULT_NOMBRES.toString())))
+            .andExpect(jsonPath("$.[*].apellidos").value(hasItem(DEFAULT_APELLIDOS.toString())))
             .andExpect(jsonPath("$.[*].fechaNacimiento").value(hasItem(DEFAULT_FECHA_NACIMIENTO.toString())))
             .andExpect(jsonPath("$.[*].fechaDefuncion").value(hasItem(DEFAULT_FECHA_DEFUNCION.toString())))
             .andExpect(jsonPath("$.[*].nombresAlternativos").value(hasItem(DEFAULT_NOMBRES_ALTERNATIVOS.toString())))

@@ -28,6 +28,10 @@ public class PersonajeCriteria implements Serializable {
 
     private LongFilter id;
 
+    private StringFilter nombres;
+
+    private StringFilter apellidos;
+
     private LocalDateFilter fechaNacimiento;
 
     private LocalDateFilter fechaDefuncion;
@@ -39,8 +43,6 @@ public class PersonajeCriteria implements Serializable {
     private BooleanFilter sexo;
 
     private StringFilter observaciones;
-
-    private LongFilter personaId;
 
     private LongFilter lugarNacimientoId;
 
@@ -64,6 +66,8 @@ public class PersonajeCriteria implements Serializable {
 
     private LongFilter cargosId;
 
+    private LongFilter candidaturasId;
+
     public PersonajeCriteria() {
     }
 
@@ -73,6 +77,22 @@ public class PersonajeCriteria implements Serializable {
 
     public void setId(LongFilter id) {
         this.id = id;
+    }
+
+    public StringFilter getNombres() {
+        return nombres;
+    }
+
+    public void setNombres(StringFilter nombres) {
+        this.nombres = nombres;
+    }
+
+    public StringFilter getApellidos() {
+        return apellidos;
+    }
+
+    public void setApellidos(StringFilter apellidos) {
+        this.apellidos = apellidos;
     }
 
     public LocalDateFilter getFechaNacimiento() {
@@ -121,14 +141,6 @@ public class PersonajeCriteria implements Serializable {
 
     public void setObservaciones(StringFilter observaciones) {
         this.observaciones = observaciones;
-    }
-
-    public LongFilter getPersonaId() {
-        return personaId;
-    }
-
-    public void setPersonaId(LongFilter personaId) {
-        this.personaId = personaId;
     }
 
     public LongFilter getLugarNacimientoId() {
@@ -219,17 +231,26 @@ public class PersonajeCriteria implements Serializable {
         this.cargosId = cargosId;
     }
 
+    public LongFilter getCandidaturasId() {
+        return candidaturasId;
+    }
+
+    public void setCandidaturasId(LongFilter candidaturasId) {
+        this.candidaturasId = candidaturasId;
+    }
+
     @Override
     public String toString() {
         return "PersonajeCriteria{" +
                 (id != null ? "id=" + id + ", " : "") +
+                (nombres != null ? "nombres=" + nombres + ", " : "") +
+                (apellidos != null ? "apellidos=" + apellidos + ", " : "") +
                 (fechaNacimiento != null ? "fechaNacimiento=" + fechaNacimiento + ", " : "") +
                 (fechaDefuncion != null ? "fechaDefuncion=" + fechaDefuncion + ", " : "") +
                 (nombresAlternativos != null ? "nombresAlternativos=" + nombresAlternativos + ", " : "") +
                 (apellidosAlternativos != null ? "apellidosAlternativos=" + apellidosAlternativos + ", " : "") +
                 (sexo != null ? "sexo=" + sexo + ", " : "") +
                 (observaciones != null ? "observaciones=" + observaciones + ", " : "") +
-                (personaId != null ? "personaId=" + personaId + ", " : "") +
                 (lugarNacimientoId != null ? "lugarNacimientoId=" + lugarNacimientoId + ", " : "") +
                 (lugarDefuncionId != null ? "lugarDefuncionId=" + lugarDefuncionId + ", " : "") +
                 (profesionesId != null ? "profesionesId=" + profesionesId + ", " : "") +
@@ -241,6 +262,7 @@ public class PersonajeCriteria implements Serializable {
                 (religionesId != null ? "religionesId=" + religionesId + ", " : "") +
                 (residenciasId != null ? "residenciasId=" + residenciasId + ", " : "") +
                 (cargosId != null ? "cargosId=" + cargosId + ", " : "") +
+                (candidaturasId != null ? "candidaturasId=" + candidaturasId + ", " : "") +
             "}";
     }
 

@@ -20,6 +20,24 @@
             "relationshipName": "seccion",
             "otherEntityName": "seccion",
             "otherEntityField": "nombre"
+        },
+        {
+            "relationshipName": "personaje",
+            "otherEntityName": "personaje",
+            "relationshipType": "many-to-one",
+            "relationshipValidateRules": [
+                "required"
+            ],
+            "otherEntityField": "nombres"
+        },
+        {
+            "relationshipName": "partido",
+            "otherEntityName": "partido",
+            "relationshipType": "many-to-one",
+            "relationshipValidateRules": [
+                "required"
+            ],
+            "otherEntityField": "id"
         }
     ],
     "fields": [
@@ -38,13 +56,21 @@
                 "maxlength"
             ],
             "fieldValidateRulesMaxlength": 2000
+        },
+        {
+            "fieldName": "anio",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": "4"
         }
     ],
     "changelogDate": "20180315172320",
-    "entityTableName": "candidatura",
     "dto": "no",
-    "pagination": "pagination",
     "service": "serviceClass",
+    "entityTableName": "candidatura",
     "jpaMetamodelFiltering": false,
+    "pagination": "pagination",
     "angularJSSuffix": "pr"
 }

@@ -9,7 +9,7 @@
                 "required",
                 "maxlength"
             ],
-            "fieldValidateRulesMaxlength": 50
+            "fieldValidateRulesMaxlength": 100
         },
         {
             "fieldName": "titulo",
@@ -18,7 +18,7 @@
                 "required",
                 "maxlength"
             ],
-            "fieldValidateRulesMaxlength": 50
+            "fieldValidateRulesMaxlength": 100
         },
         {
             "fieldName": "duracion",

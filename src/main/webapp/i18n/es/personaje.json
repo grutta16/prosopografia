@@ -17,13 +17,14 @@
             "detail": {
                 "title": "Personaje"
             },
-            "fechaNacimiento": "Fecha de nacimiento",
-            "fechaDefuncion": "Fecha de defunción",
-            "nombresAlternativos": "Nombres alternativos",
-            "apellidosAlternativos": "Apellidos alternativos",
+            "nombres": "Nombres",
+            "apellidos": "Apellidos",
+            "fechaNacimiento": "Nacimiento",
+            "fechaDefuncion": "Defunción",
+            "nombresAlternativos": "Nombres alt.",
+            "apellidosAlternativos": "Apellidos alt.",
             "sexo": "Sexo",
             "observaciones": "Observaciones",
-            "persona": "Persona",
             "lugarNacimiento": "Lugar de nacimiento",
             "lugarDefuncion": "Lugar de defunción",
             "profesiones": "Profesiones",
@@ -34,7 +35,8 @@
             "partidos": "Partidos",
             "religiones": "Religiones",
             "residencias": "Residencias",
-            "cargos": "Cargos"
+            "cargos": "Cargos",
+            "candidaturas": "Candidaturas"
         }
     }
 }

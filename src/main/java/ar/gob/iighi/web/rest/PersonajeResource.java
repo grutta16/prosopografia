@@ -107,6 +107,19 @@ public class PersonajeResource {
     }
 
     /**
+     * GET  /personajes : get all the personajes.
+     *
+     * @return the ResponseEntity with status 200 (OK) and the list of personajes in body
+     */
+    @GetMapping("/personajes/all")
+    @Timed
+    public ResponseEntity<List<Personaje>> getQueryAllPersonajes() {
+        log.debug("REST request to get all Personajes");
+        List<Personaje> list = personajeService.findAll();
+        return new ResponseEntity<>(list, HttpStatus.OK);
+    }
+
+    /**
      * GET  /personajes/:id : get the "id" personaje.
      *
      * @param id the id of the personaje to retrieve

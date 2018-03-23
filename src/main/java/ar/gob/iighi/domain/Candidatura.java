@@ -36,6 +36,10 @@ public class Candidatura implements Serializable {
     @Column(name = "observaciones", length = 2000)
     private String observaciones;
 
+    @Size(max = 4)
+    @Column(name = "anio", length = 4)
+    private String anio;
+
     @OneToMany(mappedBy = "candidatura")
     @JsonIgnore
     private Set<DetCandidatura> detCandidaturas = new HashSet<>();
@@ -47,6 +51,14 @@ public class Candidatura implements Serializable {
     @ManyToOne(optional = false)
     @NotNull
     private Seccion seccion;
+
+    @ManyToOne(optional = false)
+    @NotNull
+    private Personaje personaje;
+
+    @ManyToOne(optional = false)
+    @NotNull
+    private Partido partido;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -94,6 +106,19 @@ public class Candidatura implements Serializable {
 
     public void setObservaciones(String observaciones) {
         this.observaciones = observaciones;
+    }
+
+    public String getAnio() {
+        return anio;
+    }
+
+    public Candidatura anio(String anio) {
+        this.anio = anio;
+        return this;
+    }
+
+    public void setAnio(String anio) {
+        this.anio = anio;
     }
 
     public Set<DetCandidatura> getDetCandidaturas() {
@@ -146,6 +171,32 @@ public class Candidatura implements Serializable {
     public void setSeccion(Seccion seccion) {
         this.seccion = seccion;
     }
+
+    public Personaje getPersonaje() {
+        return personaje;
+    }
+
+    public Candidatura personaje(Personaje personaje) {
+        this.personaje = personaje;
+        return this;
+    }
+
+    public void setPersonaje(Personaje personaje) {
+        this.personaje = personaje;
+    }
+
+    public Partido getPartido() {
+        return partido;
+    }
+
+    public Candidatura partido(Partido partido) {
+        this.partido = partido;
+        return this;
+    }
+
+    public void setPartido(Partido partido) {
+        this.partido = partido;
+    }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
     @Override
@@ -175,6 +226,7 @@ public class Candidatura implements Serializable {
             ", esSuplente='" + isEsSuplente() + "'" +
             ", resultoElecto='" + isResultoElecto() + "'" +
             ", observaciones='" + getObservaciones() + "'" +
+            ", anio='" + getAnio() + "'" +
             "}";
     }
 }

@@ -12,6 +12,35 @@
             <input type="text" class="form-control" id="id" name="id"
                    [(ngModel)]="candidatura.id" readonly />
         </div>
+
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="prosopografiaApp.candidatura.eleccion" for="field_eleccion">Eleccion</label>
+            <select class="form-control" id="field_eleccion" name="eleccion" [(ngModel)]="candidatura.eleccion"  required>
+                <option *ngIf="!editForm.value.eleccion" [ngValue]="null" selected></option>
+                <option [ngValue]="eleccionOption.id === candidatura.eleccion?.id ? candidatura.eleccion : eleccionOption" *ngFor="let eleccionOption of eleccions; trackBy: trackEleccionById">{{eleccionOption.nombre}}</option>
+            </select>
+        </div>
+        <div [hidden]="!(editForm.controls.eleccion?.dirty && editForm.controls.eleccion?.invalid)">
+            <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.eleccion?.errors?.required" jhiTranslate="entity.validation.required">
+                This field is required.
+            </small>
+        </div>
+
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="prosopografiaApp.candidatura.personaje.label" for="field_personaje">Personaje</label>
+            <select class="form-control" id="field_personaje" name="personaje" [(ngModel)]="candidatura.personaje"  required>
+                <option *ngIf="!editForm.value.personaje" [ngValue]="null" selected></option>
+                <option [ngValue]="personajeOption.id === candidatura.personaje?.id ? candidatura.personaje : personajeOption" *ngFor="let personajeOption of personajes; trackBy: trackPersonajeById">{{personajeOption.nombres}} {{personajeOption.apellidos}}</option>
+            </select>
+        </div>
+        <div [hidden]="!(editForm.controls.personaje?.dirty && editForm.controls.personaje?.invalid)">
+            <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.personaje?.errors?.required" jhiTranslate="entity.validation.required">
+                This field is required.
+            </small>
+        </div>
+
         <div class="form-group">
             <label class="form-control-label" jhiTranslate="prosopografiaApp.candidatura.esSuplente" for="field_esSuplente">Es Suplente</label>
             <input type="checkbox" class="form-control" name="esSuplente" id="field_esSuplente"
@@ -33,20 +62,31 @@
                 </small>
             </div>
         </div>
-
         <div class="form-group">
-            <label class="form-control-label" jhiTranslate="prosopografiaApp.candidatura.eleccion" for="field_eleccion">Eleccion</label>
-            <select class="form-control" id="field_eleccion" name="eleccion" [(ngModel)]="candidatura.eleccion"  required>
-                <option *ngIf="!editForm.value.eleccion" [ngValue]="null" selected></option>
-                <option [ngValue]="eleccionOption.id === candidatura.eleccion?.id ? candidatura.eleccion : eleccionOption" *ngFor="let eleccionOption of eleccions; trackBy: trackEleccionById">{{eleccionOption.nombre}}</option>
-            </select>
+            <label class="form-control-label" jhiTranslate="prosopografiaApp.candidatura.anio" for="field_anio">Anio</label>
+            <input type="text" class="form-control" name="anio" id="field_anio"
+                [(ngModel)]="candidatura.anio" maxlength="4"/>
+            <div [hidden]="!(editForm.controls.anio?.dirty && editForm.controls.anio?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.anio?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 4 }">
+                   This field cannot be longer than 4 characters.
+                </small>
+            </div>
         </div>
-        <div [hidden]="!(editForm.controls.eleccion?.dirty && editForm.controls.eleccion?.invalid)">
-            <small class="form-text text-danger"
-                [hidden]="!editForm.controls.eleccion?.errors?.required" jhiTranslate="entity.validation.required">
-                This field is required.
-            </small>
-        </div>
+
+        <!--<div class="form-group">-->
+            <!--<label class="form-control-label" jhiTranslate="prosopografiaApp.candidatura.eleccion" for="field_eleccion">Eleccion</label>-->
+            <!--<select class="form-control" id="field_eleccion" name="eleccion" [(ngModel)]="candidatura.eleccion"  required>-->
+                <!--<option *ngIf="!editForm.value.eleccion" [ngValue]="null" selected></option>-->
+                <!--<option [ngValue]="eleccionOption.id === candidatura.eleccion?.id ? candidatura.eleccion : eleccionOption" *ngFor="let eleccionOption of eleccions; trackBy: trackEleccionById">{{eleccionOption.nombre}}</option>-->
+            <!--</select>-->
+        <!--</div>-->
+        <!--<div [hidden]="!(editForm.controls.eleccion?.dirty && editForm.controls.eleccion?.invalid)">-->
+            <!--<small class="form-text text-danger"-->
+                <!--[hidden]="!editForm.controls.eleccion?.errors?.required" jhiTranslate="entity.validation.required">-->
+                <!--This field is required.-->
+            <!--</small>-->
+        <!--</div>-->
         <div class="form-group">
             <label class="form-control-label" jhiTranslate="prosopografiaApp.candidatura.seccion" for="field_seccion">Seccion</label>
             <select class="form-control" id="field_seccion" name="seccion" [(ngModel)]="candidatura.seccion"  required>
@@ -57,6 +97,32 @@
         <div [hidden]="!(editForm.controls.seccion?.dirty && editForm.controls.seccion?.invalid)">
             <small class="form-text text-danger"
                 [hidden]="!editForm.controls.seccion?.errors?.required" jhiTranslate="entity.validation.required">
+                This field is required.
+            </small>
+        </div>
+        <!--<div class="form-group">-->
+            <!--<label class="form-control-label" jhiTranslate="prosopografiaApp.candidatura.personaje" for="field_personaje">Personaje</label>-->
+            <!--<select class="form-control" id="field_personaje" name="personaje" [(ngModel)]="candidatura.personaje"  required>-->
+                <!--<option *ngIf="!editForm.value.personaje" [ngValue]="null" selected></option>-->
+                <!--<option [ngValue]="personajeOption.id === candidatura.personaje?.id ? candidatura.personaje : personajeOption" *ngFor="let personajeOption of personajes; trackBy: trackPersonajeById">{{personajeOption.nombres}}</option>-->
+            <!--</select>-->
+        <!--</div>-->
+        <!--<div [hidden]="!(editForm.controls.personaje?.dirty && editForm.controls.personaje?.invalid)">-->
+            <!--<small class="form-text text-danger"-->
+                <!--[hidden]="!editForm.controls.personaje?.errors?.required" jhiTranslate="entity.validation.required">-->
+                <!--This field is required.-->
+            <!--</small>-->
+        <!--</div>-->
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="prosopografiaApp.candidatura.partido" for="field_partido">Partido</label>
+            <select class="form-control" id="field_partido" name="partido" [(ngModel)]="candidatura.partido"  required>
+                <option *ngIf="!editForm.value.partido" [ngValue]="null" selected></option>
+                <option [ngValue]="partidoOption.id === candidatura.partido?.id ? candidatura.partido : partidoOption" *ngFor="let partidoOption of partidos; trackBy: trackPartidoById">{{partidoOption.nombre}}</option>
+            </select>
+        </div>
+        <div [hidden]="!(editForm.controls.partido?.dirty && editForm.controls.partido?.invalid)">
+            <small class="form-text text-danger"
+                [hidden]="!editForm.controls.partido?.errors?.required" jhiTranslate="entity.validation.required">
                 This field is required.
             </small>
         </div>

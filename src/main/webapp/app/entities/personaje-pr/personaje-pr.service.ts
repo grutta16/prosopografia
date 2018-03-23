@@ -41,6 +41,11 @@ export class PersonajePrService {
             .map((res: HttpResponse<PersonajePr[]>) => this.convertArrayResponse(res));
     }
 
+    queryAll(): Observable<HttpResponse<PersonajePr[]>> {
+        return this.http.get<PersonajePr[]>(this.resourceUrl+'/all', { observe: 'response' })
+            .map((res: HttpResponse<PersonajePr[]>) => this.convertArrayResponse(res));
+    }
+
     delete(id: number): Observable<HttpResponse<any>> {
         return this.http.delete<any>(`${this.resourceUrl}/${id}`, { observe: 'response'});
     }

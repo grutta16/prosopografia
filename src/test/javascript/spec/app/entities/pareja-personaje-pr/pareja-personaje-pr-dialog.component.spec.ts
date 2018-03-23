@@ -9,7 +9,6 @@ import { ProsopografiaTestModule } from '../../../test.module';
 import { ParejaPersonajePrDialogComponent } from '../../../../../../main/webapp/app/entities/pareja-personaje-pr/pareja-personaje-pr-dialog.component';
 import { ParejaPersonajePrService } from '../../../../../../main/webapp/app/entities/pareja-personaje-pr/pareja-personaje-pr.service';
 import { ParejaPersonajePr } from '../../../../../../main/webapp/app/entities/pareja-personaje-pr/pareja-personaje-pr.model';
-import { PersonaPrService } from '../../../../../../main/webapp/app/entities/persona-pr';
 import { PersonajePrService } from '../../../../../../main/webapp/app/entities/personaje-pr';
 
 describe('Component Tests', () => {
@@ -26,7 +25,6 @@ describe('Component Tests', () => {
                 imports: [ProsopografiaTestModule],
                 declarations: [ParejaPersonajePrDialogComponent],
                 providers: [
-                    PersonaPrService,
                     PersonajePrService,
                     ParejaPersonajePrService
                 ]

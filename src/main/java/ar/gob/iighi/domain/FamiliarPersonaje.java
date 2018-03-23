@@ -23,9 +23,15 @@ public class FamiliarPersonaje implements Serializable {
     @SequenceGenerator(name = "sequenceGenerator")
     private Long id;
 
-    @ManyToOne(optional = false)
     @NotNull
-    private Persona persona;
+    @Size(max = 100)
+    @Column(name = "nombres", length = 100, nullable = false)
+    private String nombres;
+
+    @NotNull
+    @Size(max = 100)
+    @Column(name = "apellidos", length = 100, nullable = false)
+    private String apellidos;
 
     @ManyToOne(optional = false)
     @NotNull
@@ -44,17 +50,30 @@ public class FamiliarPersonaje implements Serializable {
         this.id = id;
     }
 
-    public Persona getPersona() {
-        return persona;
+    public String getNombres() {
+        return nombres;
     }
 
-    public FamiliarPersonaje persona(Persona persona) {
-        this.persona = persona;
+    public FamiliarPersonaje nombres(String nombres) {
+        this.nombres = nombres;
         return this;
     }
 
-    public void setPersona(Persona persona) {
-        this.persona = persona;
+    public void setNombres(String nombres) {
+        this.nombres = nombres;
+    }
+
+    public String getApellidos() {
+        return apellidos;
+    }
+
+    public FamiliarPersonaje apellidos(String apellidos) {
+        this.apellidos = apellidos;
+        return this;
+    }
+
+    public void setApellidos(String apellidos) {
+        this.apellidos = apellidos;
     }
 
     public RelacionFamiliar getRelacionFamiliar() {
@@ -108,6 +127,8 @@ public class FamiliarPersonaje implements Serializable {
     public String toString() {
         return "FamiliarPersonaje{" +
             "id=" + getId() +
+            ", nombres='" + getNombres() + "'" +
+            ", apellidos='" + getApellidos() + "'" +
             "}";
     }
 }

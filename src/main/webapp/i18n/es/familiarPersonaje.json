@@ -3,22 +3,23 @@
     "prosopografiaApp": {
         "familiarPersonaje" : {
             "home": {
-                "title": "Familiar Personajes",
-                "createLabel": "Crear nuevo Familiar Personaje",
-                "createOrEditLabel": "Crear o editar Familiar Personaje",
-                "search": "Search for Familiar Personaje"
+                "title": "Familiares del personaje",
+                "createLabel": "Crear nuevo familiar del personaje",
+                "createOrEditLabel": "Crear o editar familiar del personaje",
+                "search": "Buscar familiar del personaje"
             },
-            "created": "Un nuevo Familiar Personaje ha sido creado con el identificador {{ param }}",
-            "updated": "Un Familiar Personaje ha sido actualizado con el identificador {{ param }}",
-            "deleted": "Un Familiar Personaje ha sido eliminado con el identificador {{ param }}",
+            "created": "Un nuevo familiar del personaje ha sido creado con el identificador {{ param }}",
+            "updated": "Un familiar del personaje ha sido actualizado con el identificador {{ param }}",
+            "deleted": "Un familiar del personaje ha sido eliminado con el identificador {{ param }}",
             "delete": {
-                "question": "¿Seguro que quiere eliminar Familiar Personaje {{ id }}?"
+                "question": "¿Seguro que quiere eliminar familiar del personaje {{ id }} - {{ nombres }} {{ apellidos }}?"
             },
             "detail": {
-                "title": "Familiar Personaje"
+                "title": "Familiar del personaje"
             },
-            "persona": "Persona",
-            "relacionFamiliar": "Relacion Familiar",
+            "nombres": "Nombres",
+            "apellidos": "Apellidos",
+            "relacionFamiliar": "Relación familiar",
             "personaje": "Personaje"
         }
     }

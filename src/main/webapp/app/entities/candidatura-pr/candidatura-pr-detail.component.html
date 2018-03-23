@@ -16,6 +16,10 @@
         <dd>
             <span>{{candidatura.observaciones}}</span>
         </dd>
+        <dt><span jhiTranslate="prosopografiaApp.candidatura.anio">Anio</span></dt>
+        <dd>
+            <span>{{candidatura.anio}}</span>
+        </dd>
         <dt><span jhiTranslate="prosopografiaApp.candidatura.eleccion">Eleccion</span></dt>
         <dd>
             <div *ngIf="candidatura.eleccion">
@@ -26,6 +30,18 @@
         <dd>
             <div *ngIf="candidatura.seccion">
                 <a [routerLink]="['/seccion-pr', candidatura.seccion?.id]">{{candidatura.seccion?.nombre}}</a>
+            </div>
+        </dd>
+        <dt><span jhiTranslate="prosopografiaApp.candidatura.personaje">Personaje</span></dt>
+        <dd>
+            <div *ngIf="candidatura.personaje">
+                <a [routerLink]="['/personaje-pr', candidatura.personaje?.id]">{{candidatura.personaje?.nombres}}</a>
+            </div>
+        </dd>
+        <dt><span jhiTranslate="prosopografiaApp.candidatura.partido">Partido</span></dt>
+        <dd>
+            <div *ngIf="candidatura.partido">
+                <a [routerLink]="['/partido-pr', candidatura.partido?.id]">{{candidatura.partido?.id}}</a>
             </div>
         </dd>
     </dl>

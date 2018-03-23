@@ -68,7 +68,7 @@ class ParejaPersonajeGatlingTest extends Simulation {
             .exec(http("Create new parejaPersonaje")
             .post("/api/pareja-personajes")
             .headers(headers_http_authenticated)
-            .body(StringBody("""{"id":null, "fechaDesde":"2020-01-01T00:00:00.000Z", "fechaHasta":"2020-01-01T00:00:00.000Z"}""")).asJSON
+            .body(StringBody("""{"id":null, "nombres":"SAMPLE_TEXT", "apellidos":"SAMPLE_TEXT", "fechaDesde":"2020-01-01T00:00:00.000Z", "fechaHasta":"2020-01-01T00:00:00.000Z"}""")).asJSON
             .check(status.is(201))
             .check(headerRegex("Location", "(.*)").saveAs("new_parejaPersonaje_url"))).exitHereIfFailed
             .pause(10)

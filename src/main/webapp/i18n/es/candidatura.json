@@ -20,9 +20,16 @@
             "esSuplente": "¿Es suplente?",
             "resultoElecto": "¿Resulto electo?",
             "observaciones": "Observaciones",
+            "anio": "Año",
             "detCandidaturas": "Det Candidaturas",
             "eleccion": "Elección",
-            "seccion": "Sección"
+            "seccion": "Sección",
+            "personaje": {
+                "label": "Personaje",
+                "nombres": "Nombres personaje",
+                "apellidos": "Apellidos personaje"
+            },
+            "partido":"Partido"
         }
     }
 }

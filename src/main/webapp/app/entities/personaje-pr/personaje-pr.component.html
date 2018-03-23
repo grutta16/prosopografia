@@ -29,43 +29,41 @@
         <table class="table table-striped">
             <thead>
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
-            <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <span class="fa fa-sort"></span></th>
+            <!--<th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <span class="fa fa-sort"></span></th>-->
+            <th jhiSortBy="nombres"><span jhiTranslate="prosopografiaApp.personaje.nombres">Nombres</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="apellidos"><span jhiTranslate="prosopografiaApp.personaje.apellidos">Apellidos</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="fechaNacimiento"><span jhiTranslate="prosopografiaApp.personaje.fechaNacimiento">Fecha Nacimiento</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="fechaDefuncion"><span jhiTranslate="prosopografiaApp.personaje.fechaDefuncion">Fecha Defuncion</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="nombresAlternativos"><span jhiTranslate="prosopografiaApp.personaje.nombresAlternativos">Nombres Alternativos</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="apellidosAlternativos"><span jhiTranslate="prosopografiaApp.personaje.apellidosAlternativos">Apellidos Alternativos</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="sexo"><span jhiTranslate="prosopografiaApp.personaje.sexo">Sexo</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="observaciones"><span jhiTranslate="prosopografiaApp.personaje.observaciones">Observaciones</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="persona.id"><span jhiTranslate="prosopografiaApp.personaje.persona">Persona</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="lugarNacimiento.nombre"><span jhiTranslate="prosopografiaApp.personaje.lugarNacimiento">Lugar Nacimiento</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="lugarDefuncion.nombre"><span jhiTranslate="prosopografiaApp.personaje.lugarDefuncion">Lugar Defuncion</span> <span class="fa fa-sort"></span></th>
+            <!--<th jhiSortBy="sexo"><span jhiTranslate="prosopografiaApp.personaje.sexo">Sexo</span> <span class="fa fa-sort"></span></th>-->
+            <!--<th jhiSortBy="observaciones"><span jhiTranslate="prosopografiaApp.personaje.observaciones">Observaciones</span> <span class="fa fa-sort"></span></th>-->
+            <!--<th jhiSortBy="lugarNacimiento.nombre"><span jhiTranslate="prosopografiaApp.personaje.lugarNacimiento">Lugar Nacimiento</span> <span class="fa fa-sort"></span></th>-->
+            <!--<th jhiSortBy="lugarDefuncion.nombre"><span jhiTranslate="prosopografiaApp.personaje.lugarDefuncion">Lugar Defuncion</span> <span class="fa fa-sort"></span></th>-->
             <th></th>
             </tr>
             </thead>
             <tbody>
             <tr *ngFor="let personaje of personajes ;trackBy: trackId">
-                <td><a [routerLink]="['../personaje-pr', personaje.id ]">{{personaje.id}}</a></td>
+                <!--<td><a [routerLink]="['../personaje-pr', personaje.id ]">{{personaje.id}}</a></td>-->
+                <td>{{personaje.nombres}}</td>
+                <td>{{personaje.apellidos}}</td>
                 <td>{{personaje.fechaNacimiento | date:'mediumDate'}}</td>
                 <td>{{personaje.fechaDefuncion | date:'mediumDate'}}</td>
                 <td>{{personaje.nombresAlternativos}}</td>
                 <td>{{personaje.apellidosAlternativos}}</td>
-                <td>{{personaje.sexo}}</td>
-                <td>{{personaje.observaciones}}</td>
-                <td>
-                    <div *ngIf="personaje.persona">
-                        <a [routerLink]="['../persona-pr', personaje.persona?.id ]" >{{personaje.persona?.id}}</a>
-                    </div>
-                </td>
-                <td>
-                    <div *ngIf="personaje.lugarNacimiento">
-                        <a [routerLink]="['../lugar-pr', personaje.lugarNacimiento?.id ]" >{{personaje.lugarNacimiento?.nombre}}</a>
-                    </div>
-                </td>
-                <td>
-                    <div *ngIf="personaje.lugarDefuncion">
-                        <a [routerLink]="['../lugar-pr', personaje.lugarDefuncion?.id ]" >{{personaje.lugarDefuncion?.nombre}}</a>
-                    </div>
-                </td>
+                <!--<td>{{personaje.sexo}}</td>-->
+                <!--<td>{{personaje.observaciones}}</td>-->
+                <!--<td>-->
+                    <!--<div *ngIf="personaje.lugarNacimiento">-->
+                        <!--<a [routerLink]="['../lugar-pr', personaje.lugarNacimiento?.id ]" >{{personaje.lugarNacimiento?.nombre}}</a>-->
+                    <!--</div>-->
+                <!--</td>-->
+                <!--<td>-->
+                    <!--<div *ngIf="personaje.lugarDefuncion">-->
+                        <!--<a [routerLink]="['../lugar-pr', personaje.lugarDefuncion?.id ]" >{{personaje.lugarDefuncion?.nombre}}</a>-->
+                    <!--</div>-->
+                <!--</td>-->
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"

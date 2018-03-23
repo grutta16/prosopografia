@@ -9,7 +9,6 @@ import { JhiEventManager, JhiAlertService } from 'ng-jhipster';
 import { FamiliarPersonajePr } from './familiar-personaje-pr.model';
 import { FamiliarPersonajePrPopupService } from './familiar-personaje-pr-popup.service';
 import { FamiliarPersonajePrService } from './familiar-personaje-pr.service';
-import { PersonaPr, PersonaPrService } from '../persona-pr';
 import { RelacionFamiliarPr, RelacionFamiliarPrService } from '../relacion-familiar-pr';
 import { PersonajePr, PersonajePrService } from '../personaje-pr';
 
@@ -22,8 +21,6 @@ export class FamiliarPersonajePrDialogComponent implements OnInit {
     familiarPersonaje: FamiliarPersonajePr;
     isSaving: boolean;
 
-    personas: PersonaPr[];
-
     relacionfamiliars: RelacionFamiliarPr[];
 
     personajes: PersonajePr[];
@@ -32,7 +29,6 @@ export class FamiliarPersonajePrDialogComponent implements OnInit {
         public activeModal: NgbActiveModal,
         private jhiAlertService: JhiAlertService,
         private familiarPersonajeService: FamiliarPersonajePrService,
-        private personaService: PersonaPrService,
         private relacionFamiliarService: RelacionFamiliarPrService,
         private personajeService: PersonajePrService,
         private eventManager: JhiEventManager
@@ -41,8 +37,6 @@ export class FamiliarPersonajePrDialogComponent implements OnInit {
 
     ngOnInit() {
         this.isSaving = false;
-        this.personaService.query()
-            .subscribe((res: HttpResponse<PersonaPr[]>) => { this.personas = res.body; }, (res: HttpErrorResponse) => this.onError(res.message));
         this.relacionFamiliarService.query()
             .subscribe((res: HttpResponse<RelacionFamiliarPr[]>) => { this.relacionfamiliars = res.body; }, (res: HttpErrorResponse) => this.onError(res.message));
         this.personajeService.query()
@@ -81,10 +75,6 @@ export class FamiliarPersonajePrDialogComponent implements OnInit {
 
     private onError(error: any) {
         this.jhiAlertService.error(error.message, null, null);
-    }
-
-    trackPersonaById(index: number, item: PersonaPr) {
-        return item.id;
     }
 
     trackRelacionFamiliarById(index: number, item: RelacionFamiliarPr) {

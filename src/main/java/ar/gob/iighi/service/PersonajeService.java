@@ -3,6 +3,7 @@ package ar.gob.iighi.service;
 import ar.gob.iighi.domain.Personaje;
 import ar.gob.iighi.repository.PersonajeRepository;
 import ar.gob.iighi.repository.search.PersonajeSearchRepository;
+import org.hibernate.validator.constraints.Range;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -10,6 +11,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+
+import java.util.List;
 
 import static org.elasticsearch.index.query.QueryBuilders.*;
 
@@ -54,6 +57,17 @@ public class PersonajeService {
     public Page<Personaje> findAll(Pageable pageable) {
         log.debug("Request to get all Personajes");
         return personajeRepository.findAll(pageable);
+    }
+
+    /**
+     * Get all the personajes.
+     *
+     * @return the list of all entities
+     */
+    @Transactional(readOnly = true)
+    public List<Personaje> findAll() {
+        log.debug("Request to get all Personajes");
+        return personajeRepository.findAll();
     }
 
     /**

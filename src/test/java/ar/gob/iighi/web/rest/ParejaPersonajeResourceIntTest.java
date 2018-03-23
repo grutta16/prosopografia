@@ -3,7 +3,6 @@ package ar.gob.iighi.web.rest;
 import ar.gob.iighi.ProsopografiaApp;
 
 import ar.gob.iighi.domain.ParejaPersonaje;
-import ar.gob.iighi.domain.Persona;
 import ar.gob.iighi.domain.Personaje;
 import ar.gob.iighi.repository.ParejaPersonajeRepository;
 import ar.gob.iighi.service.ParejaPersonajeService;
@@ -43,6 +42,12 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = ProsopografiaApp.class)
 public class ParejaPersonajeResourceIntTest {
+
+    private static final String DEFAULT_NOMBRES = "AAAAAAAAAA";
+    private static final String UPDATED_NOMBRES = "BBBBBBBBBB";
+
+    private static final String DEFAULT_APELLIDOS = "AAAAAAAAAA";
+    private static final String UPDATED_APELLIDOS = "BBBBBBBBBB";
 
     private static final LocalDate DEFAULT_FECHA_DESDE = LocalDate.ofEpochDay(0L);
     private static final LocalDate UPDATED_FECHA_DESDE = LocalDate.now(ZoneId.systemDefault());
@@ -94,13 +99,10 @@ public class ParejaPersonajeResourceIntTest {
      */
     public static ParejaPersonaje createEntity(EntityManager em) {
         ParejaPersonaje parejaPersonaje = new ParejaPersonaje()
+            .nombres(DEFAULT_NOMBRES)
+            .apellidos(DEFAULT_APELLIDOS)
             .fechaDesde(DEFAULT_FECHA_DESDE)
             .fechaHasta(DEFAULT_FECHA_HASTA);
-        // Add required entity
-        Persona persona = PersonaResourceIntTest.createEntity(em);
-        em.persist(persona);
-        em.flush();
-        parejaPersonaje.setPersona(persona);
         // Add required entity
         Personaje personaje = PersonajeResourceIntTest.createEntity(em);
         em.persist(personaje);
@@ -130,6 +132,8 @@ public class ParejaPersonajeResourceIntTest {
         List<ParejaPersonaje> parejaPersonajeList = parejaPersonajeRepository.findAll();
         assertThat(parejaPersonajeList).hasSize(databaseSizeBeforeCreate + 1);
         ParejaPersonaje testParejaPersonaje = parejaPersonajeList.get(parejaPersonajeList.size() - 1);
+        assertThat(testParejaPersonaje.getNombres()).isEqualTo(DEFAULT_NOMBRES);
+        assertThat(testParejaPersonaje.getApellidos()).isEqualTo(DEFAULT_APELLIDOS);
         assertThat(testParejaPersonaje.getFechaDesde()).isEqualTo(DEFAULT_FECHA_DESDE);
         assertThat(testParejaPersonaje.getFechaHasta()).isEqualTo(DEFAULT_FECHA_HASTA);
 
@@ -159,6 +163,42 @@ public class ParejaPersonajeResourceIntTest {
 
     @Test
     @Transactional
+    public void checkNombresIsRequired() throws Exception {
+        int databaseSizeBeforeTest = parejaPersonajeRepository.findAll().size();
+        // set the field null
+        parejaPersonaje.setNombres(null);
+
+        // Create the ParejaPersonaje, which fails.
+
+        restParejaPersonajeMockMvc.perform(post("/api/pareja-personajes")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(parejaPersonaje)))
+            .andExpect(status().isBadRequest());
+
+        List<ParejaPersonaje> parejaPersonajeList = parejaPersonajeRepository.findAll();
+        assertThat(parejaPersonajeList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
+    public void checkApellidosIsRequired() throws Exception {
+        int databaseSizeBeforeTest = parejaPersonajeRepository.findAll().size();
+        // set the field null
+        parejaPersonaje.setApellidos(null);
+
+        // Create the ParejaPersonaje, which fails.
+
+        restParejaPersonajeMockMvc.perform(post("/api/pareja-personajes")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(parejaPersonaje)))
+            .andExpect(status().isBadRequest());
+
+        List<ParejaPersonaje> parejaPersonajeList = parejaPersonajeRepository.findAll();
+        assertThat(parejaPersonajeList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
     public void getAllParejaPersonajes() throws Exception {
         // Initialize the database
         parejaPersonajeRepository.saveAndFlush(parejaPersonaje);
@@ -168,6 +208,8 @@ public class ParejaPersonajeResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(parejaPersonaje.getId().intValue())))
+            .andExpect(jsonPath("$.[*].nombres").value(hasItem(DEFAULT_NOMBRES.toString())))
+            .andExpect(jsonPath("$.[*].apellidos").value(hasItem(DEFAULT_APELLIDOS.toString())))
             .andExpect(jsonPath("$.[*].fechaDesde").value(hasItem(DEFAULT_FECHA_DESDE.toString())))
             .andExpect(jsonPath("$.[*].fechaHasta").value(hasItem(DEFAULT_FECHA_HASTA.toString())));
     }
@@ -183,6 +225,8 @@ public class ParejaPersonajeResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(parejaPersonaje.getId().intValue()))
+            .andExpect(jsonPath("$.nombres").value(DEFAULT_NOMBRES.toString()))
+            .andExpect(jsonPath("$.apellidos").value(DEFAULT_APELLIDOS.toString()))
             .andExpect(jsonPath("$.fechaDesde").value(DEFAULT_FECHA_DESDE.toString()))
             .andExpect(jsonPath("$.fechaHasta").value(DEFAULT_FECHA_HASTA.toString()));
     }
@@ -208,6 +252,8 @@ public class ParejaPersonajeResourceIntTest {
         // Disconnect from session so that the updates on updatedParejaPersonaje are not directly saved in db
         em.detach(updatedParejaPersonaje);
         updatedParejaPersonaje
+            .nombres(UPDATED_NOMBRES)
+            .apellidos(UPDATED_APELLIDOS)
             .fechaDesde(UPDATED_FECHA_DESDE)
             .fechaHasta(UPDATED_FECHA_HASTA);
 
@@ -220,6 +266,8 @@ public class ParejaPersonajeResourceIntTest {
         List<ParejaPersonaje> parejaPersonajeList = parejaPersonajeRepository.findAll();
         assertThat(parejaPersonajeList).hasSize(databaseSizeBeforeUpdate);
         ParejaPersonaje testParejaPersonaje = parejaPersonajeList.get(parejaPersonajeList.size() - 1);
+        assertThat(testParejaPersonaje.getNombres()).isEqualTo(UPDATED_NOMBRES);
+        assertThat(testParejaPersonaje.getApellidos()).isEqualTo(UPDATED_APELLIDOS);
         assertThat(testParejaPersonaje.getFechaDesde()).isEqualTo(UPDATED_FECHA_DESDE);
         assertThat(testParejaPersonaje.getFechaHasta()).isEqualTo(UPDATED_FECHA_HASTA);
 
@@ -279,6 +327,8 @@ public class ParejaPersonajeResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(parejaPersonaje.getId().intValue())))
+            .andExpect(jsonPath("$.[*].nombres").value(hasItem(DEFAULT_NOMBRES.toString())))
+            .andExpect(jsonPath("$.[*].apellidos").value(hasItem(DEFAULT_APELLIDOS.toString())))
             .andExpect(jsonPath("$.[*].fechaDesde").value(hasItem(DEFAULT_FECHA_DESDE.toString())))
             .andExpect(jsonPath("$.[*].fechaHasta").value(hasItem(DEFAULT_FECHA_HASTA.toString())));
     }

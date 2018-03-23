@@ -33,11 +33,23 @@
                 <constraints nullable="true" />
             </column>
 
+            <column name="anio" type="varchar(4)">
+                <constraints nullable="true" />
+            </column>
+
             <column name="eleccion_id" type="bigint">
                 <constraints nullable="false" />
             </column>
 
             <column name="seccion_id" type="bigint">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="personaje_id" type="bigint">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="partido_id" type="bigint">
                 <constraints nullable="false" />
             </column>
 

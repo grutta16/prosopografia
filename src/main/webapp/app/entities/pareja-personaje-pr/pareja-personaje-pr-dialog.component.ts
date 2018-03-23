@@ -9,7 +9,6 @@ import { JhiEventManager, JhiAlertService } from 'ng-jhipster';
 import { ParejaPersonajePr } from './pareja-personaje-pr.model';
 import { ParejaPersonajePrPopupService } from './pareja-personaje-pr-popup.service';
 import { ParejaPersonajePrService } from './pareja-personaje-pr.service';
-import { PersonaPr, PersonaPrService } from '../persona-pr';
 import { PersonajePr, PersonajePrService } from '../personaje-pr';
 
 @Component({
@@ -21,8 +20,6 @@ export class ParejaPersonajePrDialogComponent implements OnInit {
     parejaPersonaje: ParejaPersonajePr;
     isSaving: boolean;
 
-    personas: PersonaPr[];
-
     personajes: PersonajePr[];
     fechaDesdeDp: any;
     fechaHastaDp: any;
@@ -31,7 +28,6 @@ export class ParejaPersonajePrDialogComponent implements OnInit {
         public activeModal: NgbActiveModal,
         private jhiAlertService: JhiAlertService,
         private parejaPersonajeService: ParejaPersonajePrService,
-        private personaService: PersonaPrService,
         private personajeService: PersonajePrService,
         private eventManager: JhiEventManager
     ) {
@@ -39,8 +35,6 @@ export class ParejaPersonajePrDialogComponent implements OnInit {
 
     ngOnInit() {
         this.isSaving = false;
-        this.personaService.query()
-            .subscribe((res: HttpResponse<PersonaPr[]>) => { this.personas = res.body; }, (res: HttpErrorResponse) => this.onError(res.message));
         this.personajeService.query()
             .subscribe((res: HttpResponse<PersonajePr[]>) => { this.personajes = res.body; }, (res: HttpErrorResponse) => this.onError(res.message));
     }
@@ -77,10 +71,6 @@ export class ParejaPersonajePrDialogComponent implements OnInit {
 
     private onError(error: any) {
         this.jhiAlertService.error(error.message, null, null);
-    }
-
-    trackPersonaById(index: number, item: PersonaPr) {
-        return item.id;
     }
 
     trackPersonajeById(index: number, item: PersonajePr) {

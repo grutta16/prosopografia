@@ -21,7 +21,11 @@
             <column name="id" type="bigint" autoIncrement="${autoIncrement}">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="persona_id" type="bigint">
+            <column name="nombres" type="varchar(100)">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="apellidos" type="varchar(100)">
                 <constraints nullable="false" />
             </column>
 

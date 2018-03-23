@@ -68,7 +68,7 @@ class CandidaturaGatlingTest extends Simulation {
             .exec(http("Create new candidatura")
             .post("/api/candidaturas")
             .headers(headers_http_authenticated)
-            .body(StringBody("""{"id":null, "esSuplente":null, "resultoElecto":null, "observaciones":"SAMPLE_TEXT"}""")).asJSON
+            .body(StringBody("""{"id":null, "esSuplente":null, "resultoElecto":null, "observaciones":"SAMPLE_TEXT", "anio":"SAMPLE_TEXT"}""")).asJSON
             .check(status.is(201))
             .check(headerRegex("Location", "(.*)").saveAs("new_candidatura_url"))).exitHereIfFailed
             .pause(10)

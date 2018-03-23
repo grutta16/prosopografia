@@ -53,8 +53,12 @@ describe('Candidatura e2e test', () => {
         });
         candidaturaDialogPage.setObservacionesInput('observaciones');
         expect(candidaturaDialogPage.getObservacionesInput()).toMatch('observaciones');
+        candidaturaDialogPage.setAnioInput('anio');
+        expect(candidaturaDialogPage.getAnioInput()).toMatch('anio');
         candidaturaDialogPage.eleccionSelectLastOption();
         candidaturaDialogPage.seccionSelectLastOption();
+        candidaturaDialogPage.personajeSelectLastOption();
+        candidaturaDialogPage.partidoSelectLastOption();
         candidaturaDialogPage.save();
         expect(candidaturaDialogPage.getSaveButton().isPresent()).toBeFalsy();
     });*/
@@ -84,8 +88,11 @@ export class CandidaturaDialogPage {
     esSuplenteInput = element(by.css('input#field_esSuplente'));
     resultoElectoInput = element(by.css('input#field_resultoElecto'));
     observacionesInput = element(by.css('input#field_observaciones'));
+    anioInput = element(by.css('input#field_anio'));
     eleccionSelect = element(by.css('select#field_eleccion'));
     seccionSelect = element(by.css('select#field_seccion'));
+    personajeSelect = element(by.css('select#field_personaje'));
+    partidoSelect = element(by.css('select#field_partido'));
 
     getModalTitle() {
         return this.modalTitle.getAttribute('jhiTranslate');
@@ -103,6 +110,14 @@ export class CandidaturaDialogPage {
 
     getObservacionesInput = function() {
         return this.observacionesInput.getAttribute('value');
+    };
+
+    setAnioInput = function(anio) {
+        this.anioInput.sendKeys(anio);
+    };
+
+    getAnioInput = function() {
+        return this.anioInput.getAttribute('value');
     };
 
     eleccionSelectLastOption = function() {
@@ -135,6 +150,38 @@ export class CandidaturaDialogPage {
 
     getSeccionSelectedOption = function() {
         return this.seccionSelect.element(by.css('option:checked')).getText();
+    };
+
+    personajeSelectLastOption = function() {
+        this.personajeSelect.all(by.tagName('option')).last().click();
+    };
+
+    personajeSelectOption = function(option) {
+        this.personajeSelect.sendKeys(option);
+    };
+
+    getPersonajeSelect = function() {
+        return this.personajeSelect;
+    };
+
+    getPersonajeSelectedOption = function() {
+        return this.personajeSelect.element(by.css('option:checked')).getText();
+    };
+
+    partidoSelectLastOption = function() {
+        this.partidoSelect.all(by.tagName('option')).last().click();
+    };
+
+    partidoSelectOption = function(option) {
+        this.partidoSelect.sendKeys(option);
+    };
+
+    getPartidoSelect = function() {
+        return this.partidoSelect;
+    };
+
+    getPartidoSelectedOption = function() {
+        return this.partidoSelect.element(by.css('option:checked')).getText();
     };
 
     save() {

@@ -3,7 +3,6 @@ package ar.gob.iighi.web.rest;
 import ar.gob.iighi.ProsopografiaApp;
 
 import ar.gob.iighi.domain.FamiliarPersonaje;
-import ar.gob.iighi.domain.Persona;
 import ar.gob.iighi.domain.RelacionFamiliar;
 import ar.gob.iighi.domain.Personaje;
 import ar.gob.iighi.repository.FamiliarPersonajeRepository;
@@ -42,6 +41,12 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = ProsopografiaApp.class)
 public class FamiliarPersonajeResourceIntTest {
+
+    private static final String DEFAULT_NOMBRES = "AAAAAAAAAA";
+    private static final String UPDATED_NOMBRES = "BBBBBBBBBB";
+
+    private static final String DEFAULT_APELLIDOS = "AAAAAAAAAA";
+    private static final String UPDATED_APELLIDOS = "BBBBBBBBBB";
 
     @Autowired
     private FamiliarPersonajeRepository familiarPersonajeRepository;
@@ -86,12 +91,9 @@ public class FamiliarPersonajeResourceIntTest {
      * if they test an entity which requires the current entity.
      */
     public static FamiliarPersonaje createEntity(EntityManager em) {
-        FamiliarPersonaje familiarPersonaje = new FamiliarPersonaje();
-        // Add required entity
-        Persona persona = PersonaResourceIntTest.createEntity(em);
-        em.persist(persona);
-        em.flush();
-        familiarPersonaje.setPersona(persona);
+        FamiliarPersonaje familiarPersonaje = new FamiliarPersonaje()
+            .nombres(DEFAULT_NOMBRES)
+            .apellidos(DEFAULT_APELLIDOS);
         // Add required entity
         RelacionFamiliar relacionFamiliar = RelacionFamiliarResourceIntTest.createEntity(em);
         em.persist(relacionFamiliar);
@@ -126,6 +128,8 @@ public class FamiliarPersonajeResourceIntTest {
         List<FamiliarPersonaje> familiarPersonajeList = familiarPersonajeRepository.findAll();
         assertThat(familiarPersonajeList).hasSize(databaseSizeBeforeCreate + 1);
         FamiliarPersonaje testFamiliarPersonaje = familiarPersonajeList.get(familiarPersonajeList.size() - 1);
+        assertThat(testFamiliarPersonaje.getNombres()).isEqualTo(DEFAULT_NOMBRES);
+        assertThat(testFamiliarPersonaje.getApellidos()).isEqualTo(DEFAULT_APELLIDOS);
 
         // Validate the FamiliarPersonaje in Elasticsearch
         FamiliarPersonaje familiarPersonajeEs = familiarPersonajeSearchRepository.findOne(testFamiliarPersonaje.getId());
@@ -153,6 +157,42 @@ public class FamiliarPersonajeResourceIntTest {
 
     @Test
     @Transactional
+    public void checkNombresIsRequired() throws Exception {
+        int databaseSizeBeforeTest = familiarPersonajeRepository.findAll().size();
+        // set the field null
+        familiarPersonaje.setNombres(null);
+
+        // Create the FamiliarPersonaje, which fails.
+
+        restFamiliarPersonajeMockMvc.perform(post("/api/familiar-personajes")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(familiarPersonaje)))
+            .andExpect(status().isBadRequest());
+
+        List<FamiliarPersonaje> familiarPersonajeList = familiarPersonajeRepository.findAll();
+        assertThat(familiarPersonajeList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
+    public void checkApellidosIsRequired() throws Exception {
+        int databaseSizeBeforeTest = familiarPersonajeRepository.findAll().size();
+        // set the field null
+        familiarPersonaje.setApellidos(null);
+
+        // Create the FamiliarPersonaje, which fails.
+
+        restFamiliarPersonajeMockMvc.perform(post("/api/familiar-personajes")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(familiarPersonaje)))
+            .andExpect(status().isBadRequest());
+
+        List<FamiliarPersonaje> familiarPersonajeList = familiarPersonajeRepository.findAll();
+        assertThat(familiarPersonajeList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
     public void getAllFamiliarPersonajes() throws Exception {
         // Initialize the database
         familiarPersonajeRepository.saveAndFlush(familiarPersonaje);
@@ -161,7 +201,9 @@ public class FamiliarPersonajeResourceIntTest {
         restFamiliarPersonajeMockMvc.perform(get("/api/familiar-personajes?sort=id,desc"))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
-            .andExpect(jsonPath("$.[*].id").value(hasItem(familiarPersonaje.getId().intValue())));
+            .andExpect(jsonPath("$.[*].id").value(hasItem(familiarPersonaje.getId().intValue())))
+            .andExpect(jsonPath("$.[*].nombres").value(hasItem(DEFAULT_NOMBRES.toString())))
+            .andExpect(jsonPath("$.[*].apellidos").value(hasItem(DEFAULT_APELLIDOS.toString())));
     }
 
     @Test
@@ -174,7 +216,9 @@ public class FamiliarPersonajeResourceIntTest {
         restFamiliarPersonajeMockMvc.perform(get("/api/familiar-personajes/{id}", familiarPersonaje.getId()))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
-            .andExpect(jsonPath("$.id").value(familiarPersonaje.getId().intValue()));
+            .andExpect(jsonPath("$.id").value(familiarPersonaje.getId().intValue()))
+            .andExpect(jsonPath("$.nombres").value(DEFAULT_NOMBRES.toString()))
+            .andExpect(jsonPath("$.apellidos").value(DEFAULT_APELLIDOS.toString()));
     }
 
     @Test
@@ -197,6 +241,9 @@ public class FamiliarPersonajeResourceIntTest {
         FamiliarPersonaje updatedFamiliarPersonaje = familiarPersonajeRepository.findOne(familiarPersonaje.getId());
         // Disconnect from session so that the updates on updatedFamiliarPersonaje are not directly saved in db
         em.detach(updatedFamiliarPersonaje);
+        updatedFamiliarPersonaje
+            .nombres(UPDATED_NOMBRES)
+            .apellidos(UPDATED_APELLIDOS);
 
         restFamiliarPersonajeMockMvc.perform(put("/api/familiar-personajes")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -207,6 +254,8 @@ public class FamiliarPersonajeResourceIntTest {
         List<FamiliarPersonaje> familiarPersonajeList = familiarPersonajeRepository.findAll();
         assertThat(familiarPersonajeList).hasSize(databaseSizeBeforeUpdate);
         FamiliarPersonaje testFamiliarPersonaje = familiarPersonajeList.get(familiarPersonajeList.size() - 1);
+        assertThat(testFamiliarPersonaje.getNombres()).isEqualTo(UPDATED_NOMBRES);
+        assertThat(testFamiliarPersonaje.getApellidos()).isEqualTo(UPDATED_APELLIDOS);
 
         // Validate the FamiliarPersonaje in Elasticsearch
         FamiliarPersonaje familiarPersonajeEs = familiarPersonajeSearchRepository.findOne(testFamiliarPersonaje.getId());
@@ -263,7 +312,9 @@ public class FamiliarPersonajeResourceIntTest {
         restFamiliarPersonajeMockMvc.perform(get("/api/_search/familiar-personajes?query=id:" + familiarPersonaje.getId()))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
-            .andExpect(jsonPath("$.[*].id").value(hasItem(familiarPersonaje.getId().intValue())));
+            .andExpect(jsonPath("$.[*].id").value(hasItem(familiarPersonaje.getId().intValue())))
+            .andExpect(jsonPath("$.[*].nombres").value(hasItem(DEFAULT_NOMBRES.toString())))
+            .andExpect(jsonPath("$.[*].apellidos").value(hasItem(DEFAULT_APELLIDOS.toString())));
     }
 
     @Test

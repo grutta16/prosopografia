@@ -31,8 +31,12 @@ describe('Personaje e2e test', () => {
         personajeDialogPage.close();
     });
 
-   /* it('should create and save Personajes', () => {
+    it('should create and save Personajes', () => {
         personajeComponentsPage.clickOnCreateButton();
+        personajeDialogPage.setNombresInput('nombres');
+        expect(personajeDialogPage.getNombresInput()).toMatch('nombres');
+        personajeDialogPage.setApellidosInput('apellidos');
+        expect(personajeDialogPage.getApellidosInput()).toMatch('apellidos');
         personajeDialogPage.setFechaNacimientoInput('2000-12-31');
         expect(personajeDialogPage.getFechaNacimientoInput()).toMatch('2000-12-31');
         personajeDialogPage.setFechaDefuncionInput('2000-12-31');
@@ -52,13 +56,12 @@ describe('Personaje e2e test', () => {
         });
         personajeDialogPage.setObservacionesInput('observaciones');
         expect(personajeDialogPage.getObservacionesInput()).toMatch('observaciones');
-        personajeDialogPage.personaSelectLastOption();
         personajeDialogPage.lugarNacimientoSelectLastOption();
         personajeDialogPage.lugarDefuncionSelectLastOption();
         // personajeDialogPage.profesionesSelectLastOption();
         personajeDialogPage.save();
         expect(personajeDialogPage.getSaveButton().isPresent()).toBeFalsy();
-    });*/
+    });
 
     afterAll(() => {
         navBarPage.autoSignOut();
@@ -82,13 +85,14 @@ export class PersonajeDialogPage {
     modalTitle = element(by.css('h4#myPersonajeLabel'));
     saveButton = element(by.css('.modal-footer .btn.btn-primary'));
     closeButton = element(by.css('button.close'));
+    nombresInput = element(by.css('input#field_nombres'));
+    apellidosInput = element(by.css('input#field_apellidos'));
     fechaNacimientoInput = element(by.css('input#field_fechaNacimiento'));
     fechaDefuncionInput = element(by.css('input#field_fechaDefuncion'));
     nombresAlternativosInput = element(by.css('input#field_nombresAlternativos'));
     apellidosAlternativosInput = element(by.css('input#field_apellidosAlternativos'));
     sexoInput = element(by.css('input#field_sexo'));
     observacionesInput = element(by.css('input#field_observaciones'));
-    personaSelect = element(by.css('select#field_persona'));
     lugarNacimientoSelect = element(by.css('select#field_lugarNacimiento'));
     lugarDefuncionSelect = element(by.css('select#field_lugarDefuncion'));
     profesionesSelect = element(by.css('select#field_profesiones'));
@@ -96,6 +100,22 @@ export class PersonajeDialogPage {
     getModalTitle() {
         return this.modalTitle.getAttribute('jhiTranslate');
     }
+
+    setNombresInput = function(nombres) {
+        this.nombresInput.sendKeys(nombres);
+    };
+
+    getNombresInput = function() {
+        return this.nombresInput.getAttribute('value');
+    };
+
+    setApellidosInput = function(apellidos) {
+        this.apellidosInput.sendKeys(apellidos);
+    };
+
+    getApellidosInput = function() {
+        return this.apellidosInput.getAttribute('value');
+    };
 
     setFechaNacimientoInput = function(fechaNacimiento) {
         this.fechaNacimientoInput.sendKeys(fechaNacimiento);
@@ -138,22 +158,6 @@ export class PersonajeDialogPage {
 
     getObservacionesInput = function() {
         return this.observacionesInput.getAttribute('value');
-    };
-
-    personaSelectLastOption = function() {
-        this.personaSelect.all(by.tagName('option')).last().click();
-    };
-
-    personaSelectOption = function(option) {
-        this.personaSelect.sendKeys(option);
-    };
-
-    getPersonaSelect = function() {
-        return this.personaSelect;
-    };
-
-    getPersonaSelectedOption = function() {
-        return this.personaSelect.element(by.css('option:checked')).getText();
     };
 
     lugarNacimientoSelectLastOption = function() {

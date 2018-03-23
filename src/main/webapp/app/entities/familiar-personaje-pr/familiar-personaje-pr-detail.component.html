@@ -4,11 +4,13 @@
     <hr>
     <jhi-alert-error></jhi-alert-error>
     <dl class="row-md jh-entity-details">
-        <dt><span jhiTranslate="prosopografiaApp.familiarPersonaje.persona">Persona</span></dt>
+        <dt><span jhiTranslate="prosopografiaApp.familiarPersonaje.nombres">Nombres</span></dt>
         <dd>
-            <div *ngIf="familiarPersonaje.persona">
-                <a [routerLink]="['/persona-pr', familiarPersonaje.persona?.id]">{{familiarPersonaje.persona?.id}}</a>
-            </div>
+            <span>{{familiarPersonaje.nombres}}</span>
+        </dd>
+        <dt><span jhiTranslate="prosopografiaApp.familiarPersonaje.apellidos">Apellidos</span></dt>
+        <dd>
+            <span>{{familiarPersonaje.apellidos}}</span>
         </dd>
         <dt><span jhiTranslate="prosopografiaApp.familiarPersonaje.relacionFamiliar">Relacion Familiar</span></dt>
         <dd>

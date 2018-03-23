@@ -3,23 +3,24 @@
     "prosopografiaApp": {
         "parejaPersonaje" : {
             "home": {
-                "title": "Pareja Personajes",
-                "createLabel": "Crear nuevo Pareja Personaje",
-                "createOrEditLabel": "Crear o editar Pareja Personaje",
-                "search": "Search for Pareja Personaje"
+                "title": "Parejas del personaje",
+                "createLabel": "Crear nueva pareja del personaje",
+                "createOrEditLabel": "Crear o editar pareja del personaje",
+                "search": "Buscar pareja del personaje"
             },
-            "created": "Un nuevo Pareja Personaje ha sido creado con el identificador {{ param }}",
-            "updated": "Un Pareja Personaje ha sido actualizado con el identificador {{ param }}",
-            "deleted": "Un Pareja Personaje ha sido eliminado con el identificador {{ param }}",
+            "created": "Una nueva pareja del personaje ha sido creada con el identificador {{ param }}",
+            "updated": "Una pareja del personaje ha sido actualizada con el identificador {{ param }}",
+            "deleted": "Una pareja del personaje ha sido eliminada con el identificador {{ param }}",
             "delete": {
-                "question": "¿Seguro que quiere eliminar Pareja Personaje {{ id }}?"
+                "question": "¿Seguro que quiere eliminar pareja del personaje {{ id }} - {{ nombres }} {{ apellidos }}?"
             },
             "detail": {
-                "title": "Pareja Personaje"
+                "title": "Pareja del personaje"
             },
-            "fechaDesde": "Fecha Desde",
-            "fechaHasta": "Fecha Hasta",
-            "persona": "Persona",
+            "nombres": "Nombres",
+            "apellidos": "Apellidos",
+            "fechaDesde": "Fecha desde",
+            "fechaHasta": "Fecha hasta",
             "personaje": "Personaje"
         }
     }

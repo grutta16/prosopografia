@@ -27,18 +27,28 @@ public class Personaje implements Serializable {
     @SequenceGenerator(name = "sequenceGenerator")
     private Long id;
 
+    @NotNull
+    @Size(max = 100)
+    @Column(name = "nombres", length = 100, nullable = false)
+    private String nombres;
+
+    @NotNull
+    @Size(max = 100)
+    @Column(name = "apellidos", length = 100, nullable = false)
+    private String apellidos;
+
     @Column(name = "fecha_nacimiento")
     private LocalDate fechaNacimiento;
 
     @Column(name = "fecha_defuncion")
     private LocalDate fechaDefuncion;
 
-    @Size(max = 50)
-    @Column(name = "nombres_alternativos", length = 50)
+    @Size(max = 100)
+    @Column(name = "nombres_alternativos", length = 100)
     private String nombresAlternativos;
 
-    @Size(max = 50)
-    @Column(name = "apellidos_alternativos", length = 50)
+    @Size(max = 100)
+    @Column(name = "apellidos_alternativos", length = 100)
     private String apellidosAlternativos;
 
     @Column(name = "sexo")
@@ -47,11 +57,6 @@ public class Personaje implements Serializable {
     @Size(max = 2000)
     @Column(name = "observaciones", length = 2000)
     private String observaciones;
-
-    @OneToOne(optional = false)
-    @NotNull
-    @JoinColumn(unique = true)
-    private Persona persona;
 
     @ManyToOne
     private Lugar lugarNacimiento;
@@ -97,6 +102,10 @@ public class Personaje implements Serializable {
     @JsonIgnore
     private Set<CargoPersonaje> cargos = new HashSet<>();
 
+    @OneToMany(mappedBy = "personaje")
+    @JsonIgnore
+    private Set<Candidatura> candidaturas = new HashSet<>();
+
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
         return id;
@@ -104,6 +113,32 @@ public class Personaje implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getNombres() {
+        return nombres;
+    }
+
+    public Personaje nombres(String nombres) {
+        this.nombres = nombres;
+        return this;
+    }
+
+    public void setNombres(String nombres) {
+        this.nombres = nombres;
+    }
+
+    public String getApellidos() {
+        return apellidos;
+    }
+
+    public Personaje apellidos(String apellidos) {
+        this.apellidos = apellidos;
+        return this;
+    }
+
+    public void setApellidos(String apellidos) {
+        this.apellidos = apellidos;
     }
 
     public LocalDate getFechaNacimiento() {
@@ -182,19 +217,6 @@ public class Personaje implements Serializable {
 
     public void setObservaciones(String observaciones) {
         this.observaciones = observaciones;
-    }
-
-    public Persona getPersona() {
-        return persona;
-    }
-
-    public Personaje persona(Persona persona) {
-        this.persona = persona;
-        return this;
-    }
-
-    public void setPersona(Persona persona) {
-        this.persona = persona;
     }
 
     public Lugar getLugarNacimiento() {
@@ -445,6 +467,31 @@ public class Personaje implements Serializable {
     public void setCargos(Set<CargoPersonaje> cargoPersonajes) {
         this.cargos = cargoPersonajes;
     }
+
+    public Set<Candidatura> getCandidaturas() {
+        return candidaturas;
+    }
+
+    public Personaje candidaturas(Set<Candidatura> candidaturas) {
+        this.candidaturas = candidaturas;
+        return this;
+    }
+
+    public Personaje addCandidaturas(Candidatura candidatura) {
+        this.candidaturas.add(candidatura);
+        candidatura.setPersonaje(this);
+        return this;
+    }
+
+    public Personaje removeCandidaturas(Candidatura candidatura) {
+        this.candidaturas.remove(candidatura);
+        candidatura.setPersonaje(null);
+        return this;
+    }
+
+    public void setCandidaturas(Set<Candidatura> candidaturas) {
+        this.candidaturas = candidaturas;
+    }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
     @Override
@@ -471,6 +518,8 @@ public class Personaje implements Serializable {
     public String toString() {
         return "Personaje{" +
             "id=" + getId() +
+            ", nombres='" + getNombres() + "'" +
+            ", apellidos='" + getApellidos() + "'" +
             ", fechaNacimiento='" + getFechaNacimiento() + "'" +
             ", fechaDefuncion='" + getFechaDefuncion() + "'" +
             ", nombresAlternativos='" + getNombresAlternativos() + "'" +

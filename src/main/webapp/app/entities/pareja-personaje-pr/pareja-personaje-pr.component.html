@@ -30,9 +30,10 @@
             <thead>
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
             <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="nombres"><span jhiTranslate="prosopografiaApp.parejaPersonaje.nombres">Nombres</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="apellidos"><span jhiTranslate="prosopografiaApp.parejaPersonaje.apellidos">Apellidos</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="fechaDesde"><span jhiTranslate="prosopografiaApp.parejaPersonaje.fechaDesde">Fecha Desde</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="fechaHasta"><span jhiTranslate="prosopografiaApp.parejaPersonaje.fechaHasta">Fecha Hasta</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="persona.id"><span jhiTranslate="prosopografiaApp.parejaPersonaje.persona">Persona</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="personaje.id"><span jhiTranslate="prosopografiaApp.parejaPersonaje.personaje">Personaje</span> <span class="fa fa-sort"></span></th>
             <th></th>
             </tr>
@@ -40,13 +41,10 @@
             <tbody>
             <tr *ngFor="let parejaPersonaje of parejaPersonajes ;trackBy: trackId">
                 <td><a [routerLink]="['../pareja-personaje-pr', parejaPersonaje.id ]">{{parejaPersonaje.id}}</a></td>
+                <td>{{parejaPersonaje.nombres}}</td>
+                <td>{{parejaPersonaje.apellidos}}</td>
                 <td>{{parejaPersonaje.fechaDesde | date:'mediumDate'}}</td>
                 <td>{{parejaPersonaje.fechaHasta | date:'mediumDate'}}</td>
-                <td>
-                    <div *ngIf="parejaPersonaje.persona">
-                        <a [routerLink]="['../persona-pr', parejaPersonaje.persona?.id ]" >{{parejaPersonaje.persona?.id}}</a>
-                    </div>
-                </td>
                 <td>
                     <div *ngIf="parejaPersonaje.personaje">
                         <a [routerLink]="['../personaje-pr', parejaPersonaje.personaje?.id ]" >{{parejaPersonaje.personaje?.id}}</a>
