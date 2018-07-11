@@ -57,6 +57,9 @@ public class ProvinciaResource {
         if (provincia.getId() != null) {
             throw new BadRequestAlertException("A new provincia cannot already have an ID", ENTITY_NAME, "idexists");
         }
+        if (provinciaService.existe(provincia)) {
+            throw new BadRequestAlertException("Duplicado: un registro de provincia con esos datos ya existe", ENTITY_NAME, "duplicated");
+        }
         Provincia result = provinciaService.save(provincia);
         return ResponseEntity.created(new URI("/api/provincias/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
@@ -78,6 +81,9 @@ public class ProvinciaResource {
         log.debug("REST request to update Provincia : {}", provincia);
         if (provincia.getId() == null) {
             return createProvincia(provincia);
+        }
+        if (provinciaService.existe(provincia)) {
+            throw new BadRequestAlertException("Duplicado: un registro de provincia con esos datos ya existe", ENTITY_NAME, "duplicated");
         }
         Provincia result = provinciaService.save(provincia);
         return ResponseEntity.ok()
@@ -140,7 +146,8 @@ public class ProvinciaResource {
     @Timed
     public ResponseEntity<List<Provincia>> searchProvincias(@RequestParam String query, Pageable pageable) {
         log.debug("REST request to search for a page of Provincias for query {}", query);
-        Page<Provincia> page = provinciaService.search(query, pageable);
+//        Page<Provincia> page = provinciaService.search(query, pageable);
+        Page<Provincia> page = provinciaService.search(query + "*", pageable);
         HttpHeaders headers = PaginationUtil.generateSearchPaginationHttpHeaders(query, page, "/api/_search/provincias");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }

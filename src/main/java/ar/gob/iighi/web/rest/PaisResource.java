@@ -1,5 +1,6 @@
 package ar.gob.iighi.web.rest;
 
+import ar.gob.iighi.domain.Provincia;
 import com.codahale.metrics.annotation.Timed;
 import ar.gob.iighi.domain.Pais;
 import ar.gob.iighi.service.PaisService;
@@ -11,6 +12,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,6 +22,7 @@ import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.StreamSupport;
@@ -57,6 +60,9 @@ public class PaisResource {
         if (pais.getId() != null) {
             throw new BadRequestAlertException("A new pais cannot already have an ID", ENTITY_NAME, "idexists");
         }
+        if (paisService.existe(pais)) {
+            throw new BadRequestAlertException("Duplicado: un registro de país con esos datos ya existe", ENTITY_NAME, "duplicated");
+        }
         Pais result = paisService.save(pais);
         return ResponseEntity.created(new URI("/api/pais/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
@@ -78,6 +84,9 @@ public class PaisResource {
         log.debug("REST request to update Pais : {}", pais);
         if (pais.getId() == null) {
             return createPais(pais);
+        }
+        if (paisService.existe(pais)) {
+            throw new BadRequestAlertException("Duplicado: un registro de país con esos datos ya existe", ENTITY_NAME, "duplicated");
         }
         Pais result = paisService.save(pais);
         return ResponseEntity.ok()
@@ -140,9 +149,29 @@ public class PaisResource {
     @Timed
     public ResponseEntity<List<Pais>> searchPais(@RequestParam String query, Pageable pageable) {
         log.debug("REST request to search for a page of Pais for query {}", query);
-        Page<Pais> page = paisService.search(query, pageable);
+//        Page<Pais> page = paisService.search(query, pageable);
+        Page<Pais> page = paisService.search(query + "*", pageable);
         HttpHeaders headers = PaginationUtil.generateSearchPaginationHttpHeaders(query, page, "/api/_search/pais");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
+
+    /**
+     * GET  /pais/:id : get the provincias of the "id" pais.
+     *
+     * @param id the id of the provincias of the pais to retrieve
+     * @return the ResponseEntity with status 200 (OK) and with body the pais, or with status 404 (Not Found)
+     */
+    @GetMapping("/pais/provincias/{id}")
+    @Timed
+    public ResponseEntity<List<Provincia>> getProvincias(@PathVariable Long id) {
+        log.debug("REST request to get Provincias of the Pais : {}", id);
+
+        List<Provincia> list = new ArrayList<>();
+        for (Provincia provincia : paisService.findOne(id).getProvincias()){
+            list.add(provincia);
+        }
+
+        return new ResponseEntity<>(list, HttpStatus.OK);
     }
 
 }

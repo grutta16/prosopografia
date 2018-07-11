@@ -92,4 +92,23 @@ public class PartidoService {
         Page<Partido> result = partidoSearchRepository.search(queryStringQuery(query), pageable);
         return result;
     }
+
+    @Transactional(readOnly = true)
+    public boolean existe(Partido partido) {
+        log.debug("Request if exist Partido : {}", partido);
+        for (Partido p : partidoRepository.findAll()) {
+            if (p.equals(partido) && !p.getId().equals(partido.getId())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+//    @Transactional(readOnly = true)
+//    private void esDescriptorUsado(long id) {
+//        Descriptor descriptor = repositorio.findOne(id);
+//        if (!descriptor.getFotografias().isEmpty()) {
+//            throw new EliminarObjetoEnUsoExcepcion("El descriptor <strong>" + descriptor.getNombre() + "</strong> no se puede eliminar porque tiene fotograf�as asociadas");
+//        }
+//    }
 }

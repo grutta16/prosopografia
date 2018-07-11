@@ -92,4 +92,23 @@ public class PaisService {
         Page<Pais> result = paisSearchRepository.search(queryStringQuery(query), pageable);
         return result;
     }
+
+    @Transactional(readOnly = true)
+    public boolean existe(Pais pais) {
+        log.debug("Request if exist Pais : {}", pais);
+        for (Pais p : paisRepository.findAll()) {
+            if (p.equals(pais) && !p.getId().equals(pais.getId())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+//    @Transactional(readOnly = true)
+//    private void esDescriptorUsado(long id) {
+//        Descriptor descriptor = repositorio.findOne(id);
+//        if (!descriptor.getFotografias().isEmpty()) {
+//            throw new EliminarObjetoEnUsoExcepcion("El descriptor <strong>" + descriptor.getNombre() + "</strong> no se puede eliminar porque tiene fotograf�as asociadas");
+//        }
+//    }
 }

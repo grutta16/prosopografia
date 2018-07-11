@@ -18,9 +18,13 @@ public class Lugar implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
+//    @SequenceGenerator(name = "sequenceGenerator")
+//    private Long id;
+
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
-    @SequenceGenerator(name = "sequenceGenerator")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotNull
@@ -77,6 +81,9 @@ public class Lugar implements Serializable {
             return false;
         }
         Lugar lugar = (Lugar) o;
+        if (lugar.getNombre().equalsIgnoreCase(this.getNombre()) && lugar.getProvincia().equals(this.getProvincia())) {
+            return true;
+        }
         if (lugar.getId() == null || getId() == null) {
             return false;
         }

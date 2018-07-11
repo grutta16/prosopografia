@@ -35,6 +35,20 @@
                 "carreraPr": "Carreras",
                 "estudioPersonajePr": "Estudio Personaje",
                 "candidaturaPr": "Candidatura",
+
+                "partido": "partido",
+                "cargo": "cargo",
+                "seccion": "sección",
+
+                "pais": "país",
+                "provincia": "provincia",
+                "lugar": "lugar",
+
+                "tipoProfesion": "tipo de profesión",
+                "profesion": "profesión",
+
+                "carrera": "carrera",
+
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {
@@ -154,7 +168,8 @@
         "Size": "¡El campo {{fieldName}} no cumple con los requisitos de tamaño mínimo/máximo!",
         "userexists": "Login name already used!",
         "emailexists": "Email is already in use!",
-        "idexists": "A new {{entityName}} cannot already have an ID"
+        "idexists": "A new {{entityName}} cannot already have an ID",
+        "duplicated": "Duplicado: un registro de {{entityName}} con esos datos ya existe"
     },
     "footer": "pie de página"
 }

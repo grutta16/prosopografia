@@ -19,11 +19,27 @@
             },
             "nombres": "Nombres",
             "apellidos": "Apellidos",
-            "fechaNacimiento": "Nacimiento",
-            "fechaDefuncion": "Defunción",
-            "nombresAlternativos": "Nombres alt.",
-            "apellidosAlternativos": "Apellidos alt.",
-            "sexo": "Sexo",
+            "fechaNacimiento": {
+                "norm":"Fecha de nacimiento",
+                "abrv":"Nacimiento"
+            },
+            "fechaDefuncion": {
+                "norm":"Fecha de defunción",
+                "abrv":"Defunción"
+            },
+            "nombresAlternativos": {
+                "norm":"Nombres alternativos",
+                "abrv":"Nombres alt."
+            },
+            "apellidosAlternativos": {
+                "norm":"Apellidos alternativos",
+                "abrv":"Apellidos alt."
+            },
+            "sexo": {
+                "label":"Sexo",
+                "masculino":"Masculino",
+                "femenino":"Femenino"
+            },
             "observaciones": "Observaciones",
             "lugarNacimiento": "Lugar de nacimiento",
             "lugarDefuncion": "Lugar de defunción",

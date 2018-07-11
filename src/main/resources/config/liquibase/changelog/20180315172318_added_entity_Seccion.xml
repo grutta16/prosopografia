@@ -18,16 +18,16 @@
     -->
     <changeSet id="20180315172318-1" author="jhipster">
         <createTable tableName="seccion">
-            <column name="id" type="bigint" autoIncrement="${autoIncrement}">
+            <column name="id" type="bigint" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="nombre" type="varchar(50)">
-                <constraints nullable="false" />
+                <constraints nullable="false" unique="true"/>
             </column>
 
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
         </createTable>
-        
+
     </changeSet>
     <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here, do not remove-->
 </databaseChangeLog>

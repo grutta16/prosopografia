@@ -21,9 +21,13 @@ public class Provincia implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
+//    @SequenceGenerator(name = "sequenceGenerator")
+//    private Long id;
+
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
-    @SequenceGenerator(name = "sequenceGenerator")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotNull
@@ -109,6 +113,9 @@ public class Provincia implements Serializable {
             return false;
         }
         Provincia provincia = (Provincia) o;
+        if (provincia.getNombre().equalsIgnoreCase(this.getNombre()) && provincia.getPais().equals(this.getPais())) {
+            return true;
+        }
         if (provincia.getId() == null || getId() == null) {
             return false;
         }

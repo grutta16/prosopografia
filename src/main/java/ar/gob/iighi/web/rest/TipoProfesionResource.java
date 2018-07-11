@@ -57,6 +57,9 @@ public class TipoProfesionResource {
         if (tipoProfesion.getId() != null) {
             throw new BadRequestAlertException("A new tipoProfesion cannot already have an ID", ENTITY_NAME, "idexists");
         }
+        if (tipoProfesionService.existe(tipoProfesion)) {
+            throw new BadRequestAlertException("Duplicado: un registro de tipo de profesión con esos datos ya existe", ENTITY_NAME, "duplicated");
+        }
         TipoProfesion result = tipoProfesionService.save(tipoProfesion);
         return ResponseEntity.created(new URI("/api/tipo-profesions/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
@@ -78,6 +81,9 @@ public class TipoProfesionResource {
         log.debug("REST request to update TipoProfesion : {}", tipoProfesion);
         if (tipoProfesion.getId() == null) {
             return createTipoProfesion(tipoProfesion);
+        }
+        if (tipoProfesionService.existe(tipoProfesion)) {
+            throw new BadRequestAlertException("Duplicado: un registro de tipo de profesión con esos datos ya existe", ENTITY_NAME, "duplicated");
         }
         TipoProfesion result = tipoProfesionService.save(tipoProfesion);
         return ResponseEntity.ok()
@@ -140,7 +146,8 @@ public class TipoProfesionResource {
     @Timed
     public ResponseEntity<List<TipoProfesion>> searchTipoProfesions(@RequestParam String query, Pageable pageable) {
         log.debug("REST request to search for a page of TipoProfesions for query {}", query);
-        Page<TipoProfesion> page = tipoProfesionService.search(query, pageable);
+//        Page<TipoProfesion> page = tipoProfesionService.search(query, pageable);
+        Page<TipoProfesion> page = tipoProfesionService.search(query + "*", pageable);
         HttpHeaders headers = PaginationUtil.generateSearchPaginationHttpHeaders(query, page, "/api/_search/tipo-profesions");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }

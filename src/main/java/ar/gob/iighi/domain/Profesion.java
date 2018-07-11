@@ -18,9 +18,13 @@ public class Profesion implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
+//    @SequenceGenerator(name = "sequenceGenerator")
+//    private Long id;
+
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
-    @SequenceGenerator(name = "sequenceGenerator")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotNull
@@ -77,6 +81,9 @@ public class Profesion implements Serializable {
             return false;
         }
         Profesion profesion = (Profesion) o;
+        if (profesion.getNombre().equalsIgnoreCase(this.getNombre())) {
+            return true;
+        }
         if (profesion.getId() == null || getId() == null) {
             return false;
         }

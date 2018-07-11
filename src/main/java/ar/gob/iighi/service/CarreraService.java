@@ -92,4 +92,23 @@ public class CarreraService {
         Page<Carrera> result = carreraSearchRepository.search(queryStringQuery(query), pageable);
         return result;
     }
+
+    @Transactional(readOnly = true)
+    public boolean existe(Carrera carrera) {
+        log.debug("Request if exist Carrera : {}", carrera);
+        for (Carrera c : carreraRepository.findAll()) {
+            if (c.equals(carrera) && !c.getId().equals(carrera.getId())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+//    @Transactional(readOnly = true)
+//    private void esDescriptorUsado(long id) {
+//        Descriptor descriptor = repositorio.findOne(id);
+//        if (!descriptor.getFotografias().isEmpty()) {
+//            throw new EliminarObjetoEnUsoExcepcion("El descriptor <strong>" + descriptor.getNombre() + "</strong> no se puede eliminar porque tiene fotograf�as asociadas");
+//        }
+//    }
 }

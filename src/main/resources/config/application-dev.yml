@@ -44,6 +44,7 @@ spring:
             hibernate.cache.use_second_level_cache: true
             hibernate.cache.use_query_cache: false
             hibernate.generate_statistics: true
+#            hibernate.hbm2ddl.auto: update
     data:
         elasticsearch:
             cluster-name:
@@ -63,6 +64,11 @@ spring:
         cache-seconds: 1
     thymeleaf:
         cache: false
+
+elasticsearch:
+  properties:
+      http:
+          enabled: true
 
 liquibase:
     contexts: dev

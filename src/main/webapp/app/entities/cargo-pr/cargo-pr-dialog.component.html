@@ -29,12 +29,19 @@
         </div>
         <div class="form-group">
             <label class="form-control-label" jhiTranslate="prosopografiaApp.cargo.ambito" for="field_ambito">Ambito</label>
-            <select class="form-control" name="ambito" [(ngModel)]="cargo.ambito" id="field_ambito" >
+            <select class="form-control" name="ambito" [(ngModel)]="cargo.ambito" id="field_ambito" required>
+                <!--<option *ngIf="!editForm.value.ambito" [ngValue]="null" selected></option>-->
                 <option value="MUNICIPAL">{{'prosopografiaApp.Ambito.MUNICIPAL' | translate}}</option>
                 <option value="PROVINCIAL">{{'prosopografiaApp.Ambito.PROVINCIAL' | translate}}</option>
                 <option value="NACIONAL">{{'prosopografiaApp.Ambito.NACIONAL' | translate}}</option>
                 <option value="INTERNACIONAL">{{'prosopografiaApp.Ambito.INTERNACIONAL' | translate}}</option>
             </select>
+        </div>
+        <div [hidden]="!(editForm.controls.ambito?.dirty && editForm.controls.ambito?.invalid)">
+            <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.ambito?.errors?.required" jhiTranslate="entity.validation.required">
+                This field is required.
+            </small>
         </div>
 
     </div>
@@ -42,6 +49,7 @@
         <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
             <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
         </button>
+        <!--<button type="submit" [disabled]="editForm.form.invalid || isSaving || cargo.ambito === undefined" class="btn btn-primary">-->
         <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
             <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
         </button>

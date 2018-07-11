@@ -57,6 +57,9 @@ public class LugarResource {
         if (lugar.getId() != null) {
             throw new BadRequestAlertException("A new lugar cannot already have an ID", ENTITY_NAME, "idexists");
         }
+        if (lugarService.existe(lugar)) {
+            throw new BadRequestAlertException("Duplicado: un registro de lugar con esos datos ya existe", ENTITY_NAME, "duplicated");
+        }
         Lugar result = lugarService.save(lugar);
         return ResponseEntity.created(new URI("/api/lugars/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
@@ -78,6 +81,9 @@ public class LugarResource {
         log.debug("REST request to update Lugar : {}", lugar);
         if (lugar.getId() == null) {
             return createLugar(lugar);
+        }
+        if (lugarService.existe(lugar)) {
+            throw new BadRequestAlertException("Duplicado: un registro de lugar con esos datos ya existe", ENTITY_NAME, "duplicated");
         }
         Lugar result = lugarService.save(lugar);
         return ResponseEntity.ok()
@@ -140,7 +146,8 @@ public class LugarResource {
     @Timed
     public ResponseEntity<List<Lugar>> searchLugars(@RequestParam String query, Pageable pageable) {
         log.debug("REST request to search for a page of Lugars for query {}", query);
-        Page<Lugar> page = lugarService.search(query, pageable);
+//        Page<Lugar> page = lugarService.search(query, pageable);
+        Page<Lugar> page = lugarService.search(query + "*", pageable);
         HttpHeaders headers = PaginationUtil.generateSearchPaginationHttpHeaders(query, page, "/api/_search/lugars");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }

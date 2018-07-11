@@ -18,20 +18,19 @@
     -->
     <changeSet id="20180315172316-1" author="jhipster">
         <createTable tableName="partido">
-            <column name="id" type="bigint" autoIncrement="${autoIncrement}">
+            <column name="id" type="bigint" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="nombre" type="varchar(50)">
-                <constraints nullable="false" />
+            <column name="nombre" type="varchar(100)">
+                <constraints nullable="false" unique="true" />
             </column>
 
             <column name="abreviacion" type="varchar(20)">
-                <constraints nullable="false" />
+                <constraints nullable="true" />
             </column>
-
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
         </createTable>
-        
+
     </changeSet>
     <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here, do not remove-->
 </databaseChangeLog>

@@ -4,6 +4,7 @@ import { Observable } from 'rxjs/Observable';
 import { SERVER_API_URL } from '../../app.constants';
 
 import { PaisPr } from './pais-pr.model';
+import { ProvinciaPr } from '../provincia-pr/provincia-pr.model';
 import { createRequestOption } from '../../shared';
 
 export type EntityResponseType = HttpResponse<PaisPr>;
@@ -49,6 +50,11 @@ export class PaisPrService {
             .map((res: HttpResponse<PaisPr[]>) => this.convertArrayResponse(res));
     }
 
+    getProvincias(id: number): Observable<HttpResponse<ProvinciaPr[]>> {
+        return this.http.get<ProvinciaPr[]>(`${this.resourceUrl}/provincias/${id}`, {observe: 'response'})
+            .map((res: HttpResponse<ProvinciaPr[]>) => this.convertArrayResponseProvincias(res));
+    }
+
     private convertResponse(res: EntityResponseType): EntityResponseType {
         const body: PaisPr = this.convertItemFromServer(res.body);
         return res.clone({body});
@@ -57,6 +63,15 @@ export class PaisPrService {
     private convertArrayResponse(res: HttpResponse<PaisPr[]>): HttpResponse<PaisPr[]> {
         const jsonResponse: PaisPr[] = res.body;
         const body: PaisPr[] = [];
+        for (let i = 0; i < jsonResponse.length; i++) {
+            body.push(this.convertItemFromServer(jsonResponse[i]));
+        }
+        return res.clone({body});
+    }
+
+    private convertArrayResponseProvincias(res: HttpResponse<ProvinciaPr[]>): HttpResponse<ProvinciaPr[]> {
+        const jsonResponse: ProvinciaPr[] = res.body;
+        const body: ProvinciaPr[] = [];
         for (let i = 0; i < jsonResponse.length; i++) {
             body.push(this.convertItemFromServer(jsonResponse[i]));
         }

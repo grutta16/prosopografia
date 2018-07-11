@@ -9,7 +9,9 @@ import { JhiEventManager, JhiAlertService } from 'ng-jhipster';
 import { LugarPr } from './lugar-pr.model';
 import { LugarPrPopupService } from './lugar-pr-popup.service';
 import { LugarPrService } from './lugar-pr.service';
-import { ProvinciaPr, ProvinciaPrService } from '../provincia-pr';
+// import { ProvinciaPr, ProvinciaPrService } from '../provincia-pr';
+import { ProvinciaPr } from '../provincia-pr';
+import { PaisPr, PaisPrService } from '../pais-pr';
 
 @Component({
     selector: 'jhi-lugar-pr-dialog',
@@ -21,20 +23,24 @@ export class LugarPrDialogComponent implements OnInit {
     isSaving: boolean;
 
     provincias: ProvinciaPr[];
+    paises: PaisPr[];
 
     constructor(
         public activeModal: NgbActiveModal,
         private jhiAlertService: JhiAlertService,
         private lugarService: LugarPrService,
-        private provinciaService: ProvinciaPrService,
+        // private provinciaService: ProvinciaPrService,
+        private paisService: PaisPrService,
         private eventManager: JhiEventManager
     ) {
     }
 
     ngOnInit() {
         this.isSaving = false;
-        this.provinciaService.query()
-            .subscribe((res: HttpResponse<ProvinciaPr[]>) => { this.provincias = res.body; }, (res: HttpErrorResponse) => this.onError(res.message));
+        // this.provinciaService.query()
+        //     .subscribe((res: HttpResponse<ProvinciaPr[]>) => { this.provincias = res.body; }, (res: HttpErrorResponse) => this.onError(res.message));
+        this.paisService.query()
+            .subscribe((res: HttpResponse<PaisPr[]>) => { this.paises = res.body; }, (res: HttpErrorResponse) => this.onError(res.message));
     }
 
     clear() {
@@ -73,6 +79,18 @@ export class LugarPrDialogComponent implements OnInit {
 
     trackProvinciaById(index: number, item: ProvinciaPr) {
         return item.id;
+    }
+
+    trackPaisById(index: number, item: PaisPr) {
+        return item.id;
+    }
+
+    onPaisSelected(pais: any) {
+        if (pais !== null) {
+            this.paisService.getProvincias(pais.id)
+                .subscribe((res: HttpResponse<ProvinciaPr[]>) => { this.provincias = res.body; }, (res: HttpErrorResponse) => this.onError(res.message));
+            // this.provincias = event.provincias;
+        }
     }
 }
 

@@ -92,4 +92,23 @@ public class LugarService {
         Page<Lugar> result = lugarSearchRepository.search(queryStringQuery(query), pageable);
         return result;
     }
+
+    @Transactional(readOnly = true)
+    public boolean existe(Lugar lugar) {
+        log.debug("Request if exist Provincia : {}", lugar);
+        for (Lugar l : lugarRepository.findAll()) {
+            if (l.equals(lugar) && !l.getId().equals(lugar.getId())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+//    @Transactional(readOnly = true)
+//    private void esDescriptorUsado(long id) {
+//        Descriptor descriptor = repositorio.findOne(id);
+//        if (!descriptor.getFotografias().isEmpty()) {
+//            throw new EliminarObjetoEnUsoExcepcion("El descriptor <strong>" + descriptor.getNombre() + "</strong> no se puede eliminar porque tiene fotograf�as asociadas");
+//        }
+//    }
 }

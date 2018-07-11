@@ -57,6 +57,9 @@ public class CarreraResource {
         if (carrera.getId() != null) {
             throw new BadRequestAlertException("A new carrera cannot already have an ID", ENTITY_NAME, "idexists");
         }
+        if (carreraService.existe(carrera)) {
+            throw new BadRequestAlertException("Duplicado: un registro de carrera con esos datos ya existe", ENTITY_NAME, "duplicated");
+        }
         Carrera result = carreraService.save(carrera);
         return ResponseEntity.created(new URI("/api/carreras/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
@@ -78,6 +81,9 @@ public class CarreraResource {
         log.debug("REST request to update Carrera : {}", carrera);
         if (carrera.getId() == null) {
             return createCarrera(carrera);
+        }
+        if (carreraService.existe(carrera)) {
+            throw new BadRequestAlertException("Duplicado: un registro de carrera con esos datos ya existe", ENTITY_NAME, "duplicated");
         }
         Carrera result = carreraService.save(carrera);
         return ResponseEntity.ok()

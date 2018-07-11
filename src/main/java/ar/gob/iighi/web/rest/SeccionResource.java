@@ -57,6 +57,9 @@ public class SeccionResource {
         if (seccion.getId() != null) {
             throw new BadRequestAlertException("A new seccion cannot already have an ID", ENTITY_NAME, "idexists");
         }
+        if (seccionService.existe(seccion)) {
+            throw new BadRequestAlertException("Duplicado: un registro de sección con esos datos ya existe", ENTITY_NAME, "duplicated");
+        }
         Seccion result = seccionService.save(seccion);
         return ResponseEntity.created(new URI("/api/seccions/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
@@ -78,6 +81,9 @@ public class SeccionResource {
         log.debug("REST request to update Seccion : {}", seccion);
         if (seccion.getId() == null) {
             return createSeccion(seccion);
+        }
+        if (seccionService.existe(seccion)) {
+            throw new BadRequestAlertException("Duplicado: un registro de sección con esos datos ya existe", ENTITY_NAME, "duplicated");
         }
         Seccion result = seccionService.save(seccion);
         return ResponseEntity.ok()
@@ -140,7 +146,8 @@ public class SeccionResource {
     @Timed
     public ResponseEntity<List<Seccion>> searchSeccions(@RequestParam String query, Pageable pageable) {
         log.debug("REST request to search for a page of Seccions for query {}", query);
-        Page<Seccion> page = seccionService.search(query, pageable);
+//        Page<Seccion> page = seccionService.search(query, pageable);
+        Page<Seccion> page = seccionService.search(query + "*", pageable);
         HttpHeaders headers = PaginationUtil.generateSearchPaginationHttpHeaders(query, page, "/api/_search/seccions");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }

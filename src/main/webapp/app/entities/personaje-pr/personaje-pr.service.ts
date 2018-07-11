@@ -42,7 +42,7 @@ export class PersonajePrService {
     }
 
     queryAll(): Observable<HttpResponse<PersonajePr[]>> {
-        return this.http.get<PersonajePr[]>(this.resourceUrl+'/all', { observe: 'response' })
+        return this.http.get<PersonajePr[]>(this.resourceUrl + '/all', { observe: 'response' })
             .map((res: HttpResponse<PersonajePr[]>) => this.convertArrayResponse(res));
     }
 

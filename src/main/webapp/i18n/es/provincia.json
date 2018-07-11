@@ -12,7 +12,7 @@
             "updated": "Una provincia ha sido actualizada con el identificador {{ param }}",
             "deleted": "Una provincia ha sido eliminada con el identificador {{ param }}",
             "delete": {
-                "question": "¿Seguro que quiere eliminar la provincia {{ id }} - {{ nombre }}?"
+                "question": "¿Seguro que quiere eliminar la provincia {{ id }} - {{ nombre }} ({{ pais }})?"
             },
             "detail": {
                 "title": "Provincia"

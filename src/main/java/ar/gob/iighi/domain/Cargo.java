@@ -20,9 +20,13 @@ public class Cargo implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
+//    @SequenceGenerator(name = "sequenceGenerator")
+//    private Long id;
+
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
-    @SequenceGenerator(name = "sequenceGenerator")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotNull
@@ -31,7 +35,7 @@ public class Cargo implements Serializable {
     private String nombre;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "ambito")
+    @Column(name = "ambito", nullable = false)
     private Ambito ambito;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
@@ -79,6 +83,9 @@ public class Cargo implements Serializable {
             return false;
         }
         Cargo cargo = (Cargo) o;
+        if (cargo.getNombre().equalsIgnoreCase(this.getNombre()) && cargo.getAmbito().equals(this.getAmbito())) {
+            return true;
+        }
         if (cargo.getId() == null || getId() == null) {
             return false;
         }

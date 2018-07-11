@@ -18,19 +18,22 @@ public class Partido implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
+//    @SequenceGenerator(name = "sequenceGenerator")
+//    private Long id;
+
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
-    @SequenceGenerator(name = "sequenceGenerator")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotNull
-    @Size(max = 50)
-    @Column(name = "nombre", length = 50, nullable = false)
+    @Size(max = 100)
+    @Column(name = "nombre", length = 100, nullable = false, unique = true)
     private String nombre;
 
-    @NotNull
     @Size(max = 20)
-    @Column(name = "abreviacion", length = 20, nullable = false)
+    @Column(name = "abreviacion", length = 20)
     private String abreviacion;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
@@ -78,6 +81,9 @@ public class Partido implements Serializable {
             return false;
         }
         Partido partido = (Partido) o;
+        if (partido.getNombre().equalsIgnoreCase(this.getNombre())) {
+            return true;
+        }
         if (partido.getId() == null || getId() == null) {
             return false;
         }

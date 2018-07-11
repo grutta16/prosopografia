@@ -18,19 +18,23 @@ public class Carrera implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
+//    @SequenceGenerator(name = "sequenceGenerator")
+//    private Long id;
+
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
-    @SequenceGenerator(name = "sequenceGenerator")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotNull
     @Size(max = 50)
-    @Column(name = "nombre", length = 50, nullable = false)
+    @Column(name = "nombre", length = 50, nullable = false, unique = true)
     private String nombre;
 
     @NotNull
     @Size(max = 50)
-    @Column(name = "titulo", length = 50, nullable = false)
+    @Column(name = "titulo", length = 50, nullable = false, unique = true)
     private String titulo;
 
     @NotNull
@@ -95,6 +99,9 @@ public class Carrera implements Serializable {
             return false;
         }
         Carrera carrera = (Carrera) o;
+        if (carrera.getNombre().equalsIgnoreCase(this.getNombre()) || carrera.getTitulo().equalsIgnoreCase(this.getTitulo())) {
+            return true;
+        }
         if (carrera.getId() == null || getId() == null) {
             return false;
         }
