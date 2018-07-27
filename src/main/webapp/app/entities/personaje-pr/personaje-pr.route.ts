@@ -7,6 +7,7 @@ import { PersonajePrComponent } from './personaje-pr.component';
 import { PersonajePrDetailComponent } from './personaje-pr-detail.component';
 import { PersonajePrPopupComponent } from './personaje-pr-dialog.component';
 import { PersonajePrDeletePopupComponent } from './personaje-pr-delete-dialog.component';
+import { DatosPersonalesComponent } from './datos-personales.component';
 
 @Injectable()
 export class PersonajePrResolvePagingParams implements Resolve<any> {
@@ -56,7 +57,14 @@ export const personajePopupRoute: Routes = [
             pageTitle: 'prosopografiaApp.personaje.home.title'
         },
         canActivate: [UserRouteAccessService],
-        outlet: 'popup'
+        outlet: 'popup',
+        children: [
+            {
+                path: '',
+                component: DatosPersonalesComponent,
+                outlet: 'personaje'
+            }
+        ]
     },
     {
         path: 'personaje-pr/:id/edit',

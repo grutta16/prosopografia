@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <!--
+        Added the constraints for entity ResidenciaPersonaje.
+    -->
+    <changeSet id="20180315172330-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="lugar_id"
+                                 baseTableName="residencia_personaje"
+                                 constraintName="fk_residencia_personaje_lugar_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="lugar"/>
+
+        <addForeignKeyConstraint baseColumnNames="personaje_id"
+                                 baseTableName="residencia_personaje"
+                                 constraintName="fk_residencia_personaje_personaje_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="personaje"/>
+
+    </changeSet>
+</databaseChangeLog>

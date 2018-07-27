@@ -30,7 +30,6 @@
         <div class="form-group">
             <label class="form-control-label" jhiTranslate="prosopografiaApp.cargo.ambito" for="field_ambito">Ambito</label>
             <select class="form-control" name="ambito" [(ngModel)]="cargo.ambito" id="field_ambito" required>
-                <!--<option *ngIf="!editForm.value.ambito" [ngValue]="null" selected></option>-->
                 <option value="MUNICIPAL">{{'prosopografiaApp.Ambito.MUNICIPAL' | translate}}</option>
                 <option value="PROVINCIAL">{{'prosopografiaApp.Ambito.PROVINCIAL' | translate}}</option>
                 <option value="NACIONAL">{{'prosopografiaApp.Ambito.NACIONAL' | translate}}</option>
@@ -43,7 +42,6 @@
                 This field is required.
             </small>
         </div>
-
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">

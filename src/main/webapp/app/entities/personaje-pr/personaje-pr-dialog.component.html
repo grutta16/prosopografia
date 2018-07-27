@@ -7,149 +7,35 @@
     </div>
     <div class="modal-body">
         <jhi-alert-error></jhi-alert-error>
+
+        <div class="form-group">
+            <ul class="nav nav-pills nav-fill" id="personajePill" role="tablist">
+                <li class="nav-item">
+                    <a [routerLink]="['/', { outlets: { personaje: 'personaje-pr/datos-personales'} }]" routerLinkActive="active" class="nav-link" id="datos-personales-tab" data-toggle="tab" role="tab" jhiTranslate="prosopografiaApp.personaje.datosPersonales">Datos personales</a>
+                </li>
+                <li class="nav-item">
+                    <a [routerLink]="[{ outlets: { personaje: ['datos-personales'] } }]" routerLinkActive="active" class="nav-link" id="familia-tab" data-toggle="tab" role="tab">Familia</a>
+                </li>
+                <li class="nav-item">
+                    <a [routerLink]="[{ outlets: { personaje: ['datos-personales'] } }]" routerLinkActive="active" class="nav-link" id="estudios-tab" data-toggle="tab" role="tab">Estudios</a>
+                </li>
+                <li class="nav-item">
+                    <a [routerLink]="[{ outlets: { personaje: ['datos-personales'] } }]" routerLinkActive="active" class="nav-link" id="partidos-tab" data-toggle="tab" role="tab">Partidos</a>
+                </li>
+                <li class="nav-item">
+                    <a [routerLink]="[{ outlets: { personaje: ['datos-personales'] } }]" routerLinkActive="active" class="nav-link" id="observaciones-tab" data-toggle="tab" role="tab">Observaciones</a>
+                </li>
+            </ul>
+        </div>
+
         <div class="form-group" [hidden]="!personaje.id">
             <label for="id" jhiTranslate="global.field.id">ID</label>
             <input type="text" class="form-control" id="id" name="id"
                    [(ngModel)]="personaje.id" readonly />
         </div>
 
-        <div class="row">
-            <div class="col-8">
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="prosopografiaApp.personaje.nombres" for="field_nombres">Nombres</label>
-                    <input type="text" class="form-control" name="nombres" id="field_nombres"
-                           [(ngModel)]="personaje.nombres" required maxlength="100"/>
-                    <div [hidden]="!(editForm.controls.nombres?.dirty && editForm.controls.nombres?.invalid)">
-                        <small class="form-text text-danger"
-                               [hidden]="!editForm.controls.nombres?.errors?.required" jhiTranslate="entity.validation.required">
-                            This field is required.
-                        </small>
-                        <small class="form-text text-danger"
-                               [hidden]="!editForm.controls.nombres?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 100 }">
-                            This field cannot be longer than 100 characters.
-                        </small>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="prosopografiaApp.personaje.apellidos" for="field_apellidos">Apellidos</label>
-                    <input type="text" class="form-control" name="apellidos" id="field_apellidos"
-                           [(ngModel)]="personaje.apellidos" required maxlength="100"/>
-                    <div [hidden]="!(editForm.controls.apellidos?.dirty && editForm.controls.apellidos?.invalid)">
-                        <small class="form-text text-danger"
-                               [hidden]="!editForm.controls.apellidos?.errors?.required" jhiTranslate="entity.validation.required">
-                            This field is required.
-                        </small>
-                        <small class="form-text text-danger"
-                               [hidden]="!editForm.controls.apellidos?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 100 }">
-                            This field cannot be longer than 100 characters.
-                        </small>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="prosopografiaApp.personaje.nombresAlternativos.norm" for="field_nombresAlternativos">Nombres Alternativos</label>
-                    <input type="text" class="form-control" name="nombresAlternativos" id="field_nombresAlternativos"
-                           [(ngModel)]="personaje.nombresAlternativos" maxlength="100"/>
-                    <div [hidden]="!(editForm.controls.nombresAlternativos?.dirty && editForm.controls.nombresAlternativos?.invalid)">
-                        <small class="form-text text-danger"
-                               [hidden]="!editForm.controls.nombresAlternativos?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 100 }">
-                            This field cannot be longer than 100 characters.
-                        </small>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="prosopografiaApp.personaje.apellidosAlternativos.norm" for="field_apellidosAlternativos">Apellidos Alternativos</label>
-                    <input type="text" class="form-control" name="apellidosAlternativos" id="field_apellidosAlternativos"
-                           [(ngModel)]="personaje.apellidosAlternativos" maxlength="100"/>
-                    <div [hidden]="!(editForm.controls.apellidosAlternativos?.dirty && editForm.controls.apellidosAlternativos?.invalid)">
-                        <small class="form-text text-danger"
-                               [hidden]="!editForm.controls.apellidosAlternativos?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 100 }">
-                            This field cannot be longer than 100 characters.
-                        </small>
-                    </div>
-                </div>
-            </div>
+        <router-outlet name="personaje"></router-outlet>
 
-            <div class="col-4">
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="prosopografiaApp.personaje.fechaNacimiento.norm" for="field_fechaNacimiento">Fecha Nacimiento</label>
-                    <div class="input-group">
-                        <input id="field_fechaNacimiento" type="text" class="form-control" name="fechaNacimiento" ngbDatepicker  #fechaNacimientoDp="ngbDatepicker" [(ngModel)]="personaje.fechaNacimiento"
-                        />
-                        <span class="input-group-append">
-                    <button type="button" class="btn btn-secondary" (click)="fechaNacimientoDp.toggle()"><i class="fa fa-calendar"></i></button>
-                </span>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="prosopografiaApp.personaje.fechaDefuncion.norm" for="field_fechaDefuncion">Fecha Defuncion</label>
-                    <div class="input-group">
-                        <input id="field_fechaDefuncion" type="text" class="form-control" name="fechaDefuncion" ngbDatepicker  #fechaDefuncionDp="ngbDatepicker" [(ngModel)]="personaje.fechaDefuncion"/>
-                        <span class="input-group-append">
-                            <button type="button" class="btn btn-secondary" (click)="fechaDefuncionDp.toggle()"><i class="fa fa-calendar"></i></button>
-                        </span>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="prosopografiaApp.personaje.sexo.label">Sexo</label><br>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="sexo" id="field_sexo_masculino"[(ngModel)]="personaje.sexo" value="true">
-                        <label class="form-check-label" for="field_sexo_masculino" jhiTranslate="prosopografiaApp.personaje.sexo.masculino">Masculino</label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="sexo" id="field_sexo_femenino" [(ngModel)]="personaje.sexo" value="false">
-                        <label class="form-check-label" for="field_sexo_femenino" jhiTranslate="prosopografiaApp.personaje.sexo.femenino">Femenino</label>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-6">
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="prosopografiaApp.personaje.lugarNacimiento" for="field_lugarNacimiento">Lugar Nacimiento</label>
-                    <select class="form-control" id="field_lugarNacimiento" name="lugarNacimiento" [(ngModel)]="personaje.lugarNacimiento" >
-                        <option [ngValue]="null"></option>
-                        <option [ngValue]="lugarOption.id === personaje.lugarNacimiento?.id ? personaje.lugarNacimiento : lugarOption" *ngFor="let lugarOption of lugars; trackBy: trackLugarById">{{lugarOption.nombre}}</option>
-                    </select>
-                </div>
-            </div>
-
-            <div class="col-6">
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="prosopografiaApp.personaje.lugarDefuncion" for="field_lugarDefuncion">Lugar Defuncion</label>
-                    <select class="form-control" id="field_lugarDefuncion" name="lugarDefuncion" [(ngModel)]="personaje.lugarDefuncion" >
-                        <option [ngValue]="null"></option>
-                        <option [ngValue]="lugarOption.id === personaje.lugarDefuncion?.id ? personaje.lugarDefuncion : lugarOption" *ngFor="let lugarOption of lugars; trackBy: trackLugarById">{{lugarOption.nombre}}</option>
-                    </select>
-                </div>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-12">
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="prosopografiaApp.personaje.observaciones" for="field_observaciones">Observaciones</label>
-                    <textarea class="form-control" rows="5" name="observaciones" id="field_observaciones"
-                              [(ngModel)]="personaje.observaciones" maxlength="2000"></textarea>
-                    <div [hidden]="!(editForm.controls.observaciones?.dirty && editForm.controls.observaciones?.invalid)">
-                        <small class="form-text text-danger"
-                               [hidden]="!editForm.controls.observaciones?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 2000 }">
-                            This field cannot be longer than 2000 characters.
-                        </small>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
-
-
-        <div class="form-group">
-            <label jhiTranslate="prosopografiaApp.personaje.profesiones" for="field_profesiones">Profesiones</label>
-            <select class="form-control" id="field_profesiones" multiple name="profesiones" [(ngModel)]="personaje.profesiones">
-                <option [ngValue]="getSelected(personaje.profesiones, profesionOption)" *ngFor="let profesionOption of profesions; trackBy: trackProfesionById">{{profesionOption.nombre}}</option>
-            </select>
-        </div>
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">

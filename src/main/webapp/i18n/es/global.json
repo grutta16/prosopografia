@@ -39,15 +39,16 @@
                 "partido": "partido",
                 "cargo": "cargo",
                 "seccion": "sección",
-
                 "pais": "país",
                 "provincia": "provincia",
                 "lugar": "lugar",
-
                 "tipoProfesion": "tipo de profesión",
                 "profesion": "profesión",
-
                 "carrera": "carrera",
+                "institucion": "institución",
+                "religion": "religión",
+                "asociacion": "asociación",
+                "relacionFamiliar": "relación familiar",
 
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },

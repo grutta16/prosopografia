@@ -92,4 +92,23 @@ public class AsociacionService {
         Page<Asociacion> result = asociacionSearchRepository.search(queryStringQuery(query), pageable);
         return result;
     }
+
+    @Transactional(readOnly = true)
+    public boolean existe(Asociacion asociacion) {
+        log.debug("Request if exist Asociacion : {}", asociacion);
+        for (Asociacion a : asociacionRepository.findAll()) {
+            if (a.equals(asociacion) && !a.getId().equals(asociacion.getId())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+//    @Transactional(readOnly = true)
+//    private void esDescriptorUsado(long id) {
+//        Descriptor descriptor = repositorio.findOne(id);
+//        if (!descriptor.getFotografias().isEmpty()) {
+//            throw new EliminarObjetoEnUsoExcepcion("El descriptor <strong>" + descriptor.getNombre() + "</strong> no se puede eliminar porque tiene fotograf�as asociadas");
+//        }
+//    }
 }

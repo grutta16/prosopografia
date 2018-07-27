@@ -17,6 +17,7 @@
             "detail": {
                 "title": "Personaje"
             },
+            "datosPersonales": "Datos personales",
             "nombres": "Nombres",
             "apellidos": "Apellidos",
             "fechaNacimiento": {

@@ -29,7 +29,7 @@ public class RelacionFamiliar implements Serializable {
 
     @NotNull
     @Size(max = 50)
-    @Column(name = "nombre", length = 50, nullable = false)
+    @Column(name = "nombre", length = 50, nullable = false, unique=true)
     private String nombre;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
@@ -64,6 +64,9 @@ public class RelacionFamiliar implements Serializable {
             return false;
         }
         RelacionFamiliar relacionFamiliar = (RelacionFamiliar) o;
+        if (relacionFamiliar.getNombre().equalsIgnoreCase(this.getNombre())) {
+            return true;
+        }
         if (relacionFamiliar.getId() == null || getId() == null) {
             return false;
         }

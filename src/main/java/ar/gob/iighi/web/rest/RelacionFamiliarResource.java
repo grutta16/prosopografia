@@ -57,6 +57,9 @@ public class RelacionFamiliarResource {
         if (relacionFamiliar.getId() != null) {
             throw new BadRequestAlertException("A new relacionFamiliar cannot already have an ID", ENTITY_NAME, "idexists");
         }
+        if (relacionFamiliarService.existe(relacionFamiliar)) {
+            throw new BadRequestAlertException("Duplicado: un registro de relación familiar con esos datos ya existe", ENTITY_NAME, "duplicated");
+        }
         RelacionFamiliar result = relacionFamiliarService.save(relacionFamiliar);
         return ResponseEntity.created(new URI("/api/relacion-familiars/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
@@ -78,6 +81,9 @@ public class RelacionFamiliarResource {
         log.debug("REST request to update RelacionFamiliar : {}", relacionFamiliar);
         if (relacionFamiliar.getId() == null) {
             return createRelacionFamiliar(relacionFamiliar);
+        }
+        if (relacionFamiliarService.existe(relacionFamiliar)) {
+            throw new BadRequestAlertException("Duplicado: un registro de relación familiar con esos datos ya existe", ENTITY_NAME, "duplicated");
         }
         RelacionFamiliar result = relacionFamiliarService.save(relacionFamiliar);
         return ResponseEntity.ok()
@@ -140,7 +146,8 @@ public class RelacionFamiliarResource {
     @Timed
     public ResponseEntity<List<RelacionFamiliar>> searchRelacionFamiliars(@RequestParam String query, Pageable pageable) {
         log.debug("REST request to search for a page of RelacionFamiliars for query {}", query);
-        Page<RelacionFamiliar> page = relacionFamiliarService.search(query, pageable);
+//        Page<RelacionFamiliar> page = relacionFamiliarService.search(query, pageable);
+        Page<RelacionFamiliar> page = relacionFamiliarService.search(query + "*", pageable);
         HttpHeaders headers = PaginationUtil.generateSearchPaginationHttpHeaders(query, page, "/api/_search/relacion-familiars");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }

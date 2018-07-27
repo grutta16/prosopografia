@@ -6,3 +6,4 @@ export * from './personaje-pr-delete-dialog.component';
 export * from './personaje-pr-detail.component';
 export * from './personaje-pr.component';
 export * from './personaje-pr.route';
+export * from './datos-personales.component';

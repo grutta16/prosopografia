@@ -57,6 +57,9 @@ public class ReligionResource {
         if (religion.getId() != null) {
             throw new BadRequestAlertException("A new religion cannot already have an ID", ENTITY_NAME, "idexists");
         }
+        if (religionService.existe(religion)) {
+            throw new BadRequestAlertException("Duplicado: un registro de religión con esos datos ya existe", ENTITY_NAME, "duplicated");
+        }
         Religion result = religionService.save(religion);
         return ResponseEntity.created(new URI("/api/religions/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
@@ -78,6 +81,9 @@ public class ReligionResource {
         log.debug("REST request to update Religion : {}", religion);
         if (religion.getId() == null) {
             return createReligion(religion);
+        }
+        if (religionService.existe(religion)) {
+            throw new BadRequestAlertException("Duplicado: un registro de religión con esos datos ya existe", ENTITY_NAME, "duplicated");
         }
         Religion result = religionService.save(religion);
         return ResponseEntity.ok()
@@ -140,7 +146,8 @@ public class ReligionResource {
     @Timed
     public ResponseEntity<List<Religion>> searchReligions(@RequestParam String query, Pageable pageable) {
         log.debug("REST request to search for a page of Religions for query {}", query);
-        Page<Religion> page = religionService.search(query, pageable);
+//        Page<Religion> page = religionService.search(query, pageable);
+        Page<Religion> page = religionService.search(query + "*", pageable);
         HttpHeaders headers = PaginationUtil.generateSearchPaginationHttpHeaders(query, page, "/api/_search/religions");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }

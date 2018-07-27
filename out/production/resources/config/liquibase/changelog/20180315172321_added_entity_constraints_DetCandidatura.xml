@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <!--
+        Added the constraints for entity DetCandidatura.
+    -->
+    <changeSet id="20180315172321-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="candidatura_id"
+                                 baseTableName="det_candidatura"
+                                 constraintName="fk_det_candidatura_candidatura_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="candidatura"/>
+
+    </changeSet>
+</databaseChangeLog>

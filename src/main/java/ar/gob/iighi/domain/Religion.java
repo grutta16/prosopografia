@@ -29,7 +29,7 @@ public class Religion implements Serializable {
 
     @NotNull
     @Size(max = 50)
-    @Column(name = "nombre", length = 50, nullable = false)
+    @Column(name = "nombre", length = 50, nullable = false, unique=true)
     private String nombre;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
@@ -64,6 +64,9 @@ public class Religion implements Serializable {
             return false;
         }
         Religion religion = (Religion) o;
+        if (religion.getNombre().equalsIgnoreCase(this.getNombre())) {
+            return true;
+        }
         if (religion.getId() == null || getId() == null) {
             return false;
         }

@@ -22,6 +22,7 @@ public class FamiliarPersonaje implements Serializable {
 //    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
 //    @SequenceGenerator(name = "sequenceGenerator")
 //    private Long id;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

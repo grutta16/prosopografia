@@ -92,4 +92,23 @@ public class RelacionFamiliarService {
         Page<RelacionFamiliar> result = relacionFamiliarSearchRepository.search(queryStringQuery(query), pageable);
         return result;
     }
+
+    @Transactional(readOnly = true)
+    public boolean existe(RelacionFamiliar relacionFamiliar) {
+        log.debug("Request if exist RelacionFamiliar : {}", relacionFamiliar);
+        for (RelacionFamiliar r : relacionFamiliarRepository.findAll()) {
+            if (r.equals(relacionFamiliar) && !r.getId().equals(relacionFamiliar.getId())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+//    @Transactional(readOnly = true)
+//    private void esDescriptorUsado(long id) {
+//        Descriptor descriptor = repositorio.findOne(id);
+//        if (!descriptor.getFotografias().isEmpty()) {
+//            throw new EliminarObjetoEnUsoExcepcion("El descriptor <strong>" + descriptor.getNombre() + "</strong> no se puede eliminar porque tiene fotograf�as asociadas");
+//        }
+//    }
 }

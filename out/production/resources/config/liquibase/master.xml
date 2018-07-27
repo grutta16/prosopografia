@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+
+    <include file="config/liquibase/changelog/00000000000000_initial_schema.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180315172309_added_entity_Pais.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180315172310_added_entity_Provincia.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180315172311_added_entity_TipoProfesion.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180315172312_added_entity_Lugar.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180315172313_added_entity_Profesion.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180315172314_added_entity_Religion.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180315172315_added_entity_Asociacion.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180315172316_added_entity_Partido.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180315172317_added_entity_Cargo.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180315172318_added_entity_Seccion.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180315172319_added_entity_Eleccion.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180315172320_added_entity_Candidatura.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180315172321_added_entity_DetCandidatura.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180315172322_added_entity_Persona.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180315172323_added_entity_FamiliarPersonaje.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180315172324_added_entity_RelacionFamiliar.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180315172325_added_entity_ParejaPersonaje.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180315172326_added_entity_Personaje.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180315172327_added_entity_AsociacionPersonaje.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180315172328_added_entity_PartidoPersonaje.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180315172329_added_entity_ReligionPersonaje.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180315172330_added_entity_ResidenciaPersonaje.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180315172331_added_entity_CargoPersonaje.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180315172332_added_entity_Institucion.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180315172333_added_entity_Carrera.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180315172334_added_entity_EstudioPersonaje.xml" relativeToChangelogFile="false"/>
+    <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
+    <include file="config/liquibase/changelog/20180315172310_added_entity_constraints_Provincia.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180315172312_added_entity_constraints_Lugar.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180315172313_added_entity_constraints_Profesion.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180315172319_added_entity_constraints_Eleccion.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180315172320_added_entity_constraints_Candidatura.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180315172321_added_entity_constraints_DetCandidatura.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180315172323_added_entity_constraints_FamiliarPersonaje.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180315172325_added_entity_constraints_ParejaPersonaje.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180315172326_added_entity_constraints_Personaje.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180315172327_added_entity_constraints_AsociacionPersonaje.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180315172328_added_entity_constraints_PartidoPersonaje.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180315172329_added_entity_constraints_ReligionPersonaje.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180315172330_added_entity_constraints_ResidenciaPersonaje.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180315172331_added_entity_constraints_CargoPersonaje.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180315172332_added_entity_constraints_Institucion.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180315172334_added_entity_constraints_EstudioPersonaje.xml" relativeToChangelogFile="false"/>
+    <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
+</databaseChangeLog>

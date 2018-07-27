@@ -26,17 +26,18 @@ public class Institucion implements Serializable {
 //    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
 //    @SequenceGenerator(name = "sequenceGenerator")
 //    private Long id;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotNull
     @Size(max = 50)
-    @Column(name = "nombre", length = 50, nullable = false)
+    @Column(name = "nombre", length = 50, nullable = false, unique=true)
     private String nombre;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "nivel")
+    @Column(name = "nivel", nullable = false)
     private Nivel nivel;
 
     @ManyToOne(optional = false)
@@ -130,6 +131,9 @@ public class Institucion implements Serializable {
             return false;
         }
         Institucion institucion = (Institucion) o;
+        if (institucion.getNombre().equalsIgnoreCase(this.getNombre())) {
+            return true;
+        }
         if (institucion.getId() == null || getId() == null) {
             return false;
         }

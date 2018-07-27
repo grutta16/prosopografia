@@ -14,6 +14,7 @@ import {
     personajeRoute,
     personajePopupRoute,
     PersonajePrResolvePagingParams,
+    DatosPersonalesComponent,
 } from './';
 
 const ENTITY_STATES = [
@@ -33,6 +34,7 @@ const ENTITY_STATES = [
         PersonajePrDeleteDialogComponent,
         PersonajePrPopupComponent,
         PersonajePrDeletePopupComponent,
+        DatosPersonalesComponent,
     ],
     entryComponents: [
         PersonajePrComponent,
@@ -40,6 +42,7 @@ const ENTITY_STATES = [
         PersonajePrPopupComponent,
         PersonajePrDeleteDialogComponent,
         PersonajePrDeletePopupComponent,
+        DatosPersonalesComponent,
     ],
     providers: [
         PersonajePrService,
