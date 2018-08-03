@@ -39,11 +39,14 @@
             "otherEntityName": "estudioPersonaje",
             "otherEntityRelationshipName": "personaje"
         },
+
         {
             "relationshipType": "one-to-many",
+            "otherEntityRelationshipName": "",
             "relationshipName": "asociaciones",
-            "otherEntityName": "asociacionPersonaje",
-            "otherEntityRelationshipName": "personaje"
+            "otherEntityName": "asociacion",
+            "otherEntityField": "nombre",
+            "ownerSide": true
         },
         {
             "relationshipType": "one-to-many",
@@ -52,10 +55,10 @@
             "otherEntityRelationshipName": "personaje"
         },
         {
-            "relationshipType": "one-to-many",
-            "relationshipName": "religiones",
-            "otherEntityName": "religionPersonaje",
-            "otherEntityRelationshipName": "personaje"
+            "relationshipType": "many-to-one",
+            "relationshipName": "religion",
+            "otherEntityName": "religion",
+            "otherEntityField": "nombre"
         },
         {
             "relationshipType": "one-to-many",

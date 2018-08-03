@@ -10,7 +10,9 @@ import { PersonajePr } from './personaje-pr.model';
 import { PersonajePrPopupService } from './personaje-pr-popup.service';
 import { PersonajePrService } from './personaje-pr.service';
 import { LugarPr, LugarPrService } from '../lugar-pr';
+import { ReligionPr, ReligionPrService } from '../religion-pr';
 import { ProfesionPr, ProfesionPrService } from '../profesion-pr';
+import { AsociacionPr, AsociacionPrService } from '../asociacion-pr';
 
 @Component({
     selector: 'jhi-personaje-pr-dialog',
@@ -22,8 +24,11 @@ export class PersonajePrDialogComponent implements OnInit {
     isSaving: boolean;
 
     lugars: LugarPr[];
+    religions: ReligionPr[];
 
     profesions: ProfesionPr[];
+    asociacions: AsociacionPr[];
+
     fechaNacimientoDp: any;
     fechaDefuncionDp: any;
 
@@ -32,7 +37,9 @@ export class PersonajePrDialogComponent implements OnInit {
         private jhiAlertService: JhiAlertService,
         private personajeService: PersonajePrService,
         private lugarService: LugarPrService,
+        private religionService: ReligionPrService,
         private profesionService: ProfesionPrService,
+        private asociacionService: AsociacionPrService,
         private eventManager: JhiEventManager
     ) {
     }
@@ -41,8 +48,12 @@ export class PersonajePrDialogComponent implements OnInit {
         this.isSaving = false;
         this.lugarService.query()
             .subscribe((res: HttpResponse<LugarPr[]>) => { this.lugars = res.body; }, (res: HttpErrorResponse) => this.onError(res.message));
+        this.religionService.query()
+            .subscribe((res: HttpResponse<LugarPr[]>) => { this.religions = res.body; }, (res: HttpErrorResponse) => this.onError(res.message));
         this.profesionService.query()
             .subscribe((res: HttpResponse<ProfesionPr[]>) => { this.profesions = res.body; }, (res: HttpErrorResponse) => this.onError(res.message));
+        this.asociacionService.query()
+            .subscribe((res: HttpResponse<ProfesionPr[]>) => { this.asociacions = res.body; }, (res: HttpErrorResponse) => this.onError(res.message));
     }
 
     clear() {
@@ -83,7 +94,15 @@ export class PersonajePrDialogComponent implements OnInit {
         return item.id;
     }
 
+    trackReligionById(index: number, item: ReligionPr) {
+        return item.id;
+    }
+
     trackProfesionById(index: number, item: ProfesionPr) {
+        return item.id;
+    }
+
+    trackAsociacionById(index: number, item: AsociacionPr) {
         return item.id;
     }
 

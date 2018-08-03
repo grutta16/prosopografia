@@ -61,6 +61,10 @@
                 <constraints nullable="true" />
             </column>
 
+            <column name="religion_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
         </createTable>
 
@@ -74,6 +78,18 @@
         </createTable>
 
         <addPrimaryKey columnNames="personajes_id, profesiones_id" tableName="personaje_profesiones"/>
+
+
+        <createTable tableName="personaje_asociaciones">
+            <column name="asociaciones_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="personajes_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addPrimaryKey columnNames="personajes_id, asociaciones_id" tableName="personaje_asociaciones"/>
 
     </changeSet>
     <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here, do not remove-->
