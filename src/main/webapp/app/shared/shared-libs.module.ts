@@ -6,6 +6,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgJhipsterModule } from 'ng-jhipster';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { CookieModule } from 'ngx-cookie';
+import { NgSelectModule } from '@ng-select/ng-select';
+// import { CalendarModule } from 'primeng/calendar';
 
 @NgModule({
     imports: [
@@ -25,7 +27,9 @@ import { CookieModule } from 'ngx-cookie';
         CommonModule,
         NgbModule,
         NgJhipsterModule,
-        InfiniteScrollModule
+        InfiniteScrollModule,
+        NgSelectModule,
+        // CalendarModule
     ]
 })
 export class ProsopografiaSharedLibsModule {}

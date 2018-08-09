@@ -1,0 +1,15 @@
+<div class="input-group">
+    <input type="text"
+           class="form-control"
+           name="dateName"
+           ngbDatepicker
+           [minDate]="minDate"
+           [maxDate]="maxDate"
+           [name]="name"
+           #dateDp="ngbDatepicker"
+           [(ngModel)]="fecha"
+           (ngModelChange)="onDateSelect()"/>
+    <span class="input-group-append">
+        <button type="button" class="btn btn-secondary" (click)="dateDp.toggle()"><i class="fa fa-calendar"></i></button>
+    </span>
+</div>

@@ -14,6 +14,10 @@ import { ReligionPr, ReligionPrService } from '../religion-pr';
 import { ProfesionPr, ProfesionPrService } from '../profesion-pr';
 import { AsociacionPr, AsociacionPrService } from '../asociacion-pr';
 
+import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
+
+const now = new Date();
+
 @Component({
     selector: 'jhi-personaje-pr-dialog',
     templateUrl: './personaje-pr-dialog.component.html'
@@ -32,6 +36,12 @@ export class PersonajePrDialogComponent implements OnInit {
     fechaNacimientoDp: any;
     fechaDefuncionDp: any;
 
+    minNacDate: NgbDateStruct;
+    maxNacDate: NgbDateStruct;
+
+    minDefDate: NgbDateStruct;
+    maxDefDate: NgbDateStruct;
+
     constructor(
         public activeModal: NgbActiveModal,
         private jhiAlertService: JhiAlertService,
@@ -45,6 +55,10 @@ export class PersonajePrDialogComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.minNacDate = {year: 1800, month: 1, day: 1};
+        this.minDefDate = {year: 1800, month: 1, day: 1};
+        this.maxNacDate = {year: now.getFullYear(), month: now.getMonth() + 1, day: now.getDate()};
+        this.maxDefDate = {year: now.getFullYear(), month: now.getMonth() + 1, day: now.getDate()};
         this.isSaving = false;
         this.lugarService.query()
             .subscribe((res: HttpResponse<LugarPr[]>) => { this.lugars = res.body; }, (res: HttpErrorResponse) => this.onError(res.message));
@@ -98,24 +112,42 @@ export class PersonajePrDialogComponent implements OnInit {
         return item.id;
     }
 
-    trackProfesionById(index: number, item: ProfesionPr) {
-        return item.id;
+    nacDateChange() {
+        this.minDefDate = this.fechaNacimientoDp;
     }
 
-    trackAsociacionById(index: number, item: AsociacionPr) {
-        return item.id;
+    defDateChange() {
+        this.maxNacDate = this.fechaDefuncionDp;
     }
 
-    getSelected(selectedVals: Array<any>, option: any) {
-        if (selectedVals) {
-            for (let i = 0; i < selectedVals.length; i++) {
-                if (option.id === selectedVals[i].id) {
-                    return selectedVals[i];
-                }
-            }
+    onSelectDate(event: any) {
+        if (event.name === 'fechaNacimiento') {
+            this.personaje.fechaNacimiento = event.fecha;
+            this.minDefDate = event.fecha;
+        } else {
+            this.personaje.fechaDefuncion = event.fecha;
+            this.maxNacDate = event.fecha;
         }
-        return option;
     }
+
+    // trackProfesionById(index: number, item: ProfesionPr) {
+    //     return item.id;
+    // }
+    //
+    // trackAsociacionById(index: number, item: AsociacionPr) {
+    //     return item.id;
+    // }
+    //
+    // getSelected(selectedVals: Array<any>, option: any) {
+    //     if (selectedVals) {
+    //         for (let i = 0; i < selectedVals.length; i++) {
+    //             if (option.id === selectedVals[i].id) {
+    //                 return selectedVals[i];
+    //             }
+    //         }
+    //     }
+    //     return option;
+    // }
 }
 
 @Component({

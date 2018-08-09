@@ -142,7 +142,6 @@ repositories {
 }
 
 dependencies {
-//    compile "org.projectlombok:lombok:1.14.8"
     compile "io.github.jhipster:jhipster"
     compile "io.dropwizard.metrics:metrics-core"
     compile "io.dropwizard.metrics:metrics-json"

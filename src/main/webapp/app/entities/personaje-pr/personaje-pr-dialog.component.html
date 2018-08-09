@@ -38,6 +38,10 @@
 
         <div class="form-group">
             <div class="row">
+                <div class="col-12">
+                    <h5>Datos personales</h5>
+                    <hr>
+                </div>
                 <div class="col-6">
                     <div class="form-group">
                         <label class="form-control-label" jhiTranslate="prosopografiaApp.personaje.nombres" for="field_nombres">Nombres</label>
@@ -95,21 +99,50 @@
                 <div class="col-6">
                     <div class="form-group">
                         <label class="form-control-label" jhiTranslate="prosopografiaApp.personaje.fechaNacimiento.norm" for="field_fechaNacimiento">Fecha Nacimiento</label>
-                        <div class="input-group">
-                            <input id="field_fechaNacimiento" type="text" class="form-control" name="fechaNacimiento" ngbDatepicker  #fechaNacimientoDp="ngbDatepicker" [(ngModel)]="personaje.fechaNacimiento"/>
-                            <span class="input-group-append">
-                                    <button type="button" class="btn btn-secondary" (click)="fechaNacimientoDp.toggle()"><i class="fa fa-calendar"></i></button>
-                                </span>
-                        </div>
+                        <!--<p-calendar-->
+                            <!--id="field_fechaNacimiento"-->
+                            <!--name="fechaNacimiento"-->
+                            <!--[locale]="es"-->
+                            <!--dateFormat="dd/mm/yyyy"-->
+                            <!--[(ngModel)]="personaje.fechaNacimiento"-->
+                            <!--[monthNavigator]="true"-->
+                            <!--[yearNavigator]="true"-->
+                            <!--[showIcon]="true"-->
+                            <!--yearRange="1800:2018">-->
+                        <!--</p-calendar>-->
+                        <!--<div class="input-group">-->
+                            <!--<input id="field_fechaNacimiento" type="text" class="form-control" name="fechaNacimiento" ngbDatepicker [minDate]="minNacDate"  [maxDate]="maxNacDate" #fechaNacimientoDp="ngbDatepicker" [(ngModel)]="personaje.fechaNacimiento" (dateSelect)="nacDateChange()"/>-->
+                            <!--<span class="input-group-append">-->
+                                    <!--<button type="button" class="btn btn-secondary" (click)="fechaNacimientoDp.toggle()"><i class="fa fa-calendar"></i></button>-->
+                                <!--</span>-->
+                        <!--</div>-->
+                        <jhi-datepicker-i18n-component
+                            id="field_fechaNacimiento"
+                            name="fechaNacimiento"
+                            [name]="'fechaNacimiento'"
+                            [minDate]="minNacDate"
+                            [maxDate]="maxNacDate"
+                            (selectDate)="onSelectDate($event)"
+                            ngDefaultControl>
+                        </jhi-datepicker-i18n-component>
                     </div>
                     <div class="form-group">
                         <label class="form-control-label" jhiTranslate="prosopografiaApp.personaje.fechaDefuncion.norm" for="field_fechaDefuncion">Fecha Defuncion</label>
-                        <div class="input-group">
-                            <input id="field_fechaDefuncion" type="text" class="form-control" name="fechaDefuncion" ngbDatepicker  #fechaDefuncionDp="ngbDatepicker" [(ngModel)]="personaje.fechaDefuncion"/>
-                            <span class="input-group-append">
-                                    <button type="button" class="btn btn-secondary" (click)="fechaDefuncionDp.toggle()"><i class="fa fa-calendar"></i></button>
-                                </span>
-                        </div>
+                        <!--<div class="input-group">-->
+                            <!--<input id="field_fechaDefuncion" type="text" class="form-control" name="fechaDefuncion" ngbDatepicker [minDate]="minDefDate"  [maxDate]="maxDefDate" #fechaDefuncionDp="ngbDatepicker" [(ngModel)]="personaje.fechaDefuncion" (dateSelect)="defDateChange()"/>-->
+                            <!--<span class="input-group-append">-->
+                                    <!--<button type="button" class="btn btn-secondary" (click)="fechaDefuncionDp.toggle()"><i class="fa fa-calendar"></i></button>-->
+                                <!--</span>-->
+                        <!--</div>-->
+                        <jhi-datepicker-i18n-component
+                            id="field_fechaDefuncion"
+                            name="fechaDefuncion"
+                            [name]="'fechaDefuncion'"
+                            [minDate]="minDefDate"
+                            [maxDate]="maxDefDate"
+                            (selectDate)="onSelectDate($event)"
+                            ngDefaultControl>
+                        </jhi-datepicker-i18n-component>
                     </div>
                     <div class="form-group">
                         <label class="form-control-label" jhiTranslate="prosopografiaApp.personaje.lugarNacimiento" for="field_lugarNacimiento">Lugar Nacimiento</label>
@@ -159,11 +192,62 @@
                     </div>
                 </div>
             </div>
-            <div class="form-group">
-                <label jhiTranslate="prosopografiaApp.personaje.profesiones" for="field_profesiones">Profesiones</label>
-                <select class="form-control" id="field_profesiones" multiple name="profesiones" [(ngModel)]="personaje.profesiones">
-                    <option [ngValue]="getSelected(personaje.profesiones, profesionOption)" *ngFor="let profesionOption of profesions; trackBy: trackProfesionById">{{profesionOption.nombre}}</option>
-                </select>
+            <div class="row">
+                <div class="col-6">
+                    <div class="form-group">
+                        <label jhiTranslate="prosopografiaApp.personaje.profesiones">Profesiones</label>
+                        <!--<select class="form-control" id="field_profesiones" multiple name="profesiones" [(ngModel)]="personaje.profesiones">-->
+                            <!--<option [ngValue]="getSelected(personaje.profesiones, profesionOption)" *ngFor="let profesionOption of profesions; trackBy: trackProfesionById">{{profesionOption.nombre}}</option>-->
+                        <!--</select>-->
+                        <ng-select
+                            [items]="profesions"
+                            [multiple]="true"
+                            [closeOnSelect]="false"
+                            [hideSelected]="true"
+                            bindLabel="nombre"
+                            placeholder="{{'prosopografiaApp.personaje.profesionesPlaceHolder' | translate }}"
+                            name="profesiones"
+                            [(ngModel)]="personaje.profesiones">
+                        </ng-select>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="form-group">
+                        <label jhiTranslate="prosopografiaApp.personaje.asociaciones">Asociaciones</label>
+                        <!--<select class="form-control" id="field_asociaciones" multiple name="asociaciones" [(ngModel)]="personaje.asociaciones">-->
+                            <!--<option [ngValue]="getSelected(personaje.asociaciones, asociacionOption)" *ngFor="let asociacionOption of asociacions; trackBy: trackAsociacionById">{{asociacionOption.nombre}}</option>-->
+                        <!--</select>-->
+                        <ng-select
+                            [items]="asociacions"
+                            [multiple]="true"
+                            [closeOnSelect]="false"
+                            [hideSelected]="true"
+                            bindLabel="nombre"
+                            placeholder="{{'prosopografiaApp.personaje.asociacionesPlaceHolder' | translate }}"
+                            name="asociaciones"
+                            [(ngModel)]="personaje.asociaciones">
+                        </ng-select>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <h5 jhiTranslate="prosopografiaApp.personaje.observaciones">Observaciones</h5>
+                    <hr>
+                </div>
+                <div class="col-12">
+                    <div class="form-group">
+                        <!--<label class="form-control-label" jhiTranslate="prosopografiaApp.personaje.observaciones" for="field_observaciones">Observaciones</label>-->
+                        <textarea class="form-control" rows="5" name="observaciones" id="field_observaciones"
+                                  [(ngModel)]="personaje.observaciones" maxlength="2000"></textarea>
+                        <div [hidden]="!(editForm.controls.observaciones?.dirty && editForm.controls.observaciones?.invalid)">
+                            <small class="form-text text-danger"
+                                   [hidden]="!editForm.controls.observaciones?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 2000 }">
+                                This field cannot be longer than 2000 characters.
+                            </small>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
