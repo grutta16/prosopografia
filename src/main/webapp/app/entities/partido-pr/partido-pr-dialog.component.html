@@ -30,12 +30,8 @@
         <div class="form-group">
             <label class="form-control-label" jhiTranslate="prosopografiaApp.partido.abreviacion" for="field_abreviacion">Abreviacion</label>
             <input type="text" class="form-control" name="abreviacion" id="field_abreviacion"
-                [(ngModel)]="partido.abreviacion" required maxlength="20"/>
+                [(ngModel)]="partido.abreviacion" maxlength="20"/>
             <div [hidden]="!(editForm.controls.abreviacion?.dirty && editForm.controls.abreviacion?.invalid)">
-                <small class="form-text text-danger"
-                   [hidden]="!editForm.controls.abreviacion?.errors?.required" jhiTranslate="entity.validation.required">
-                   This field is required.
-                </small>
                 <small class="form-text text-danger"
                    [hidden]="!editForm.controls.abreviacion?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 20 }">
                    This field cannot be longer than 20 characters.

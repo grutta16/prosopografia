@@ -118,15 +118,15 @@ public class PersonajeQueryService extends QueryService<Personaje> {
             if (criteria.getEstudiosId() != null) {
                 specification = specification.and(buildReferringEntitySpecification(criteria.getEstudiosId(), Personaje_.estudios, EstudioPersonaje_.id));
             }
-            if (criteria.getAsociacionesId() != null) {
-                specification = specification.and(buildReferringEntitySpecification(criteria.getAsociacionesId(), Personaje_.asociaciones, AsociacionPersonaje_.id));
-            }
+//            if (criteria.getAsociacionesId() != null) {
+//                specification = specification.and(buildReferringEntitySpecification(criteria.getAsociacionesId(), Personaje_.asociaciones, AsociacionPersonaje_.id));
+//            }
             if (criteria.getPartidosId() != null) {
                 specification = specification.and(buildReferringEntitySpecification(criteria.getPartidosId(), Personaje_.partidos, PartidoPersonaje_.id));
             }
-            if (criteria.getReligionesId() != null) {
-                specification = specification.and(buildReferringEntitySpecification(criteria.getReligionesId(), Personaje_.religiones, ReligionPersonaje_.id));
-            }
+//            if (criteria.getReligionesId() != null) {
+//                specification = specification.and(buildReferringEntitySpecification(criteria.getReligionesId(), Personaje_.religiones, ReligionPersonaje_.id));
+//            }
             if (criteria.getResidenciasId() != null) {
                 specification = specification.and(buildReferringEntitySpecification(criteria.getResidenciasId(), Personaje_.residencias, ResidenciaPersonaje_.id));
             }

@@ -17,21 +17,41 @@
             "detail": {
                 "title": "Personaje"
             },
+            "datosPersonales": "Datos personales",
             "nombres": "Nombres",
             "apellidos": "Apellidos",
-            "fechaNacimiento": "Nacimiento",
-            "fechaDefuncion": "Defunción",
-            "nombresAlternativos": "Nombres alt.",
-            "apellidosAlternativos": "Apellidos alt.",
-            "sexo": "Sexo",
+            "fechaNacimiento": {
+                "norm":"Fecha de nacimiento",
+                "abrv":"Nacimiento"
+            },
+            "fechaDefuncion": {
+                "norm":"Fecha de defunción",
+                "abrv":"Defunción"
+            },
+            "nombresAlternativos": {
+                "norm":"Nombres alternativos",
+                "abrv":"Nombres alt."
+            },
+            "apellidosAlternativos": {
+                "norm":"Apellidos alternativos",
+                "abrv":"Apellidos alt."
+            },
+            "sexo": {
+                "label":"Sexo",
+                "masculino":"Masculino",
+                "femenino":"Femenino"
+            },
             "observaciones": "Observaciones",
             "lugarNacimiento": "Lugar de nacimiento",
             "lugarDefuncion": "Lugar de defunción",
+            "religion": "Religión",
             "profesiones": "Profesiones",
+            "profesionesPlaceHolder": "Seleccionar profesiones",
             "parejas": "Parejas",
             "familiares": "Familiares",
             "estudios": "Estudios",
             "asociaciones": "Asociaciones",
+            "asociacionesPlaceHolder": "Seleccionar asociaciones",
             "partidos": "Partidos",
             "religiones": "Religiones",
             "residencias": "Residencias",

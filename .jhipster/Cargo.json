@@ -14,7 +14,10 @@
         {
             "fieldName": "ambito",
             "fieldType": "Ambito",
-            "fieldValues": "MUNICIPAL,PROVINCIAL,NACIONAL,INTERNACIONAL"
+            "fieldValues": "MUNICIPAL,PROVINCIAL,NACIONAL,INTERNACIONAL",
+            "fieldValidateRules": [
+                "required"
+            ]
         }
     ],
     "changelogDate": "20180315172317",

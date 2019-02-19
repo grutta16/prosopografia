@@ -57,6 +57,9 @@ public class PartidoResource {
         if (partido.getId() != null) {
             throw new BadRequestAlertException("A new partido cannot already have an ID", ENTITY_NAME, "idexists");
         }
+        if (partidoService.existe(partido)) {
+            throw new BadRequestAlertException("Duplicado: un registro de partido con esos datos ya existe", ENTITY_NAME, "duplicated");
+        }
         Partido result = partidoService.save(partido);
         return ResponseEntity.created(new URI("/api/partidos/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
@@ -78,6 +81,9 @@ public class PartidoResource {
         log.debug("REST request to update Partido : {}", partido);
         if (partido.getId() == null) {
             return createPartido(partido);
+        }
+        if (partidoService.existe(partido)) {
+            throw new BadRequestAlertException("Duplicado: un registro de partido con esos datos ya existe", ENTITY_NAME, "duplicated");
         }
         Partido result = partidoService.save(partido);
         return ResponseEntity.ok()
@@ -140,7 +146,8 @@ public class PartidoResource {
     @Timed
     public ResponseEntity<List<Partido>> searchPartidos(@RequestParam String query, Pageable pageable) {
         log.debug("REST request to search for a page of Partidos for query {}", query);
-        Page<Partido> page = partidoService.search(query, pageable);
+//        Page<Partido> page = partidoService.search(query, pageable);
+        Page<Partido> page = partidoService.search(query + "*", pageable);
         HttpHeaders headers = PaginationUtil.generateSearchPaginationHttpHeaders(query, page, "/api/_search/partidos");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }

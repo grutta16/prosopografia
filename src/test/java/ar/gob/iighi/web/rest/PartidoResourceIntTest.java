@@ -163,24 +163,6 @@ public class PartidoResourceIntTest {
 
     @Test
     @Transactional
-    public void checkAbreviacionIsRequired() throws Exception {
-        int databaseSizeBeforeTest = partidoRepository.findAll().size();
-        // set the field null
-        partido.setAbreviacion(null);
-
-        // Create the Partido, which fails.
-
-        restPartidoMockMvc.perform(post("/api/partidos")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(partido)))
-            .andExpect(status().isBadRequest());
-
-        List<Partido> partidoList = partidoRepository.findAll();
-        assertThat(partidoList).hasSize(databaseSizeBeforeTest);
-    }
-
-    @Test
-    @Transactional
     public void getAllPartidos() throws Exception {
         // Initialize the database
         partidoRepository.saveAndFlush(partido);

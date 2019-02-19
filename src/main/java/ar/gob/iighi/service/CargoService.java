@@ -92,4 +92,23 @@ public class CargoService {
         Page<Cargo> result = cargoSearchRepository.search(queryStringQuery(query), pageable);
         return result;
     }
+
+    @Transactional(readOnly = true)
+    public boolean existe(Cargo cargo) {
+        log.debug("Request if exist Cargo : {}", cargo);
+        for (Cargo c : cargoRepository.findAll()) {
+            if (c.equals(cargo) && !c.getId().equals(cargo.getId())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+//    @Transactional(readOnly = true)
+//    private void esDescriptorUsado(long id) {
+//        Descriptor descriptor = repositorio.findOne(id);
+//        if (!descriptor.getFotografias().isEmpty()) {
+//            throw new EliminarObjetoEnUsoExcepcion("El descriptor <strong>" + descriptor.getNombre() + "</strong> no se puede eliminar porque tiene fotograf�as asociadas");
+//        }
+//    }
 }

@@ -18,14 +18,18 @@ public class Asociacion implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+//    @Id
+//    @SequenceGenerator(name = "sequenceGenerator")
+//    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
+//    private Long id;
+
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
-    @SequenceGenerator(name = "sequenceGenerator")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotNull
     @Size(max = 50)
-    @Column(name = "nombre", length = 50, nullable = false)
+    @Column(name = "nombre", length = 50, nullable = false, unique=true)
     private String nombre;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
@@ -60,6 +64,9 @@ public class Asociacion implements Serializable {
             return false;
         }
         Asociacion asociacion = (Asociacion) o;
+        if (asociacion.getNombre().equalsIgnoreCase(this.getNombre())) {
+            return true;
+        }
         if (asociacion.getId() == null || getId() == null) {
             return false;
         }

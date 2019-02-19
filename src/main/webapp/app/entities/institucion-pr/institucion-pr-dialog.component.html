@@ -29,14 +29,19 @@
         </div>
         <div class="form-group">
             <label class="form-control-label" jhiTranslate="prosopografiaApp.institucion.nivel" for="field_nivel">Nivel</label>
-            <select class="form-control" name="nivel" [(ngModel)]="institucion.nivel" id="field_nivel" >
+            <select class="form-control" name="nivel" [(ngModel)]="institucion.nivel" id="field_nivel" required>
                 <option value="PRIMARIO">{{'prosopografiaApp.Nivel.PRIMARIO' | translate}}</option>
                 <option value="SECUNDARIO">{{'prosopografiaApp.Nivel.SECUNDARIO' | translate}}</option>
                 <option value="TERCIARIO">{{'prosopografiaApp.Nivel.TERCIARIO' | translate}}</option>
                 <option value="UNIVERSITARIO">{{'prosopografiaApp.Nivel.UNIVERSITARIO' | translate}}</option>
             </select>
         </div>
-
+        <div [hidden]="!(editForm.controls.nivel?.dirty && editForm.controls.nivel?.invalid)">
+            <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.nivel?.errors?.required" jhiTranslate="entity.validation.required">
+                This field is required.
+            </small>
+        </div>
         <div class="form-group">
             <label class="form-control-label" jhiTranslate="prosopografiaApp.institucion.lugar" for="field_lugar">Lugar</label>
             <select class="form-control" id="field_lugar" name="lugar" [(ngModel)]="institucion.lugar"  required>

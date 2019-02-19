@@ -22,9 +22,13 @@ public class Personaje implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
+//    @SequenceGenerator(name = "sequenceGenerator")
+//    private Long id;
+
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
-    @SequenceGenerator(name = "sequenceGenerator")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotNull
@@ -70,6 +74,15 @@ public class Personaje implements Serializable {
                inverseJoinColumns = @JoinColumn(name="profesiones_id", referencedColumnName="id"))
     private Set<Profesion> profesiones = new HashSet<>();
 
+    @ManyToMany
+    @JoinTable(name = "personaje_asociaciones",
+        joinColumns = @JoinColumn(name="personajes_id", referencedColumnName="id"),
+        inverseJoinColumns = @JoinColumn(name="asociaciones_id", referencedColumnName="id"))
+    private Set<Asociacion> asociaciones = new HashSet<>();
+
+    @ManyToOne
+    private Religion religion;
+
     @OneToMany(mappedBy = "personaje")
     @JsonIgnore
     private Set<ParejaPersonaje> parejas = new HashSet<>();
@@ -82,17 +95,17 @@ public class Personaje implements Serializable {
     @JsonIgnore
     private Set<EstudioPersonaje> estudios = new HashSet<>();
 
-    @OneToMany(mappedBy = "personaje")
-    @JsonIgnore
-    private Set<AsociacionPersonaje> asociaciones = new HashSet<>();
+//    @OneToMany(mappedBy = "personaje")
+//    @JsonIgnore
+//    private Set<AsociacionPersonaje> asociaciones = new HashSet<>();
 
     @OneToMany(mappedBy = "personaje")
     @JsonIgnore
     private Set<PartidoPersonaje> partidos = new HashSet<>();
 
-    @OneToMany(mappedBy = "personaje")
-    @JsonIgnore
-    private Set<ReligionPersonaje> religiones = new HashSet<>();
+//    @OneToMany(mappedBy = "personaje")
+//    @JsonIgnore
+//    private Set<ReligionPersonaje> religiones = new HashSet<>();
 
     @OneToMany(mappedBy = "personaje")
     @JsonIgnore
@@ -268,6 +281,19 @@ public class Personaje implements Serializable {
         this.profesiones = profesions;
     }
 
+    public Religion getReligion() {
+        return religion;
+    }
+
+    public Personaje religion(Religion religion) {
+        this.religion = religion;
+        return this;
+    }
+
+    public void setReligion(Religion religion) {
+        this.religion = religion;
+    }
+
     public Set<ParejaPersonaje> getParejas() {
         return parejas;
     }
@@ -343,29 +369,27 @@ public class Personaje implements Serializable {
         this.estudios = estudioPersonajes;
     }
 
-    public Set<AsociacionPersonaje> getAsociaciones() {
+    public Set<Asociacion> getAsociaciones() {
         return asociaciones;
     }
 
-    public Personaje asociaciones(Set<AsociacionPersonaje> asociacionPersonajes) {
-        this.asociaciones = asociacionPersonajes;
+    public Personaje asociaciones(Set<Asociacion> asociacions) {
+        this.asociaciones = asociacions;
         return this;
     }
 
-    public Personaje addAsociaciones(AsociacionPersonaje asociacionPersonaje) {
-        this.asociaciones.add(asociacionPersonaje);
-        asociacionPersonaje.setPersonaje(this);
+    public Personaje addAsociaciones(Asociacion asociacion) {
+        this.asociaciones.add(asociacion);
         return this;
     }
 
-    public Personaje removeAsociaciones(AsociacionPersonaje asociacionPersonaje) {
-        this.asociaciones.remove(asociacionPersonaje);
-        asociacionPersonaje.setPersonaje(null);
+    public Personaje removeAsociaciones(Asociacion asociacion) {
+        this.asociaciones.remove(asociacion);
         return this;
     }
 
-    public void setAsociaciones(Set<AsociacionPersonaje> asociacionPersonajes) {
-        this.asociaciones = asociacionPersonajes;
+    public void setAsociaciones(Set<Asociacion> asociacions) {
+        this.asociaciones = asociacions;
     }
 
     public Set<PartidoPersonaje> getPartidos() {
@@ -393,30 +417,30 @@ public class Personaje implements Serializable {
         this.partidos = partidoPersonajes;
     }
 
-    public Set<ReligionPersonaje> getReligiones() {
-        return religiones;
-    }
-
-    public Personaje religiones(Set<ReligionPersonaje> religionPersonajes) {
-        this.religiones = religionPersonajes;
-        return this;
-    }
-
-    public Personaje addReligiones(ReligionPersonaje religionPersonaje) {
-        this.religiones.add(religionPersonaje);
-        religionPersonaje.setPersonaje(this);
-        return this;
-    }
-
-    public Personaje removeReligiones(ReligionPersonaje religionPersonaje) {
-        this.religiones.remove(religionPersonaje);
-        religionPersonaje.setPersonaje(null);
-        return this;
-    }
-
-    public void setReligiones(Set<ReligionPersonaje> religionPersonajes) {
-        this.religiones = religionPersonajes;
-    }
+//    public Set<ReligionPersonaje> getReligiones() {
+//        return religiones;
+//    }
+//
+//    public Personaje religiones(Set<ReligionPersonaje> religionPersonajes) {
+//        this.religiones = religionPersonajes;
+//        return this;
+//    }
+//
+//    public Personaje addReligiones(ReligionPersonaje religionPersonaje) {
+//        this.religiones.add(religionPersonaje);
+//        religionPersonaje.setPersonaje(this);
+//        return this;
+//    }
+//
+//    public Personaje removeReligiones(ReligionPersonaje religionPersonaje) {
+//        this.religiones.remove(religionPersonaje);
+//        religionPersonaje.setPersonaje(null);
+//        return this;
+//    }
+//
+//    public void setReligiones(Set<ReligionPersonaje> religionPersonajes) {
+//        this.religiones = religionPersonajes;
+//    }
 
     public Set<ResidenciaPersonaje> getResidencias() {
         return residencias;

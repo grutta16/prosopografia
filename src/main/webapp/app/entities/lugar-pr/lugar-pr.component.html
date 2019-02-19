@@ -32,6 +32,7 @@
             <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="nombre"><span jhiTranslate="prosopografiaApp.lugar.nombre">Nombre</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="provincia.nombre"><span jhiTranslate="prosopografiaApp.lugar.provincia">Provincia</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="provincia.pais.nombre"><span jhiTranslate="prosopografiaApp.provincia.pais">País</span> <span class="fa fa-sort"></span></th>
             <th></th>
             </tr>
             </thead>
@@ -42,6 +43,11 @@
                 <td>
                     <div *ngIf="lugar.provincia">
                         <a [routerLink]="['../provincia-pr', lugar.provincia?.id ]" >{{lugar.provincia?.nombre}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="lugar.provincia.pais.nombre">
+                        <a [routerLink]="['../pais-pr', lugar.provincia.pais?.id ]" >{{lugar.provincia.pais?.nombre}}</a>
                     </div>
                 </td>
                 <td class="text-right">

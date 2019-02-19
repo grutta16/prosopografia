@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <!--
+        Added the constraints for entity FamiliarPersonaje.
+    -->
+    <changeSet id="20180315172323-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="relacion_familiar_id"
+                                 baseTableName="familiar_personaje"
+                                 constraintName="fk_familiar_personaje_relacion_familiar_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="relacion_familiar"/>
+
+        <addForeignKeyConstraint baseColumnNames="personaje_id"
+                                 baseTableName="familiar_personaje"
+                                 constraintName="fk_familiar_personaje_personaje_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="personaje"/>
+
+    </changeSet>
+</databaseChangeLog>

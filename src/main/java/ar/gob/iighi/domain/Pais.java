@@ -1,6 +1,7 @@
 package ar.gob.iighi.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
@@ -21,17 +22,22 @@ public class Pais implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
+//    @SequenceGenerator(name = "sequenceGenerator")
+//    private Long id;
+
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
-    @SequenceGenerator(name = "sequenceGenerator")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotNull
     @Size(max = 50)
-    @Column(name = "nombre", length = 50, nullable = false)
+    @Column(name = "nombre", length = 50, nullable = false, unique = true)
     private String nombre;
 
-    @OneToMany(mappedBy = "pais")
+//    @OneToMany(mappedBy = "pais")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "pais")
     @JsonIgnore
     private Set<Provincia> provincias = new HashSet<>();
 
@@ -92,6 +98,9 @@ public class Pais implements Serializable {
             return false;
         }
         Pais pais = (Pais) o;
+        if (pais.getNombre().equalsIgnoreCase(this.getNombre())) {
+            return true;
+        }
         if (pais.getId() == null || getId() == null) {
             return false;
         }

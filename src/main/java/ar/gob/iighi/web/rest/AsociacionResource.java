@@ -57,6 +57,9 @@ public class AsociacionResource {
         if (asociacion.getId() != null) {
             throw new BadRequestAlertException("A new asociacion cannot already have an ID", ENTITY_NAME, "idexists");
         }
+        if (asociacionService.existe(asociacion)) {
+            throw new BadRequestAlertException("Duplicado: un registro de asociación con esos datos ya existe", ENTITY_NAME, "duplicated");
+        }
         Asociacion result = asociacionService.save(asociacion);
         return ResponseEntity.created(new URI("/api/asociacions/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
@@ -78,6 +81,9 @@ public class AsociacionResource {
         log.debug("REST request to update Asociacion : {}", asociacion);
         if (asociacion.getId() == null) {
             return createAsociacion(asociacion);
+        }
+        if (asociacionService.existe(asociacion)) {
+            throw new BadRequestAlertException("Duplicado: un registro de asociación con esos datos ya existe", ENTITY_NAME, "duplicated");
         }
         Asociacion result = asociacionService.save(asociacion);
         return ResponseEntity.ok()
@@ -140,7 +146,8 @@ public class AsociacionResource {
     @Timed
     public ResponseEntity<List<Asociacion>> searchAsociacions(@RequestParam String query, Pageable pageable) {
         log.debug("REST request to search for a page of Asociacions for query {}", query);
-        Page<Asociacion> page = asociacionService.search(query, pageable);
+//        Page<Asociacion> page = asociacionService.search(query, pageable);
+        Page<Asociacion> page = asociacionService.search(query + "*", pageable);
         HttpHeaders headers = PaginationUtil.generateSearchPaginationHttpHeaders(query, page, "/api/_search/asociacions");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }

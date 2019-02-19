@@ -2,10 +2,10 @@
     "prosopografiaApp": {
         "Ambito" : {
             "null": "",
-            "MUNICIPAL": "MUNICIPAL",
-            "PROVINCIAL": "PROVINCIAL",
-            "NACIONAL": "NACIONAL",
-            "INTERNACIONAL": "INTERNACIONAL"
+            "MUNICIPAL": "Municipal",
+            "PROVINCIAL": "Provincial",
+            "NACIONAL": "Nacional",
+            "INTERNACIONAL": "Internacional"
         }
     }
 }

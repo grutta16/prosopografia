@@ -57,6 +57,9 @@ public class CargoResource {
         if (cargo.getId() != null) {
             throw new BadRequestAlertException("A new cargo cannot already have an ID", ENTITY_NAME, "idexists");
         }
+        if (cargoService.existe(cargo)) {
+            throw new BadRequestAlertException("Duplicado: un registro de cargo con esos datos ya existe", ENTITY_NAME, "duplicated");
+        }
         Cargo result = cargoService.save(cargo);
         return ResponseEntity.created(new URI("/api/cargos/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
@@ -78,6 +81,9 @@ public class CargoResource {
         log.debug("REST request to update Cargo : {}", cargo);
         if (cargo.getId() == null) {
             return createCargo(cargo);
+        }
+        if (cargoService.existe(cargo)) {
+            throw new BadRequestAlertException("Duplicado: un registro de cargo con esos datos ya existe", ENTITY_NAME, "duplicated");
         }
         Cargo result = cargoService.save(cargo);
         return ResponseEntity.ok()
@@ -140,7 +146,8 @@ public class CargoResource {
     @Timed
     public ResponseEntity<List<Cargo>> searchCargos(@RequestParam String query, Pageable pageable) {
         log.debug("REST request to search for a page of Cargos for query {}", query);
-        Page<Cargo> page = cargoService.search(query, pageable);
+//        Page<Cargo> page = cargoService.search(query, pageable);
+        Page<Cargo> page = cargoService.search(query + "*", pageable);
         HttpHeaders headers = PaginationUtil.generateSearchPaginationHttpHeaders(query, page, "/api/_search/cargos");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }

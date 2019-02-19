@@ -1,5 +1,6 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { DatePipe } from '@angular/common';
+import { JhiDatepickerI18nComponent } from './datepicker/datepicker-i18n';
 
 import {
     ProsopografiaSharedLibsModule,
@@ -13,7 +14,7 @@ import {
     LoginModalService,
     JhiLoginModalComponent,
     Principal,
-    HasAnyAuthorityDirective,
+    HasAnyAuthorityDirective
 } from './';
 
 @NgModule({
@@ -23,7 +24,8 @@ import {
     ],
     declarations: [
         JhiLoginModalComponent,
-        HasAnyAuthorityDirective
+        HasAnyAuthorityDirective,
+        JhiDatepickerI18nComponent
     ],
     providers: [
         LoginService,
@@ -41,6 +43,7 @@ import {
         ProsopografiaSharedCommonModule,
         JhiLoginModalComponent,
         HasAnyAuthorityDirective,
+        JhiDatepickerI18nComponent,
         DatePipe
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]

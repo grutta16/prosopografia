@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <!--
+        Added the constraints for entity ReligionPersonaje.
+    -->
+    <changeSet id="20180315172329-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="religion_id"
+                                 baseTableName="religion_personaje"
+                                 constraintName="fk_religion_personaje_religion_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="religion"/>
+
+        <addForeignKeyConstraint baseColumnNames="personaje_id"
+                                 baseTableName="religion_personaje"
+                                 constraintName="fk_religion_personaje_personaje_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="personaje"/>
+
+    </changeSet>
+</databaseChangeLog>

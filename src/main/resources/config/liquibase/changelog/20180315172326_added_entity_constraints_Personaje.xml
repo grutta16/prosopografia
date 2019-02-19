@@ -7,7 +7,7 @@
         Added the constraints for entity Personaje.
     -->
     <changeSet id="20180315172326-2" author="jhipster">
-        
+
         <addForeignKeyConstraint baseColumnNames="lugar_nacimiento_id"
                                  baseTableName="personaje"
                                  constraintName="fk_personaje_lugar_nacimiento_id"
@@ -20,6 +20,12 @@
                                  referencedColumnNames="id"
                                  referencedTableName="lugar"/>
 
+        <addForeignKeyConstraint baseColumnNames="religion_id"
+                                 baseTableName="personaje"
+                                 constraintName="fk_personaje_religion_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="religion"/>
+
         <addForeignKeyConstraint baseColumnNames="personajes_id"
                                  baseTableName="personaje_profesiones"
                                  constraintName="fk_personaje_profesiones_personajes_id"
@@ -30,6 +36,17 @@
                                  constraintName="fk_personaje_profesiones_profesiones_id"
                                  referencedColumnNames="id"
                                  referencedTableName="profesion"/>
-        
+
+        <addForeignKeyConstraint baseColumnNames="personajes_id"
+                                 baseTableName="personaje_asociaciones"
+                                 constraintName="fk_personaje_asociaciones_personajes_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="personaje"/>
+        <addForeignKeyConstraint baseColumnNames="asociaciones_id"
+                                 baseTableName="personaje_asociaciones"
+                                 constraintName="fk_personaje_asociaciones_asociaciones_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="asociacion"/>
+
     </changeSet>
 </databaseChangeLog>

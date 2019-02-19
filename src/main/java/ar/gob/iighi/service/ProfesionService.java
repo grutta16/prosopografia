@@ -92,4 +92,23 @@ public class ProfesionService {
         Page<Profesion> result = profesionSearchRepository.search(queryStringQuery(query), pageable);
         return result;
     }
+
+    @Transactional(readOnly = true)
+    public boolean existe(Profesion profesion) {
+        log.debug("Request if exist profesion : {}", profesion);
+        for (Profesion p : profesionRepository.findAll()) {
+            if (p.equals(profesion) && !p.getId().equals(profesion.getId())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+//    @Transactional(readOnly = true)
+//    private void esDescriptorUsado(long id) {
+//        Descriptor descriptor = repositorio.findOne(id);
+//        if (!descriptor.getFotografias().isEmpty()) {
+//            throw new EliminarObjetoEnUsoExcepcion("El descriptor <strong>" + descriptor.getNombre() + "</strong> no se puede eliminar porque tiene fotograf�as asociadas");
+//        }
+//    }
 }

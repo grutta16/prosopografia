@@ -57,6 +57,9 @@ public class InstitucionResource {
         if (institucion.getId() != null) {
             throw new BadRequestAlertException("A new institucion cannot already have an ID", ENTITY_NAME, "idexists");
         }
+        if (institucionService.existe(institucion)) {
+            throw new BadRequestAlertException("Duplicado: un registro de institución con esos datos ya existe", ENTITY_NAME, "duplicated");
+        }
         Institucion result = institucionService.save(institucion);
         return ResponseEntity.created(new URI("/api/institucions/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
@@ -78,6 +81,9 @@ public class InstitucionResource {
         log.debug("REST request to update Institucion : {}", institucion);
         if (institucion.getId() == null) {
             return createInstitucion(institucion);
+        }
+        if (institucionService.existe(institucion)) {
+            throw new BadRequestAlertException("Duplicado: un registro de institución con esos datos ya existe", ENTITY_NAME, "duplicated");
         }
         Institucion result = institucionService.save(institucion);
         return ResponseEntity.ok()
@@ -140,7 +146,8 @@ public class InstitucionResource {
     @Timed
     public ResponseEntity<List<Institucion>> searchInstitucions(@RequestParam String query, Pageable pageable) {
         log.debug("REST request to search for a page of Institucions for query {}", query);
-        Page<Institucion> page = institucionService.search(query, pageable);
+//        Page<Institucion> page = institucionService.search(query, pageable);
+        Page<Institucion> page = institucionService.search(query + "*", pageable);
         HttpHeaders headers = PaginationUtil.generateSearchPaginationHttpHeaders(query, page, "/api/_search/institucions");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
